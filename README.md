@@ -6,13 +6,18 @@
 <title>أداة التقارير التعليمية | وزارة التعليم</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- مكتبة html2canvas لالتقاط الصفحة كصورة -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<!-- مكتبة jsPDF لإنشاء PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root {
   --primary: #083024;
   --primary-light: #0a4030;
   --secondary: #059669;
   --secondary-dark: #047857;
-  --accent: #d97706;
+  --whatsapp: #25D366;
+  --telegram: #0088cc;
   --light: #f8fafc;
   --dark: #1f2937;
   --gray: #6b7280;
@@ -344,6 +349,26 @@ body {
 }
 
 .action-btn-success:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--box-shadow-hover);
+}
+
+.action-btn-whatsapp {
+  background: linear-gradient(135deg, var(--whatsapp), #128C7E);
+  color: white;
+}
+
+.action-btn-whatsapp:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--box-shadow-hover);
+}
+
+.action-btn-telegram {
+  background: linear-gradient(135deg, var(--telegram), #005a8c);
+  color: white;
+}
+
+.action-btn-telegram:hover {
   transform: translateY(-1px);
   box-shadow: var(--box-shadow-hover);
 }
@@ -915,6 +940,40 @@ textarea.form-control::placeholder {
     font-size: 11px;
   }
 }
+
+/* زر مساعدة */
+.help-btn {
+  position: fixed;
+  bottom: 80px;
+  left: 15px;
+  background: var(--primary);
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 1001;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: var(--transition);
+}
+
+.help-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .help-btn {
+    bottom: 70px;
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+  }
+}
 </style>
 </head>
 <body>
@@ -1243,6 +1302,16 @@ textarea.form-control::placeholder {
           طباعة التقرير
         </button>
         
+        <button class="action-btn action-btn-whatsapp" onclick="shareAsPDF()">
+          <i class="fab fa-whatsapp"></i>
+          إرسال عبر واتساب
+        </button>
+        
+        <button class="action-btn action-btn-telegram" onclick="downloadAsPDF()">
+          <i class="fab fa-telegram"></i>
+          تحميل PDF
+        </button>
+        
         <button class="action-btn action-btn-secondary" onclick="saveDraft()">
           <i class="fas fa-save"></i>
           حفظ كمسودة
@@ -1279,11 +1348,16 @@ textarea.form-control::placeholder {
     <span>طباعة</span>
   </button>
   
-  <button class="nav-btn" onclick="saveDraft()">
-    <i class="fas fa-save"></i>
-    <span>حفظ</span>
+  <button class="nav-btn" onclick="shareAsPDF()">
+    <i class="fab fa-whatsapp"></i>
+    <span>واتساب</span>
   </button>
 </nav>
+
+<!-- زر المساعدة -->
+<button class="help-btn" onclick="showHelp()">
+  <i class="fas fa-question"></i>
+</button>
 
 <!-- نافذة المعاينة -->
 <div class="preview-overlay" id="preview-overlay">
@@ -1300,13 +1374,70 @@ textarea.form-control::placeholder {
   </div>
 </div>
 
+<!-- نافذة المساعدة -->
+<div class="preview-overlay" id="help-overlay">
+  <div class="preview-container" style="max-width: 500px;">
+    <div class="preview-header">
+      <h3><i class="fas fa-question-circle"></i> المساعدة والدعم</h3>
+      <button class="close-preview" onclick="hideHelp()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div style="padding: 20px;">
+      <h4 style="color: var(--primary); margin-bottom: 15px;">كيفية استخدام الأداة:</h4>
+      
+      <div style="margin-bottom: 15px;">
+        <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px;">
+          <i class="fas fa-edit" style="color: var(--primary);"></i>
+          <div>
+            <strong>1. تعبئة النموذج:</strong>
+            <p style="font-size: 13px; color: var(--gray);">املأ جميع الحقول المطلوبة لتوليد التقرير</p>
+          </div>
+        </div>
+        
+        <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px;">
+          <i class="fas fa-eye" style="color: var(--primary);"></i>
+          <div>
+            <strong>2. المعاينة:</strong>
+            <p style="font-size: 13px; color: var(--gray);">استعرض التقرير قبل الطباعة أو الحفظ</p>
+          </div>
+        </div>
+        
+        <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px;">
+          <i class="fas fa-print" style="color: var(--primary);"></i>
+          <div>
+            <strong>3. الطباعة:</strong>
+            <p style="font-size: 13px; color: var(--gray);">اطبع التقرير مباشرة على طابعتك</p>
+          </div>
+        </div>
+        
+        <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px;">
+          <i class="fab fa-whatsapp" style="color: var(--whatsapp);"></i>
+          <div>
+            <strong>4. المشاركة:</strong>
+            <p style="font-size: 13px; color: var(--gray);">شارك التقرير كـ PDF عبر الواتساب</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="alert alert-info">
+        <i class="fas fa-lightbulb"></i>
+        <span>لأفضل تجربة، استخدم المتصفح على أحدث إصدار</span>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- شاشة التحميل -->
 <div class="loading-overlay" id="loading-overlay">
   <div class="loading-spinner"></div>
-  <p>جاري إنشاء التقرير...</p>
+  <p id="loading-text">جاري إنشاء التقرير...</p>
 </div>
 
 <script>
+// تهيئة jsPDF
+const { jsPDF } = window.jspdf;
+
 // بيانات التطبيق
 const templates = {
   1: {
@@ -1636,24 +1767,30 @@ function showPreview() {
   }
   
   buildPreviewContent(data);
-  const previewOverlay = document.getElementById('preview-overlay');
-  if (previewOverlay) {
-    previewOverlay.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-  }
+  document.getElementById('preview-overlay').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
 }
 
 // إخفاء المعاينة
 function hidePreview() {
-  const previewOverlay = document.getElementById('preview-overlay');
-  if (previewOverlay) {
-    previewOverlay.style.display = 'none';
-    document.body.style.overflow = 'auto';
-  }
+  document.getElementById('preview-overlay').style.display = 'none';
+  document.body.style.overflow = 'auto';
 }
 
-// طباعة التقرير باستخدام القالب الجديد
-function printReport() {
+// عرض المساعدة
+function showHelp() {
+  document.getElementById('help-overlay').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+// إخفاء المساعدة
+function hideHelp() {
+  document.getElementById('help-overlay').style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
+
+// طباعة التقرير - الإصدار المصلح
+async function printReport() {
   const data = collectFormData();
   
   if (!validateForm()) {
@@ -1661,342 +1798,521 @@ function printReport() {
     return;
   }
   
-  // إنشاء نافذة طباعة
-  const printWindow = window.open('', '_blank');
+  // عرض شاشة التحميل
+  showLoading('جاري إعداد التقرير للطباعة...');
   
-  // الحصول على التاريخ الهجري
-  const getHijriDate = async () => {
-    try {
-      const response = await fetch('https://api.aladhan.com/v1/gToH');
-      const result = await response.json();
-      const h = result.data.hijri;
-      return `${h.day} ${h.month.ar} ${h.year} هـ`;
-    } catch (error) {
-      return '';
-    }
-  };
-  
-  // إنشاء المحتوى مع انتظار التاريخ الهجري
-  const createPrintContent = async () => {
-    const hijriDate = await getHijriDate();
-    
-    printWindow.document.write(`
-      <!DOCTYPE html>
-      <html dir="rtl" lang="ar">
-      <head>
-        <meta charset="UTF-8">
-        <title>تقرير - ${data.school}</title>
-        <style>
-          @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
-
-          * { margin: 0; padding: 0; box-sizing: border-box; }
-
-          html, body {
-            width: 100%;
-            font-family: 'Cairo', sans-serif;
-            background: #ffffff;
-            color: #1f2937;
-          }
-
-          body { padding: 18px 0; }
-
-          .header {
-            width: 100%;
-            height: 110px;
-            background-color: #083024;
-            position: relative;
-            margin-bottom: 12px;
-          }
-
-          .header::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background-image: url('https://i.ibb.co/kVWFFwhW/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: 28%;
-            opacity: 0.95;
-          }
-
-          .admin-name {
-            position: absolute;
-            top: 8px;
-            right: 22px;
-            font-size: 13px;
-            font-weight: 600;
-            color: #ffffff;
-            z-index: 2;
-          }
-
-          .school-name {
-            position: absolute;
-            bottom: 8px;
-            right: 22px;
-            font-size: 13px;
-            font-weight: 600;
-            color: #ffffff;
-            z-index: 2;
-          }
-
-          .hijri-date {
-            position: absolute;
-            bottom: 8px;
-            left: 22px;
-            font-size: 13px;
-            font-weight: 500;
-            color: #ffffff;
-            z-index: 2;
-          }
-
-          .container {
-            max-width: 210mm;
-            margin: auto;
-            padding: 0 18px 26px;
-          }
-
-          .info-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
-            margin-bottom: 6px;
-          }
-
-          .info-grid.second {
-            grid-template-columns: repeat(4, 1fr);
-            margin-bottom: 12px;
-          }
-
-          .info-box {
-            border: 1px solid #083024;
-            border-radius: 6px;
-            padding: 5px 6px;
-            text-align: center;
-            font-size: 11.5px;
-            background: #ffffff;
-            line-height: 1.35;
-          }
-
-          .info-box strong {
-            display: block;
-            font-size: 12px;
-            margin-bottom: 1px;
-            color: #083024;
-          }
-
-          .report-objective-box {
-            background: rgba(8,48,36,0.07);
-            border: 1px solid rgba(8,48,36,0.35);
-            border-radius: 9px;
-            padding: 14px;
-            margin-bottom: 18px;
-            text-align: center;
-            font-size: 14px;
-            line-height: 1.7;
-          }
-
-          .report-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            margin-bottom: 18px;
-          }
-
-          .report-box {
-            border-radius: 9px;
-            border: 1px solid #d1d5db;
-            padding: 14px;
-            background: #fafafa;
-            min-height: 150px;
-          }
-
-          .report-box-title {
-            font-size: 14.5px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            border-bottom: 1px solid #e5e7eb;
-            padding-bottom: 5px;
-            color: #083024;
-          }
-
-          .report-box-content {
-            font-size: 12.5px;
-            line-height: 1.7;
-            color: #374151;
-            white-space: pre-line;
-          }
-
-          .improvements-box {
-            background: rgba(234,88,12,0.07);
-            border: 1px solid rgba(234,88,12,0.35);
-            border-radius: 9px;
-            padding: 14px;
-            margin-bottom: 18px;
-          }
-
-          .image-evidence-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            margin-top: 8px;
-          }
-
-          .image-box {
-            border: 2px dashed #083024;
-            border-radius: 9px;
-            height: 160px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 13px;
-            color: #083024;
-            background: rgba(8,48,36,0.035);
-            overflow: hidden;
-          }
-          
-          .image-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-          }
-
-          @media print {
-            body { padding: 0; }
-            .header { margin-bottom: 8px; }
-            .container { padding: 0 15px 20px; }
-          }
-          
-          @media screen and (max-width: 768px) {
-            body { padding: 12px 0; }
-            .header { height: 90px; }
-            .container { padding: 0 12px 20px; }
-            .report-grid { grid-template-columns: 1fr; }
-            .info-grid.second { grid-template-columns: repeat(2, 1fr); }
-          }
-        </style>
-      </head>
-      <body>
-
-        <div class="header">
-          <div class="admin-name">${getDepartmentName(data.department)}</div>
-          <div class="school-name">${data.school}</div>
-          <div class="hijri-date">${hijriDate}</div>
-        </div>
-
-        <div class="container">
-
-          <div class="info-grid">
-            <div class="info-box"><strong>الفصل الدراسي</strong>${data.semester}</div>
-            <div class="info-box"><strong>الصف</strong>${data.classLevel || 'غير محدد'}</div>
-            <div class="info-box"><strong>المادة</strong>${data.subject || 'غير محدد'}</div>
-          </div>
-
-          <div class="info-grid second">
-            <div class="info-box"><strong>التقرير</strong>${data.type || 'نشاط إثرائي'}</div>
-            <div class="info-box"><strong>المستهدفون</strong>${data.target || 'غير محدد'}</div>
-            <div class="info-box"><strong>العدد</strong>${data.count || 'غير محدد'}</div>
-            <div class="info-box"><strong>مكان التنفيذ</strong>${data.location || 'غير محدد'}</div>
-          </div>
-
-          <div class="report-objective-box">
-            ${data.goal || 'لم يتم تحديد الهدف التربوي'}
-          </div>
-
-          <div class="report-grid">
-            <div class="report-box">
-              <div class="report-box-title">خطوات التنفيذ</div>
-              <div class="report-box-content">${data.steps || 'لم يتم تحديد خطوات التنفيذ'}</div>
-            </div>
-            <div class="report-box">
-              <div class="report-box-title">النتائج</div>
-              <div class="report-box-content">${data.results || 'لم يتم تحديد النتائج'}</div>
-            </div>
-            <div class="report-box">
-              <div class="report-box-title">نقاط القوة</div>
-              <div class="report-box-content">${data.strengths || 'لم يتم تحديد نقاط القوة'}</div>
-            </div>
-            <div class="report-box">
-              <div class="report-box-title">التوصيات</div>
-              <div class="report-box-content">${data.recommendations || 'لم يتم تحديد توصيات'}</div>
-            </div>
-          </div>
-
-          <div class="improvements-box">
-            <div class="report-box-title">نقاط التحسين</div>
-            <div class="report-box-content">${data.improvements || 'لم يتم تحديد نقاط التحسين'}</div>
-          </div>
-
-          <div class="image-evidence-grid">
-            ${uploadedImages.length > 0 ? 
-              uploadedImages.map(img => `
-                <div class="image-box">
-                  <img src="${img.data}" alt="صورة توثيقية">
-                </div>
-              `).join('') : 
-              '<div class="image-box">شواهد الصور</div><div class="image-box">شواهد الصور</div>'
-            }
-          </div>
-
-        </div>
-
-        <script>
-          // إضافة توقيعات إذا كانت موجودة
-          const signatures = ${JSON.stringify({
-            teacher: data.teacher || '',
-            principal: data.principal || ''
-          })};
-          
-          if (signatures.teacher || signatures.principal) {
-            const container = document.querySelector('.container');
-            const signaturesDiv = document.createElement('div');
-            signaturesDiv.style.marginTop = '30px';
-            signaturesDiv.style.paddingTop = '20px';
-            signaturesDiv.style.borderTop = '1px solid #d1d5db';
-            signaturesDiv.style.display = 'flex';
-            signaturesDiv.style.justifyContent = 'space-around';
-            signaturesDiv.style.flexWrap = 'wrap';
-            signaturesDiv.style.gap = '20px';
-            
-            if (signatures.teacher) {
-              const teacherDiv = document.createElement('div');
-              teacherDiv.style.textAlign = 'center';
-              teacherDiv.innerHTML = \`
-                <div style="font-weight: 600; margin-bottom: 5px;">المعلم</div>
-                <div style="border-bottom: 1px solid #083024; width: 150px; margin: 0 auto 10px;"></div>
-                <div>\${signatures.teacher}</div>
-              \`;
-              signaturesDiv.appendChild(teacherDiv);
-            }
-            
-            if (signatures.principal) {
-              const principalDiv = document.createElement('div');
-              principalDiv.style.textAlign = 'center';
-              principalDiv.innerHTML = \`
-                <div style="font-weight: 600; margin-bottom: 5px;">مدير المدرسة</div>
-                <div style="border-bottom: 1px solid #083024; width: 150px; margin: 0 auto 10px;"></div>
-                <div>\${signatures.principal}</div>
-              \`;
-              signaturesDiv.appendChild(principalDiv);
-            }
-            
-            container.appendChild(signaturesDiv);
-          }
-        <\/script>
-
-      </body>
-      </html>
-    `);
-    
-    printWindow.document.close();
-    printWindow.focus();
-    
+  try {
+    // إنشاء نافذة الطباعة بعد تأخير قصير للتأكد من تحميل البيانات
     setTimeout(() => {
-      printWindow.print();
-      printWindow.close();
-    }, 500);
-  };
+      const printWindow = window.open('', '_blank', 'width=800,height=600');
+      
+      if (!printWindow) {
+        hideLoading();
+        showAlert('تم منع النافذة المنبثقة. الرجاء السماح بالنوافذ المنبثقة لهذا الموقع.', 'error');
+        return;
+      }
+      
+      // الحصول على التاريخ الهجري
+      const hijriDate = getHijriDate();
+      
+      printWindow.document.write(`
+        <!DOCTYPE html>
+        <html dir="rtl" lang="ar">
+        <head>
+          <meta charset="UTF-8">
+          <title>تقرير - ${data.school}</title>
+          <style>
+            @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+            * { margin: 0; padding: 0; box-sizing: border-box; }
+            html, body {
+              width: 100%;
+              font-family: 'Cairo', sans-serif;
+              background: #ffffff;
+              color: #1f2937;
+            }
+            body { padding: 18px 0; }
+            .header {
+              width: 100%;
+              height: 110px;
+              background-color: #083024;
+              position: relative;
+              margin-bottom: 12px;
+            }
+            .header::before {
+              content: "";
+              position: absolute;
+              inset: 0;
+              background-image: url('https://i.ibb.co/kVWFFwhW/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png');
+              background-repeat: no-repeat;
+              background-position: center;
+              background-size: 28%;
+              opacity: 0.95;
+            }
+            .admin-name {
+              position: absolute;
+              top: 8px;
+              right: 22px;
+              font-size: 13px;
+              font-weight: 600;
+              color: #ffffff;
+              z-index: 2;
+            }
+            .school-name {
+              position: absolute;
+              bottom: 8px;
+              right: 22px;
+              font-size: 13px;
+              font-weight: 600;
+              color: #ffffff;
+              z-index: 2;
+            }
+            .hijri-date {
+              position: absolute;
+              bottom: 8px;
+              left: 22px;
+              font-size: 13px;
+              font-weight: 500;
+              color: #ffffff;
+              z-index: 2;
+            }
+            .container {
+              max-width: 210mm;
+              margin: auto;
+              padding: 0 18px 26px;
+            }
+            .info-grid {
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              gap: 6px;
+              margin-bottom: 6px;
+            }
+            .info-grid.second {
+              grid-template-columns: repeat(4, 1fr);
+              margin-bottom: 12px;
+            }
+            .info-box {
+              border: 1px solid #083024;
+              border-radius: 6px;
+              padding: 5px 6px;
+              text-align: center;
+              font-size: 11.5px;
+              background: #ffffff;
+              line-height: 1.35;
+            }
+            .info-box strong {
+              display: block;
+              font-size: 12px;
+              margin-bottom: 1px;
+              color: #083024;
+            }
+            .report-objective-box {
+              background: rgba(8,48,36,0.07);
+              border: 1px solid rgba(8,48,36,0.35);
+              border-radius: 9px;
+              padding: 14px;
+              margin-bottom: 18px;
+              text-align: center;
+              font-size: 14px;
+              line-height: 1.7;
+            }
+            .report-grid {
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 14px;
+              margin-bottom: 18px;
+            }
+            .report-box {
+              border-radius: 9px;
+              border: 1px solid #d1d5db;
+              padding: 14px;
+              background: #fafafa;
+              min-height: 150px;
+            }
+            .report-box-title {
+              font-size: 14.5px;
+              font-weight: 600;
+              margin-bottom: 8px;
+              border-bottom: 1px solid #e5e7eb;
+              padding-bottom: 5px;
+              color: #083024;
+            }
+            .report-box-content {
+              font-size: 12.5px;
+              line-height: 1.7;
+              color: #374151;
+              white-space: pre-line;
+            }
+            .improvements-box {
+              background: rgba(234,88,12,0.07);
+              border: 1px solid rgba(234,88,12,0.35);
+              border-radius: 9px;
+              padding: 14px;
+              margin-bottom: 18px;
+            }
+            .image-evidence-grid {
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 14px;
+              margin-top: 8px;
+            }
+            .image-box {
+              border: 2px dashed #083024;
+              border-radius: 9px;
+              height: 160px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 13px;
+              color: #083024;
+              background: rgba(8,48,36,0.035);
+              overflow: hidden;
+            }
+            .image-box img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+            .signatures {
+              display: flex;
+              justify-content: space-around;
+              margin-top: 40px;
+              padding-top: 20px;
+              border-top: 1px solid #d1d5db;
+              flex-wrap: wrap;
+            }
+            .signature-box {
+              text-align: center;
+              min-width: 200px;
+              margin: 10px;
+            }
+            .signature-name {
+              font-weight: 600;
+              margin-bottom: 5px;
+              color: #083024;
+            }
+            .signature-line {
+              width: 150px;
+              height: 1px;
+              background: #083024;
+              margin: 10px auto;
+            }
+            @media print {
+              body { padding: 0; }
+              .header { margin-bottom: 8px; }
+              .container { padding: 0 15px 20px; }
+            }
+          </style>
+        </head>
+        <body>
+          <div class="header">
+            <div class="admin-name">${data.department || 'وزارة التعليم'}</div>
+            <div class="school-name">${data.school}</div>
+            <div class="hijri-date">${hijriDate}</div>
+          </div>
+          <div class="container">
+            <div class="info-grid">
+              <div class="info-box"><strong>الفصل الدراسي</strong>${data.semester}</div>
+              <div class="info-box"><strong>الصف</strong>${data.classLevel || 'غير محدد'}</div>
+              <div class="info-box"><strong>المادة</strong>${data.subject || 'غير محدد'}</div>
+            </div>
+            <div class="info-grid second">
+              <div class="info-box"><strong>التقرير</strong>${data.type || 'نشاط إثرائي'}</div>
+              <div class="info-box"><strong>المستهدفون</strong>${data.target || 'غير محدد'}</div>
+              <div class="info-box"><strong>العدد</strong>${data.count || 'غير محدد'}</div>
+              <div class="info-box"><strong>مكان التنفيذ</strong>${data.location || 'غير محدد'}</div>
+            </div>
+            <div class="report-objective-box">${data.goal || 'لم يتم تحديد الهدف التربوي'}</div>
+            <div class="report-grid">
+              <div class="report-box">
+                <div class="report-box-title">خطوات التنفيذ</div>
+                <div class="report-box-content">${data.steps || 'لم يتم تحديد خطوات التنفيذ'}</div>
+              </div>
+              <div class="report-box">
+                <div class="report-box-title">النتائج</div>
+                <div class="report-box-content">${data.results || 'لم يتم تحديد النتائج'}</div>
+              </div>
+              <div class="report-box">
+                <div class="report-box-title">نقاط القوة</div>
+                <div class="report-box-content">${data.strengths || 'لم يتم تحديد نقاط القوة'}</div>
+              </div>
+              <div class="report-box">
+                <div class="report-box-title">التوصيات</div>
+                <div class="report-box-content">${data.recommendations || 'لم يتم تحديد توصيات'}</div>
+              </div>
+            </div>
+            <div class="improvements-box">
+              <div class="report-box-title">نقاط التحسين</div>
+              <div class="report-box-content">${data.improvements || 'لم يتم تحديد نقاط التحسين'}</div>
+            </div>
+            <div class="image-evidence-grid">
+              ${uploadedImages.length > 0 ? 
+                uploadedImages.map(img => `
+                  <div class="image-box">
+                    <img src="${img.data}" alt="صورة توثيقية">
+                  </div>
+                `).join('') : 
+                '<div class="image-box">شواهد الصور</div><div class="image-box">شواهد الصور</div>'
+              }
+            </div>
+            <div class="signatures">
+              ${data.teacher ? `
+                <div class="signature-box">
+                  <div class="signature-name">المعلم</div>
+                  <div class="signature-line"></div>
+                  <div>${data.teacher}</div>
+                </div>
+              ` : ''}
+              ${data.principal ? `
+                <div class="signature-box">
+                  <div class="signature-name">مدير المدرسة</div>
+                  <div class="signature-line"></div>
+                  <div>${data.principal}</div>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+          <script>
+            // انتظار تحميل الصور قبل الطباعة
+            window.onload = function() {
+              setTimeout(function() {
+                window.print();
+              }, 500);
+            };
+          <\/script>
+        </body>
+        </html>
+      `);
+      
+      printWindow.document.close();
+      printWindow.focus();
+      
+      // إخفاء شاشة التحميل
+      hideLoading();
+      
+      // إظهار رسالة نجاح
+      showAlert('تم فتح نافذة الطباعة بنجاح', 'success');
+      
+    }, 1000);
+    
+  } catch (error) {
+    hideLoading();
+    console.error('خطأ في الطباعة:', error);
+    showAlert('حدث خطأ أثناء الطباعة. الرجاء المحاولة مرة أخرى.', 'error');
+  }
+}
+
+// تحميل التقرير كـ PDF
+async function downloadAsPDF() {
+  const data = collectFormData();
   
-  createPrintContent();
+  if (!validateForm()) {
+    showAlert('الرجاء تعبئة الحقول المطلوبة قبل إنشاء PDF', 'error');
+    return;
+  }
+  
+  showLoading('جاري إنشاء ملف PDF...');
+  
+  try {
+    // إنشاء PDF جديد
+    const doc = new jsPDF({
+      orientation: 'portrait',
+      unit: 'mm',
+      format: 'a4'
+    });
+    
+    // إضافة الخط العربي
+    doc.addFont('https://fonts.googleapis.com/css2?family=Cairo&display=swap', 'Cairo', 'normal');
+    doc.setFont('Cairo');
+    
+    // العنوان الرئيسي
+    doc.setFontSize(20);
+    doc.setTextColor(8, 48, 36);
+    doc.text('وزارة التعليم', 105, 20, { align: 'center' });
+    
+    // اسم الإدارة
+    doc.setFontSize(16);
+    doc.text(data.department || 'وزارة التعليم', 105, 30, { align: 'center' });
+    
+    // اسم المدرسة
+    doc.setFontSize(14);
+    doc.text(data.school, 105, 40, { align: 'center' });
+    
+    // خط فاصل
+    doc.setDrawColor(8, 48, 36);
+    doc.setLineWidth(0.5);
+    doc.line(20, 45, 190, 45);
+    
+    // المعلومات الأساسية
+    doc.setFontSize(12);
+    doc.setTextColor(0, 0, 0);
+    doc.text(`الفصل الدراسي: ${data.semester}`, 20, 55);
+    doc.text(`الصف: ${data.classLevel || 'غير محدد'}`, 105, 55);
+    doc.text(`المادة: ${data.subject || 'غير محدد'}`, 150, 55);
+    
+    doc.text(`نوع التقرير: ${data.type || 'نشاط إثرائي'}`, 20, 65);
+    doc.text(`المستهدفون: ${data.target || 'غير محدد'}`, 105, 65);
+    doc.text(`العدد: ${data.count || 'غير محدد'}`, 150, 65);
+    doc.text(`مكان التنفيذ: ${data.location || 'غير محدد'}`, 20, 75);
+    
+    // الهدف التربوي
+    doc.setFontSize(14);
+    doc.setTextColor(8, 48, 36);
+    doc.text('الهدف التربوي', 20, 90);
+    doc.setFontSize(11);
+    doc.setTextColor(0, 0, 0);
+    const goalLines = doc.splitTextToSize(data.goal || 'لم يتم تحديد الهدف التربوي', 170);
+    doc.text(goalLines, 20, 100);
+    
+    let yPosition = 100 + (goalLines.length * 6);
+    
+    // خطوات التنفيذ والنتائج
+    doc.setFontSize(14);
+    doc.setTextColor(8, 48, 36);
+    doc.text('خطوات التنفيذ', 20, yPosition + 10);
+    doc.setFontSize(11);
+    doc.setTextColor(0, 0, 0);
+    const stepsLines = doc.splitTextToSize(data.steps || 'لم يتم تحديد خطوات التنفيذ', 80);
+    doc.text(stepsLines, 20, yPosition + 20);
+    
+    doc.setFontSize(14);
+    doc.setTextColor(8, 48, 36);
+    doc.text('النتائج المتحققة', 110, yPosition + 10);
+    doc.setFontSize(11);
+    doc.setTextColor(0, 0, 0);
+    const resultsLines = doc.splitTextToSize(data.results || 'لم يتم تحديد النتائج', 80);
+    doc.text(resultsLines, 110, yPosition + 20);
+    
+    yPosition += 20 + Math.max(stepsLines.length, resultsLines.length) * 6 + 10;
+    
+    // نقاط القوة والتوصيات
+    doc.setFontSize(14);
+    doc.setTextColor(8, 48, 36);
+    doc.text('نقاط القوة', 20, yPosition + 10);
+    doc.setFontSize(11);
+    doc.setTextColor(0, 0, 0);
+    const strengthsLines = doc.splitTextToSize(data.strengths || 'لم يتم تحديد نقاط القوة', 80);
+    doc.text(strengthsLines, 20, yPosition + 20);
+    
+    doc.setFontSize(14);
+    doc.setTextColor(8, 48, 36);
+    doc.text('التوصيات والمقترحات', 110, yPosition + 10);
+    doc.setFontSize(11);
+    doc.setTextColor(0, 0, 0);
+    const recommendationsLines = doc.splitTextToSize(data.recommendations || 'لم يتم تحديد توصيات', 80);
+    doc.text(recommendationsLines, 110, yPosition + 20);
+    
+    yPosition += 20 + Math.max(strengthsLines.length, recommendationsLines.length) * 6 + 10;
+    
+    // نقاط التحسين
+    doc.setFontSize(14);
+    doc.setTextColor(8, 48, 36);
+    doc.text('نقاط التحسين', 20, yPosition + 10);
+    doc.setFontSize(11);
+    doc.setTextColor(0, 0, 0);
+    const improvementsLines = doc.splitTextToSize(data.improvements || 'لم يتم تحديد نقاط التحسين', 170);
+    doc.text(improvementsLines, 20, yPosition + 20);
+    
+    yPosition += 20 + improvementsLines.length * 6 + 20;
+    
+    // التوقيعات
+    if (data.teacher || data.principal) {
+      doc.setDrawColor(8, 48, 36);
+      doc.line(20, yPosition, 190, yPosition);
+      
+      yPosition += 15;
+      
+      if (data.teacher) {
+        doc.setFontSize(12);
+        doc.setTextColor(8, 48, 36);
+        doc.text('المعلم', 60, yPosition + 10);
+        doc.setFontSize(11);
+        doc.setTextColor(0, 0, 0);
+        doc.text(data.teacher, 60, yPosition + 20, { align: 'center' });
+      }
+      
+      if (data.principal) {
+        doc.setFontSize(12);
+        doc.setTextColor(8, 48, 36);
+        doc.text('مدير المدرسة', 150, yPosition + 10);
+        doc.setFontSize(11);
+        doc.setTextColor(0, 0, 0);
+        doc.text(data.principal, 150, yPosition + 20, { align: 'center' });
+      }
+    }
+    
+    // حفظ الملف
+    const fileName = `تقرير_${data.school}_${new Date().toISOString().split('T')[0]}.pdf`;
+    doc.save(fileName);
+    
+    hideLoading();
+    showAlert('تم تحميل ملف PDF بنجاح', 'success');
+    
+  } catch (error) {
+    hideLoading();
+    console.error('خطأ في إنشاء PDF:', error);
+    showAlert('حدث خطأ أثناء إنشاء ملف PDF', 'error');
+  }
+}
+
+// إرسال التقرير عبر واتساب
+async function shareAsPDF() {
+  const data = collectFormData();
+  
+  if (!validateForm()) {
+    showAlert('الرجاء تعبئة الحقول المطلوبة قبل المشاركة', 'error');
+    return;
+  }
+  
+  showLoading('جاري إعداد التقرير للمشاركة...');
+  
+  try {
+    // إنشاء نص للرسالة
+    let message = `📋 *تقرير تعليمي*\n\n`;
+    message += `🏫 *المدرسة:* ${data.school}\n`;
+    message += `📍 *الإدارة:* ${data.department || 'غير محدد'}\n`;
+    message += `📄 *نوع التقرير:* ${data.type || 'نشاط إثرائي'}\n`;
+    message += `📚 *الفصل:* ${data.semester}\n`;
+    message += `👥 *الصف:* ${data.classLevel || 'غير محدد'}\n`;
+    message += `📖 *المادة:* ${data.subject || 'غير محدد'}\n\n`;
+    message += `🎯 *الهدف التربوي:*\n${data.goal.substring(0, 100)}${data.goal.length > 100 ? '...' : ''}\n\n`;
+    message += `📝 *تم إنشاء التقرير بتاريخ:* ${new Date().toLocaleDateString('ar-SA')}\n`;
+    message += `🔗 *رابط الأداة:* ${window.location.href}`;
+    
+    // تشفير النص للرابط
+    const encodedMessage = encodeURIComponent(message);
+    
+    // إنشاء رابط الواتساب
+    const whatsappURL = `https://wa.me/?text=${encodedMessage}`;
+    
+    // فتح نافذة جديدة للواتساب
+    window.open(whatsappURL, '_blank');
+    
+    hideLoading();
+    showAlert('تم فتح الواتساب للمشاركة. يمكنك إرسال التقرير الآن.', 'success');
+    
+  } catch (error) {
+    hideLoading();
+    console.error('خطأ في المشاركة:', error);
+    showAlert('حدث خطأ أثناء المشاركة عبر واتساب', 'error');
+  }
+}
+
+// الحصول على التاريخ الهجري
+function getHijriDate() {
+  const now = new Date();
+  const date = now.getDate().toString().padStart(2, '0');
+  const month = (now.getMonth() + 1).toString().padStart(2, '0');
+  const year = now.getFullYear();
+  const hijriYear = year - 622 + Math.floor((year - 622) / 32);
+  
+  const hijriMonths = [
+    'محرم', 'صفر', 'ربيع الأول', 'ربيع الثاني', 
+    'جمادى الأولى', 'جمادى الآخرة', 'رجب', 'شعبان', 
+    'رمضان', 'شوال', 'ذو القعدة', 'ذو الحجة'
+  ];
+  
+  const currentHijriMonth = hijriMonths[now.getMonth() % 12];
+  return `${date} ${currentHijriMonth} ${hijriYear} هـ`;
 }
 
 // حفظ المسودة
@@ -2247,6 +2563,19 @@ function buildPreviewContent(data) {
   `;
 }
 
+// عرض شاشة التحميل
+function showLoading(text = 'جاري التحميل...') {
+  document.getElementById('loading-text').textContent = text;
+  document.getElementById('loading-overlay').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+// إخفاء شاشة التحميل
+function hideLoading() {
+  document.getElementById('loading-overlay').style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
+
 // عرض التنبيهات
 function showAlert(message, type = 'info') {
   const alert = document.createElement('div');
@@ -2305,6 +2634,7 @@ document.addEventListener('click', function(e) {
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
     hidePreview();
+    hideHelp();
   }
 });
 
@@ -2314,6 +2644,15 @@ if (previewOverlay) {
   previewOverlay.addEventListener('click', function(e) {
     if (e.target === this) {
       hidePreview();
+    }
+  });
+}
+
+const helpOverlay = document.getElementById('help-overlay');
+if (helpOverlay) {
+  helpOverlay.addEventListener('click', function(e) {
+    if (e.target === this) {
+      hideHelp();
     }
   });
 }
