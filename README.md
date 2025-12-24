@@ -1,163 +1,242 @@
-
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>أداة إنشاء تقرير نشاط إثرائي</title>
+<title>أداة إعداد تقرير نشاط إثرائي</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-
 <style>
-*{font-family:'Cairo',sans-serif; box-sizing:border-box;}
-body{background:#f2f4f5; padding:20px;}
-
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif}
+body{background:#f3f4f6;padding:20px;color:#083024}
 .form-container{
-  max-width:800px;
-  margin:auto;
-  background:#fff;
-  padding:20px;
-  border-radius:10px;
-  border:1px solid #ddd;
+  max-width:900px;margin:auto;background:#fff;padding:20px;border-radius:10px;
+  border:2px solid #083024
 }
-.form-group{margin-bottom:12px;}
-label{font-weight:600; font-size:15px; margin-bottom:4px; display:block;}
+.form-container h2{margin-bottom:15px;text-align:center}
+label{font-weight:600;margin:8px 0;display:block}
 input,textarea,select{
-  width:100%; padding:8px; border-radius:6px;
-  border:1px solid #ccc; font-size:14px;
+  width:100%;padding:6px;border:1px solid #aaa;border-radius:6px;margin-top:3px
 }
-textarea{height:90px;}
-
-.images-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
-
+textarea{height:70px;resize:vertical}
+.grid{display:grid;gap:10px}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-4{grid-template-columns:repeat(4,1fr)}
 button{
-  width:100%; background:#0b3d2e; color:#fff;
-  padding:12px; font-size:17px;
-  border:none; border-radius:6px; margin-top:10px;
-  cursor:pointer; font-weight:600;
+  width:100%;padding:12px;background:#083024;color:#fff;font-size:16px;
+  border-radius:8px;border:none;cursor:pointer;margin-top:18px
 }
-button:hover{background:#0e5641}
+button:hover{background:#0a4734}
 </style>
 </head>
 
 <body>
 
 <div class="form-container">
+<h2>نموذج إعداد تقرير نشاط إثرائي</h2>
 
-<h2 style="text-align:center; margin-bottom:15px;">إنشاء تقرير نشاط إثرائي</h2>
+<form id="reportForm">
 
-<div class="form-group">
-<label>اسم المدرسة</label>
-<input id="school" value="مدرسة التجربة النموذجية">
-</div>
-
-<div class="form-group">
+<div class="grid grid-3">
+<div>
 <label>المادة</label>
-<input id="subject" value="أحياء">
+<input name="subject" required>
 </div>
-
-<div class="form-group">
+<div>
 <label>الصف</label>
-<input id="grade" value="الثالث الثانوي">
+<input name="grade" required>
 </div>
-
-<div class="form-group">
+<div>
 <label>الفصل الدراسي</label>
-<select id="semester">
-  <option>الأول</option>
-  <option>الثاني</option>
+<select name="semester">
+<option value="الأول">الأول</option>
+<option value="الثاني">الثاني</option>
 </select>
 </div>
+</div>
 
-<div class="form-group">
+<div class="grid grid-4">
+<div>
 <label>مكان التنفيذ</label>
-<input id="place" value="الفصل الدراسي">
+<input name="place">
 </div>
-
-<div class="form-group">
-<label>عدد الطلاب</label>
-<input id="count" type="number" value="25">
+<div>
+<label>العدد</label>
+<input name="count" type="number">
 </div>
-
-<div class="form-group">
+<div>
 <label>المستهدفون</label>
-<input id="target" value="طلاب الصف">
+<input name="target">
+</div>
+<div>
+<label>نوع التقرير</label>
+<input name="reportType" value="نشاط إثرائي">
+</div>
 </div>
 
-<div class="form-group">
-<label>أسم التقرير</label>
-<input id="report" value="نشاط إثرائي">
-</div>
-
-<div class="form-group">
 <label>الهدف التربوي</label>
-<textarea id="objective">شرح مفهوم أساسي في المنهج وتطبيقه عبر أنشطة تفاعلية تركز على التعلم النشط والعمل الجماعي وتنمية مهارات التفكير.</textarea>
-</div>
+<textarea name="goal"></textarea>
 
-<div class="form-group">
-<label>وصف مختصر</label>
-<textarea id="desc">تنفيذ درس نموذجي يركز على الفهم العميق والتطبيق العملي للمفاهيم باستخدام أساليب تعليمية حديثة.</textarea>
-</div>
-
-<div class="form-group">
 <label>إجراءات التنفيذ</label>
-<textarea id="steps">عرض المفهوم الجديد، مناقشة أمثلة توضيحية، أنشطة تطبيقية جماعية، حل تمارين فردية، تلخيص النقاط الرئيسية.</textarea>
-</div>
+<textarea name="steps"></textarea>
 
-<div class="form-group">
+<label>وصف مختصر</label>
+<textarea name="summary"></textarea>
+
 <label>النتائج</label>
-<textarea id="results">استيعاب غالبية الطلاب للمفهوم، مشاركة فعالة في الأنشطة، إنجاز التمارين وتحقيق أهداف الدرس.</textarea>
-</div>
+<textarea name="results"></textarea>
 
-<div class="form-group">
 <label>نقاط القوة</label>
-<textarea id="strengths">وضوح الشرح، تنوع الأنشطة، إدارة الوقت بفاعلية، مراعاة الفروق الفردية بين الطلاب.</textarea>
-</div>
+<textarea name="strength"></textarea>
 
-<div class="form-group">
 <label>المحفزات</label>
-<textarea id="motivation">تفاعل الطلاب الإيجابي، تحفيز روح التنافس بين المجموعات، استخدام وسائل تعليمية جذابة.</textarea>
-</div>
+<textarea name="motivation"></textarea>
 
-<div class="form-group">
 <label>مواطن القصور</label>
-<textarea id="weakness">نقص بعض الوسائل التعليمية، محدودية المساحة الصفية، ضعف مشاركة عدد محدود من الطلاب.</textarea>
-</div>
+<textarea name="weakness"></textarea>
 
-<div class="form-group">
 <label>التحديات</label>
-<textarea id="challenge">تفاوت سرعة الاستيعاب بين الطلاب، قصر وقت الحصة، صعوبة بعض المفاهيم العلمية.</textarea>
+<textarea name="challenge"></textarea>
+
+<label>صورة الدليل الأولى</label>
+<input type="file" accept="image/*" id="img1">
+
+<label>وصف الصورة الأولى</label>
+<textarea name="cap1"></textarea>
+
+<label>صورة الدليل الثانية</label>
+<input type="file" accept="image/*" id="img2">
+
+<label>وصف الصورة الثانية</label>
+<textarea name="cap2"></textarea>
+
+<button type="submit">إصدار التقرير</button>
+</form>
 </div>
 
-<div class="form-group">
-<label>شاهد الصورة الأولى</label>
-<input type="file" id="img1" accept="image/*">
-</div>
-
-<div class="form-group">
-<label>شاهد الصورة الثانية</label>
-<input type="file" id="img2" accept="image/*">
-</div>
-
-<button onclick="generateReport()">إنشاء وطباعة التقرير</button>
-
-</div>
 
 <script>
-function getImage(input,cb){
-  if(input.files && input.files[0]){
-    const r=new FileReader();
-    r.onload=e=>cb(e.target.result);
-    r.readAsDataURL(input.files[0]);
-  }else cb("");
-}
+document.getElementById('reportForm').addEventListener('submit', async function(e){
+e.preventDefault();
 
-function generateReport(){
-  getImage(document.getElementById("img1"), img1=>{
-  getImage(document.getElementById("img2"), img2=>{
+const f = new FormData(this);
+const readImage = (fileInput)=> new Promise(res=>{
+  if(!fileInput.files[0]) return res("");
+  const r=new FileReader();
+  r.onload=()=>res(r.result);
+  r.readAsDataURL(fileInput.files[0]);
+});
 
-let w=window.open("","_blank");
+const img1 = await readImage(document.getElementById('img1'));
+const img2 = await readImage(document.getElementById('img2'));
+
+const w = window.open("", "_blank");
+
 w.document.write(`
-${document.querySelector("style").outerHTML}
-<body style="padding:0;margin:0">
-${htmlReport(img1,img2)}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>${f.get("reportType")}</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+@page{size:A4;margin:12mm}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif}
+body{width:210mm;min-height:297mm;color:#1f2937}
+.header{
+  width:100%;height:105px;background:#083024;position:relative;margin-bottom:10px;
+}
+.header::before{
+  content:"";position:absolute;inset:0;
+  background:url('https://i.ibb.co/kVWFFwhW/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png') center/40% no-repeat;opacity:.95
+}
+.admin-name,.school-name,.hijri-date{
+  position:absolute;font-size:10.5px;color:#fff;z-index:2
+}
+.admin-name{top:10px;right:16px}
+.school-name{bottom:10px;right:16px}
+.hijri-date{bottom:10px;left:16px}
+.container{width:100%}
+.box{
+  border:2px solid #3f5f5a;border-radius:8px;padding:10px;font-size:11.5px;line-height:1.6;background:#fff
+}
+.box-title{font-weight:700;margin-bottom:6px;font-size:12.5px}
+.grid{display:grid;gap:8px;margin-bottom:8px}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-4{grid-template-columns:repeat(4,1fr)}
+.objective{
+  background:#eef6ea;border:2px solid #6fa37a;text-align:center;font-size:13px;margin:8px 0;padding:12px
+}
+.main-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.motivation{background:#fff7cc;border:2px dashed #e6c84f}
+.weakness,.challenge{background:#ffecec;border-color:#d16a6a}
+.evidence-section{margin-top:10px}
+.evidence-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.evidence-box{border:2px solid #083024;border-radius:8px;overflow:hidden}
+.evidence-box img{width:100%;height:150px;object-fit:cover}
+.evidence-caption{padding:6px;font-size:10.5px;background:#f9fafb;border-top:1px solid #e5e7eb}
+@media print{button{display:none}}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <div class="admin-name">الإدارة العامة للتعليم بمنطقة الرياض</div>
+  <div class="school-name">مدرسة التجربة النموذجية</div>
+  <div class="hijri-date" id="hijriDate">—</div>
+</div>
+
+<div class="container">
+
+<div class="grid grid-3">
+<div class="box"><strong>المادة</strong><br>${f.get("subject")}</div>
+<div class="box"><strong>الصف</strong><br>${f.get("grade")}</div>
+<div class="box"><strong>الفصل الدراسي</strong><br>${f.get("semester")}</div>
+</div>
+
+<div class="grid grid-4">
+<div class="box"><strong>مكان التنفيذ</strong><br>${f.get("place")}</div>
+<div class="box"><strong>العدد</strong><br>${f.get("count")}</div>
+<div class="box"><strong>المستهدفون</strong><br>${f.get("target")}</div>
+<div class="box"><strong>التقرير</strong><br>${f.get("reportType")}</div>
+</div>
+
+<div class="box objective">
+<div class="box-title">الهدف التربوي</div>
+${f.get("goal")}
+</div>
+
+<div class="main-grid">
+
+<div class="box"><div class="box-title">إجراءات التنفيذ</div>${f.get("steps")}</div>
+<div class="box"><div class="box-title">وصف مختصر</div>${f.get("summary")}</div>
+<div class="box"><div class="box-title">النتائج</div>${f.get("results")}</div>
+<div class="box"><div class="box-title">نقاط القوة</div>${f.get("strength")}</div>
+<div class="box motivation"><div class="box-title">المحفزات</div>${f.get("motivation")}</div>
+<div class="box weakness"><div class="box-title">مواطن القصور</div>${f.get("weakness")}</div>
+<div class="box challenge"><div class="box-title">التحديات</div>${f.get("challenge")}</div>
+
+</div>
+
+<div class="evidence-section">
+<div class="box-title">شواهد الصور</div>
+
+<div class="evidence-grid">
+${img1?`
+<div class="evidence-box">
+<img src="${img1}">
+<div class="evidence-caption">${f.get("cap1")}</div>
+</div>`:""}
+
+${img2?`
+<div class="evidence-box">
+<img src="${img2}">
+<div class="evidence-caption">${f.get("cap2")}</div>
+</div>`:""}
+</div>
+</div>
+
+</div>
+
 <script>
 fetch('https://api.aladhan.com/v1/gToH')
 .then(r=>r.json())
@@ -165,76 +244,17 @@ fetch('https://api.aladhan.com/v1/gToH')
  const h=d.data.hijri;
  document.getElementById('hijriDate').textContent =
  \`\${h.day} \${h.month.ar} \${h.year} هـ\`;
+ setTimeout(()=>{window.print()},1000);
 });
-<\/script>
+</script>
+
 </body>
+</html>
 `);
+
 w.document.close();
 
-  });
- });
-}
-
-function htmlReport(img1,img2){
-return `
-<div class="header">
-  <div class="admin-name">الإدارة العامة للتعليم بمنطقة الرياض</div>
-  <div class="school-name">${school.value}</div>
-  <div class="hijri-date" id="hijriDate">—</div>
-</div>
-
-<div class="container">
-
-<div class="top-grid">
-<div class="box"><strong>المادة</strong><br>${subject.value}</div>
-<div class="box"><strong>الصف</strong><br>${grade.value}</div>
-<div class="box"><strong>الفصل الدراسي</strong><br>${semester.value}</div>
-</div>
-
-<div class="top-grid second">
-<div class="box"><strong>مكان التنفيذ</strong><br>${place.value}</div>
-<div class="box"><strong>العدد</strong><br>${count.value}</div>
-<div class="box"><strong>المستهدفون</strong><br>${target.value}</div>
-<div class="box"><strong>التقرير</strong><br>${report.value}</div>
-</div>
-
-<div class="box objective">
-<div class="box-title">الهدف التربوي</div>
-${objective.value}
-</div>
-
-<div class="main-grid">
-
-<div class="box"><div class="box-title">إجراءات التنفيذ</div>${steps.value}</div>
-<div class="box"><div class="box-title">وصف مختصر</div>${desc.value}</div>
-<div class="box recommend"><div class="box-title">التوصيات</div>${results.value}</div>
-<div class="box result"><div class="box-title">النتائج</div>${results.value}</div>
-<div class="box strength"><div class="box-title">نقاط القوة</div>${strengths.value}</div>
-<div class="box motivation"><div class="box-title">المحفزات</div>${motivation.value}</div>
-<div class="box weakness"><div class="box-title">مواطن القصور</div>${weakness.value}</div>
-<div class="box challenge"><div class="box-title">التحديات</div>${challenge.value}</div>
-
-</div>
-
-<div class="evidence-section">
-<div class="evidence-title">شواهد الصور</div>
-
-<div class="evidence-grid">
-<div class="evidence-box">
-  ${img1?`<img src="${img1}">`:""}
-  <div class="evidence-caption">الصورة الأولى</div>
-</div>
-<div class="evidence-box">
-  ${img2?`<img src="${img2}">`:""}
-  <div class="evidence-caption">الصورة الثانية</div>
-</div>
-</div>
-
-</div>
-
-</div>
-`;
-}
+});
 </script>
 
 </body>
