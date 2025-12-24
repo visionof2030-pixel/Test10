@@ -8,7 +8,7 @@
 <style>
 @page{
   size:A4;
-  margin:10mm;
+  margin:12mm;
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -24,69 +24,73 @@ body{
 /* ===== الهيدر (بدون تغيير) ===== */
 .header{
   width:100%;
-  height:85px;
+  height:95px;
   background:#083024;
   position:relative;
-  margin-bottom:6px;
+  margin-bottom:10px;
 }
 .header::before{
   content:"";
   position:absolute;
   inset:0;
-  background:url('https://i.ibb.co/kVWFFwhW/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png') center/35% no-repeat;
+  background:url('https://i.ibb.co/kVWFFwhW/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png') center/38% no-repeat;
   opacity:.95;
 }
 .admin-name,.school-name,.hijri-date{
   position:absolute;
-  font-size:8px;
+  font-size:10.5px;
   color:#fff;
   z-index:2;
 }
-.admin-name{top:6px;right:12px}
-.school-name{bottom:6px;right:12px}
-.hijri-date{bottom:6px;left:12px}
+.admin-name{top:8px;right:14px}
+.school-name{bottom:8px;right:14px}
+.hijri-date{bottom:8px;left:14px}
 
 /* ===== عام ===== */
 .container{width:100%}
 
 .box{
-  border:2px solid #3f5f5a;
-  border-radius:6px;
-  padding:6px;
-  font-size:9.5px;
-  line-height:1.4;
+  border:2.5px solid #3f5f5a;
+  border-radius:8px;
+  padding:10px;
+  font-size:12.5px;
+  line-height:1.6;
   background:#fff;
 }
 .box-title{
   font-weight:700;
-  margin-bottom:4px;
+  font-size:13.5px;
+  margin-bottom:6px;
 }
 
 /* ===== الصفوف العلوية ===== */
 .top-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:5px;
-  margin-bottom:5px;
+  gap:8px;
+  margin-bottom:8px;
 }
 .top-grid.second{
   grid-template-columns:repeat(4,1fr);
+  margin-bottom:12px;
 }
 
 /* ===== الهدف ===== */
 .objective{
   background:#eef6ea;
-  border:2px solid #6fa37a;
+  border:2.5px solid #6fa37a;
   text-align:center;
-  font-size:10.5px;
-  margin:6px 0;
+  font-size:14px;
+  margin:10px 0;
+  padding:14px;
 }
 
 /* ===== المحتوى ===== */
 .main-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:6px;
+  gap:10px;
+  margin-bottom:12px;
 }
 
 /* ===== ألوان ===== */
@@ -95,7 +99,7 @@ body{
 .strength{border-color:#3f6fa5}
 .motivation{
   background:#fff7cc;
-  border:2px dashed #e6c84f;
+  border:2.5px dashed #e6c84f;
 }
 .weakness{
   background:#ffecec;
@@ -108,38 +112,37 @@ body{
 
 /* ===== شواهد الصور ===== */
 .evidence-section{
-  margin-top:8px;
+  margin-top:12px;
 }
 .evidence-title{
-  font-size:11px;
+  font-size:14px;
   font-weight:700;
   color:#083024;
-  margin-bottom:6px;
+  margin-bottom:8px;
 }
 .evidence-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:8px;
+  gap:12px;
 }
 .evidence-box{
-  border:1.5px solid #083024;
-  border-radius:6px;
+  border:2.5px solid #083024;
+  border-radius:8px;
   overflow:hidden;
 }
 .evidence-box img{
   width:100%;
-  height:120px;
+  height:170px;
   object-fit:cover;
   display:block;
 }
 .evidence-caption{
-  padding:4px;
-  font-size:9px;
-  line-height:1.4;
+  padding:8px;
+  font-size:11.5px;
+  line-height:1.6;
   background:#f9fafb;
   border-top:1px solid #e5e7eb;
 }
-
 </style>
 </head>
 
@@ -168,56 +171,61 @@ body{
 
   <div class="box objective">
     <div class="box-title">الهدف التربوي</div>
-    شرح مفهوم أساسي في المنهج وتطبيقه عبر أنشطة تفاعلية
+    شرح مفهوم أساسي في المنهج وتطبيقه عبر أنشطة تفاعلية تسهم في
+    تنمية مهارات التفكير والتحليل والعمل التعاوني لدى الطلاب.
   </div>
 
   <div class="main-grid">
 
     <div class="box">
       <div class="box-title">إجراءات التنفيذ</div>
-      عرض المفهوم الجديد، مناقشة أمثلة توضيحية، أنشطة تطبيقية جماعية،
-      حل تمارين فردية، تلخيص النقاط الرئيسية.
+      عرض المفهوم الجديد بطريقة تفاعلية، مناقشة أمثلة توضيحية،
+      تنفيذ أنشطة جماعية، حل تمارين فردية،
+      ثم تلخيص أهم النقاط.
     </div>
 
     <div class="box">
       <div class="box-title">وصف مختصر</div>
-      تنفيذ درس نموذجي يركز على الفهم العميق والتطبيق العملي للمفاهيم.
+      درس تطبيقي يعتمد على التعلم النشط،
+      يركز على الفهم العميق للمفاهيم العلمية
+      وربطها بالتطبيق العملي.
     </div>
 
     <div class="box recommend">
       <div class="box-title">التوصيات</div>
-      تكرار استخدام الأنشطة التفاعلية، تخصيص وقت للمراجعة،
-      استخدام وسائل بصرية إضافية.
+      الاستمرار في تنفيذ الأنشطة الإثرائية،
+      زيادة وقت التطبيق، وتوظيف وسائل تعليمية
+      متنوعة لدعم الفهم.
     </div>
 
     <div class="box result">
       <div class="box-title">النتائج</div>
-      استيعاب غالبية الطلاب للمفهوم، مشاركة فعالة في الأنشطة،
-      إنجاز التمارين بنجاح.
+      ارتفاع مستوى التفاعل، تحسن استيعاب المفاهيم،
+      ومشاركة فعالة من غالبية الطلاب.
     </div>
 
     <div class="box strength">
       <div class="box-title">نقاط القوة</div>
-      وضوح الشرح، تنوع الأنشطة، إدارة الوقت الفعالة،
-      مراعاة الفروق الفردية.
+      وضوح الشرح، تنوع الاستراتيجيات،
+      إدارة فعالة للوقت، ومراعاة الفروق الفردية.
     </div>
 
     <div class="box motivation">
       <div class="box-title">المحفزات</div>
-      تفاعل الطلاب الإيجابي، حافز التنافس بين المجموعات،
-      استخدام الوسائل التعليمية الجذابة.
+      تعزيز التنافس الإيجابي بين المجموعات،
+      استخدام أنشطة محفزة، وتقديم تغذية راجعة فورية.
     </div>
 
     <div class="box weakness">
       <div class="box-title">مواطن القصور</div>
-      نقص بعض الوسائل التعليمية، محدودية المساحة،
-      ضعف مشاركة بعض الطلاب.
+      محدودية بعض الوسائل التعليمية،
+      وضيق وقت الحصة لبعض الأنشطة.
     </div>
 
     <div class="box challenge">
       <div class="box-title">التحديات</div>
-      تفاوت سرعة الاستيعاب بين الطلاب، وقت الحصة المحدود،
-      صعوبة بعض المفاهيم.
+      تفاوت مستوى الاستيعاب بين الطلاب،
+      وصعوبة بعض المفاهيم العلمية.
     </div>
 
   </div>
@@ -229,18 +237,18 @@ body{
       <div class="evidence-box">
         <img src="https://i.ibb.co/dwKFLM99/IMG-1941.png">
         <div class="evidence-caption">
-          توضح الصورة تنفيذ النشاط داخل الفصل الدراسي من خلال العمل التعاوني
-          بين الطلاب، حيث تم توزيعهم في مجموعات لتنفيذ مهام تعليمية
-          تعتمد على التعلم النشط والمشاركة الفعالة.
+          توضح الصورة تنفيذ النشاط داخل الفصل الدراسي من خلال
+          العمل التعاوني بين الطلاب وتوزيعهم في مجموعات
+          لإنجاز المهام التعليمية.
         </div>
       </div>
 
       <div class="evidence-box">
         <img src="https://i.ibb.co/fY77kdRH/IMG-1942.png">
         <div class="evidence-caption">
-          تُظهر الصورة نماذج من أعمال الطلاب أثناء النشاط، مع توضيح
-          تقسيم المجموعات وتنوع المهام بين الإبداع والتحدي،
-          مما أسهم في تنمية مهارات التفكير والتعاون.
+          تُظهر الصورة نماذج من أعمال الطلاب أثناء النشاط،
+          مع تنوع المهام بين الإبداع والتحدي
+          وتنمية مهارات التفكير والتعاون.
         </div>
       </div>
     </div>
