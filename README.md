@@ -54,13 +54,13 @@ iframe{
 <div class="panel">
 <h2>بيانات التقرير</h2>
 
-<div class="field"><label>اسم الإدارة</label><input id="admin"></div>
+<div class="field"><label>الإدارة العامة للتعليم</label><input id="admin"></div>
 <div class="field"><label>اسم المدرسة</label><input id="school"></div>
 <div class="field"><label>الفصل الدراسي</label><input id="term"></div>
 <div class="field"><label>الصف</label><input id="grade"></div>
-<div class="field"><label>المادة</label><input id="subject"></input></div>
-<div class="field"><label>التقرير</label><input id="type"></input></div>
-<div class="field"><label>المستهدفون</label><input id="target"></input></div>
+<div class="field"><label>المادة</label><input id="subject"></div>
+<div class="field"><label>التقرير</label><input id="type"></div>
+<div class="field"><label>المستهدفون</label><input id="target"></div>
 <div class="field"><label>العدد</label><input id="count"></input></div>
 <div class="field"><label>مكان التنفيذ</label><input id="place"></input></div>
 <div class="field"><label>اسم المعلم</label><input id="teacher"></input></div>
@@ -129,7 +129,17 @@ body{font-family:'Cairo',sans-serif;background:white;color:#000;}
  opacity:0.95;
 }
 
-.admin{position:absolute;top:6px;right:12px;color:white;font-size:8px;}
+.admin-top{
+ position:absolute;
+ top:4px;
+ right:12px;
+ font-size:8px;
+ font-weight:700;
+ color:white;
+ z-index:2;
+}
+
+.admin{position:absolute;top:18px;right:12px;color:white;font-size:8px;}
 .school{position:absolute;bottom:6px;right:12px;color:white;font-size:8px;}
 .date{position:absolute;bottom:6px;left:12px;color:white;font-size:8px;}
 
@@ -192,7 +202,6 @@ body{font-family:'Cairo',sans-serif;background:white;color:#000;}
  line-height:1.4;
 }
 
-/* ألوان رسمية */
 .green{background:#e3ede8;border:1px solid #0c5c42;}
 .blue{background:#e5e9f3;border:1px solid #1e3a8a;}
 .yellow{background:#fff7d4;border:1px solid #c99b00;}
@@ -228,7 +237,8 @@ body{font-family:'Cairo',sans-serif;background:white;color:#000;}
 <body>
 
 <div class="header">
- <div class="admin">${v('admin')}</div>
+ <div class="admin-top">${v('admin')}</div>
+ <div class="admin">قسم الشؤون التعليمية</div>
  <div class="school">${v('school')}</div>
  <div class="date" id="hDate"></div>
 </div>
