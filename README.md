@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -69,12 +69,12 @@ iframe{
 <div class="field"><label>الهدف التربوي</label><textarea id="objective"></textarea></div>
 
 <div class="field"><label>وصف مختصر</label><textarea id="desc"></textarea></div>
+<div class="field"><label>إجراءات التنفيذ</label><textarea id="steps"></textarea></div>
 <div class="field"><label>النتائج</label><textarea id="results"></textarea></div>
 <div class="field"><label>المحفزات</label><textarea id="motives"></textarea></div>
-<div class="field"><label>التحديات</label><textarea id="challenges"></textarea></div>
 <div class="field"><label>نقاط القوة</label><textarea id="strengths"></textarea></div>
 <div class="field"><label>مواطن القصور</label><textarea id="weak"></textarea></div>
-<div class="field"><label>إجراءات التنفيذ</label><textarea id="steps"></textarea></div>
+<div class="field"><label>التحديات</label><textarea id="challenges"></textarea></div>
 <div class="field"><label>التوصيات</label><textarea id="recommend"></textarea></div>
 
 <div class="field"><label>صورة 1</label><input type="file" id="img1" accept="image/*"></div>
@@ -251,13 +251,13 @@ body{font-family:'Cairo',sans-serif;background:white;color:#000;}
 
 <div class="sectors">
  <div class="sec green"><div class="sec-title">وصف مختصر</div><div class="sec-content">${v('desc')}</div></div>
+ <div class="sec gray"><div class="sec-title">إجراءات التنفيذ</div><div class="sec-content">${v('steps')}</div></div>
  <div class="sec green"><div class="sec-title">النتائج</div><div class="sec-content">${v('results')}</div></div>
  <div class="sec yellow"><div class="sec-title">المحفزات</div><div class="sec-content">${v('motives')}</div></div>
- <div class="sec red"><div class="sec-title">التحديات</div><div class="sec-content">${v('challenges')}</div></div>
 
  <div class="sec blue"><div class="sec-title">نقاط القوة</div><div class="sec-content">${v('strengths')}</div></div>
  <div class="sec red"><div class="sec-title">مواطن القصور</div><div class="sec-content">${v('weak')}</div></div>
- <div class="sec gray"><div class="sec-title">إجراءات التنفيذ</div><div class="sec-content">${v('steps')}</div></div>
+ <div class="sec red"><div class="sec-title">التحديات</div><div class="sec-content">${v('challenges')}</div></div>
  <div class="sec blue"><div class="sec-title">التوصيات</div><div class="sec-content">${v('recommend')}</div></div>
 </div>
 
@@ -283,8 +283,7 @@ fetch('https://api.aladhan.com/v1/gToH')
 <\/script>
 
 </body>
-</html>
-`;
+</html>`;
 
  document.getElementById("preview").srcdoc = html;
 }
