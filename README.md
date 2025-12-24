@@ -16,7 +16,6 @@
       height: 100vh;
     }
 
-    /* ===== لوحة الإدخال ===== */
     .panel {
       background: #ffffff;
       padding: 16px;
@@ -63,7 +62,6 @@
       margin-top: 10px;
     }
 
-    /* ===== المعاينة ===== */
     iframe {
       width: 100%;
       height: 100%;
@@ -74,7 +72,6 @@
 </head>
 <body>
 
-  <!-- ===== لوحة الإدخال ===== -->
   <div class="panel">
     <h2>بيانات التقرير</h2>
 
@@ -83,11 +80,11 @@
     <div class="field"><label>الفصل الدراسي</label><input id="term"></div>
     <div class="field"><label>الصف</label><input id="grade"></div>
     <div class="field"><label>المادة</label><input id="subject"></div>
-    <div class="field"><label>مكان التنفيذ</label><input id="place"></div>
-    <div class="field"><label>نوع التقرير</label><input id="type"></div>
-    <div class="field"><label>المستهدفون</label><input id="target"></div>
-    <div class="field"><label>العدد</label><input id="count"></div>
-    <div class="field"><label>اسم المعلم</label><input id="teacher"></div>
+    <div class="field"><label>مكان التنفيذ</label><input id="place"></input></div>
+    <div class="field"><label>نوع التقرير</label><input id="type"></input></div>
+    <div class="field"><label>المستهدفون</label><input id="target"></input></div>
+    <div class="field"><label>العدد</label><input id="count"></input></div>
+    <div class="field"><label>اسم المعلم</label><input id="teacher"></input></div>
 
     <div class="field"><label>الهدف التربوي</label><textarea id="objective"></textarea></div>
     <div class="field"><label>وصف مختصر للنشاط</label><textarea id="desc"></textarea></div>
@@ -101,7 +98,6 @@
     <button onclick="printReport()">طباعة</button>
   </div>
 
-  <!-- ===== نافذة المعاينة ===== -->
   <iframe id="preview"></iframe>
 
 <script>
@@ -288,7 +284,7 @@ function generate() {
   <div class="page-content">
 
     <div class="report-objective-box">
-      ${v('objective')}
+${v('objective')}
     </div>
 
     <div class="report-section">
@@ -340,27 +336,38 @@ ${v('improvements')}
 
   </div>
 
-  <script>
-    fetch('https://api.aladhan.com/v1/gToH')
-      .then(r => r.json())
-      .then(d => {
-        const h = d.data.hijri;
-        document.getElementById('hijriDate').textContent =
-          h.day + ' ' + h.month.ar + ' ' + h.year + ' هـ';
-      })
-      .catch(() => {
-        document.getElementById('hijriDate').textContent = '—';
-      });
-  </script>
+<script>
+fetch('https://api.aladhan.com/v1/gToH')
+.then(r => r.json())
+.then(d => {
+  const h = d.data.hijri;
+  document.getElementById('hijriDate').textContent =
+    h.day + ' ' + h.month.ar + ' ' + h.year + ' هـ';
+})
+.catch(() => {
+  document.getElementById('hijriDate').textContent = '—';
+});
+<\/script>
 
 </body>
 </html>`;
 
-  document.getElementById('preview').srcdoc = html;
+  const frame = document.getElementById('preview');
+  frame.srcdoc = html;
 }
 
-function printReport(){
-  document.getElementById('preview').contentWindow.print();
+function printReport() {
+  const frame = document.getElementById('preview');
+
+  if (frame.contentWindow.document.readyState === 'complete') {
+    frame.contentWindow.focus();
+    frame.contentWindow.print();
+  } else {
+    frame.onload = () => {
+      frame.contentWindow.focus();
+      frame.contentWindow.print();
+    };
+  }
 }
 </script>
 
