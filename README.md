@@ -58,10 +58,10 @@ iframe{
 <div class="field"><label>اسم المدرسة</label><input id="school"></div>
 <div class="field"><label>الفصل الدراسي</label><input id="term"></div>
 <div class="field"><label>الصف</label><input id="grade"></div>
-<div class="field"><label>المادة</label><input id="subject"></div>
-<div class="field"><label>التقرير</label><input id="type"></div>
-<div class="field"><label>المستهدفون</label><input id="target"></div>
-<div class="field"><label>العدد</label><input id="count"></div>
+<div class="field"><label>المادة</label><input id="subject"></input></div>
+<div class="field"><label>التقرير</label><input id="type"></input></div>
+<div class="field"><label>المستهدفون</label><input id="target"></input></div>
+<div class="field"><label>العدد</label><input id="count"></input></div>
 <div class="field"><label>مكان التنفيذ</label><input id="place"></input></div>
 <div class="field"><label>اسم المعلم</label><input id="teacher"></input></div>
 <div class="field"><label>اسم مدير المدرسة</label><input id="manager"></input></div>
@@ -155,13 +155,16 @@ body{font-family:'Cairo',sans-serif;background:white;color:#000;}
 .objective{
  background:#dcece5;
  border:1px solid #0b543a;
- padding:8px;
- text-align:center;
- font-size:7.5px;
- margin-bottom:8px;
+ font-size:7.8px;
  font-weight:700;
  border-radius:6px;
  line-height:1.6;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ height:70px;
+ text-align:center;
+ margin-bottom:8px;
 }
 
 .sectors{
