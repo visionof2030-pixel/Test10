@@ -14,43 +14,41 @@ body{
   height:100vh;
 }
 .panel{
-  background:white;
-  padding:16px;
+  background:#ffffff;
+  padding:14px;
   overflow-y:auto;
   border-left:4px solid #083024;
 }
-.field{margin-bottom:14px;}
+.field{margin-bottom:12px;}
 .field label{font-size:12px;display:block;margin-bottom:4px;}
 input,select,textarea{
   width:100%;padding:6px;font-size:12px;
-  border:1px solid #b9b9b9;border-radius:4px;
+  border:1px solid #bcbcbc;border-radius:4px;
 }
 textarea{min-height:60px;resize:vertical}
-
 .auto-box{display:flex;gap:6px;align-items:center;margin-top:4px;}
 .auto-btn{
-  font-size:16px;cursor:pointer;background:#ececec;
-  width:26px;height:26px;border-radius:4px;
-  text-align:center;line-height:24px;border:1px solid #bbb;
+  width:24px;height:24px;border-radius:4px;
+  text-align:center;line-height:22px;
+  cursor:pointer;background:#ddd;
+  font-size:16px;border:1px solid #aaa;
 }
 .auto-text{font-size:9px;color:#555;}
-
 button{
   width:100%;padding:10px;
   background:#083024;color:white;
   border:none;border-radius:6px;
   font-size:14px;margin-top:10px;cursor:pointer;
 }
-
-iframe{width:100%;height:100%;border:none;background:white}
+.preview-msg{
+  font-size:13px;color:#333;padding:20px;text-align:center;
+}
 </style>
 </head>
 <body>
 
 <div class="panel">
-<h2>بيانات التقرير</h2>
-
-<!-- حقول الإدخال -->
+<h2 style="color:#083024;">بيانات التقرير</h2>
 
 <div class="field">
 <label>الإدارة العامة للتعليم</label>
@@ -71,7 +69,6 @@ iframe{width:100%;height:100%;border:none;background:white}
 
 <div class="field"><label>الصف</label><input id="grade"></div>
 <div class="field"><label>المادة</label><input id="subject"></div>
-
 <div class="field">
 <label>نوع التقرير</label>
 <select id="type">
@@ -85,180 +82,135 @@ iframe{width:100%;height:100%;border:none;background:white}
 <div class="field"><label>اسم المعلم</label><input id="teacher"></div>
 <div class="field"><label>اسم مدير المدرسة</label><input id="manager"></div>
 
-<!-- السكربت الخاص بالنصوص التلقائية -->
 <script>
 const autos={
 objective:[
-"استثمار حصص النشاط لتنمية مواهب الطلاب وتعزيز مهارات التعاون والابتكار، بما يساهم في بناء شخصية إيجابية قادرة على التفاعل المنتج داخل المجتمع المدرسي.",
-"تحقيق التوازن بين الجانب الأكاديمي والمهاري لدى الطلاب من خلال أنشطة تطبيقية تفتح آفاق التفكير وتعزز الثقة بالنفس.",
-"تهيئة بيئة محفزة للإبداع تسمح للطلاب باكتشاف قدراتهم الشخصية وتطوير ميولهم بما يتماشى مع متطلبات العصر.",
-"رفع مستوى الانتماء للمدرسة عبر تفعيل دور الطالب في التخطيط والتنفيذ للأنشطة التي تواكب اهتماماته وتطلعاته."
+"استثمار حصص النشاط في تعزيز مهارات الطلاب وتنمية مواهبهم بما يحقق مشاركة فعّالة ويزيد من ارتباطهم بالمدرسة.",
+"تنمية شخصية الطالب من خلال أنشطة جماعية ترفع الثقة بالنفس والعمل بروح الفريق.",
+"توفير بيئة محفزة للإبداع تسهم في تنمية الجوانب المعرفية والمهارية لدى الطلاب.",
+"تحقيق تفاعل إيجابي داخل المدرسة عبر تنفيذ أنشطة تعزز الانتماء والقدرات الاجتماعية."
 ],
 desc:[
-"تنفيذ مجموعة من الأنشطة الهادفة خلال حصص النشاط تركّز على التعلم التعاوني وتحسين مهارات التواصل بين الطلاب بأساليب حديثة جاذبة.",
-"تصميم برنامج نشاط مدرسي شامل يُسهم في تعزيز القيم الإيجابية لدى الطلاب واستثمار طاقاتهم بما ينعكس إيجابًا على سلوكهم وتحصيلهم.",
-"إتاحة الفرصة للطلاب لخوض تجارب جديدة تعزز قدراتهم القيادية والعملية من خلال الأنشطة الجماعية.",
-"تحقيق تفاعل فعّال بين الطلاب عبر أنشطة نوعية مخطط لها وفق احتياجاتهم وقدراتهم الفردية."
+"تنفيذ نشاط خلال حصة النشاط يركز على مشاركة جميع الطلاب وتحفيزهم على تطبيق المهارات بشكل عملي تفاعلي.",
+"تصميم وتنفيذ أنشطة متنوعة بهدف تطوير مهارات الطلاب وربط التعلم بالواقع.",
+"إشراك الطلاب في أنشطة تحاكي اهتماماتهم وتساهم في اكتشاف مواهب جديدة.",
+"الاعتماد على التعلم التعاوني في إنجاز مهام النشاط وتعزيز روح الفريق."
 ],
 steps:[
-"إعداد خطة للنشاط وتوزيع المهام على الطلاب، ثم تنفيذ الأنشطة بإشراف المعلم ومتابعة الأداء بوسائل تحفيزية تضمن مشاركة الجميع.",
-"شرح أهداف النشاط قبل البدء، ثم تقسيم الطلاب إلى مجموعات تعاونية تؤدي المهام وفق جدول زمني مناسب.",
-"تنظيم خطوات النشاط وفق منهجية تعلم نشط تعتمد المشاركة الفعّالة وإتاحة المجال للطلاب لاتخاذ القرار.",
-"تقديم الدعم اللازم للطلاب خلال التنفيذ، ثم تقييم المخرجات ومناقشة أبرز ما تم تعلمه."
+"توضيح أهداف النشاط وتوزيع الأدوار ثم تنفيذ المهام بإشراف المعلم ومتابعة التفاعل.",
+"تقسيم الطلاب لمجموعات والعمل على خطة نشاط محددة وعرض المخرجات.",
+"تهيئة وسائل النشاط ومتابعة التنفيذ ثم تقييم النتائج ومناقشة الفوائد.",
+"تنظيم العمل التعاوني وتقديم التغذية الراجعة لتحسين الأداء داخل النشاط."
 ],
 results:[
-"ارتفاع مستوى اندماج الطلاب وتفاعلهم مع الأنشطة بما ساعد على تعزيز مهارات التواصل والعمل الجماعي.",
-"إبراز إبداعات الطلاب وقدرتهم على تحمل المسؤولية وتحقيق نتائج ملموسة داخل الحصة.",
-"زيادة دافعية الطلاب للتعلم من خلال النشاط وتحسن أدوارهم القيادية ومشاركتهم.",
-"تحقيق أثر إيجابي على الجو المدرسي بتعزيز التعاون والانتماء."
+"زيادة تفاعل الطلاب ومشاركتهم الفاعلة في تنفيذ المهام.",
+"تحسن ملحوظ في مهارات التواصل والعمل الجماعي.",
+"إبراز مواهب الطلاب وقدرتهم على الابتكار.",
+"تعزيز دافعية الطلاب وتحقيق أهداف النشاط."
 ],
 motives:[
-"تشجيع الطلاب عبر الجوائز الرمزية والتحفيز المستمر وإبراز المشاركات المتميزة.",
-"استخدام منافسات المجموعات لتحقيق مستويات أعلى من التفاعل والحماس.",
-"تهيئة مناخ داعم يبرز قدرات الطلاب ويزيد دافعيتهم للمشاركة.",
-"إضافة عنصر التشويق وربط النشاط باهتمامات الطلاب اليومية."
+"استخدام التشجيع والتحفيز المستمر لزيادة التفاعل بين الطلاب.",
+"عرض مشاركات الطلاب المتميزة وإبراز منجزاتهم.",
+"خلق روح تنافس إيجابي بين المجموعات.",
+"توفير بيئة مشجعة ومحفزة للطلاب."
 ],
 challenges:[
-"تفاوت مستويات تفاعل الطلاب ما يستدعي دعمًا إضافيًا للمشاركة العادلة.",
-"ضيق الوقت المخصص للنشاط مقارنة بكمية المهام المخطط لها.",
-"صعوبة توفير بعض المستلزمات اللازمة لتنويع الأنشطة.",
-"الحاجة إلى ضبط السلوك أثناء العمل الجماعي لضمان نجاح النشاط."
+"تفاوت مستويات المشاركة بين الطلاب داخل المجموعات.",
+"عدم توفر الوقت الكافي لتنفيذ جميع مهام النشاط.",
+"الحاجة إلى ضبط سلوك بعض الطلاب أثناء التنفيذ.",
+"قلة توفر الأدوات المناسبة لبعض الأنشطة."
 ],
 strengths:[
-"وضوح الأهداف ومناسبة الأنشطة لقدرات الطلاب مما ساهم في نجاح التنفيذ وتحقيق الفائدة.",
-"تنوع الأنشطة وضمان مشاركة جميع الطلاب بطرق تفاعلية جاذبة.",
-"تعزيز العلاقات الإيجابية بين الطلاب عبر العمل التعاوني.",
-"فاعلية أساليب التحفيز وانعكاسها المباشر على دافعية الطلاب."
+"تنوع الأنشطة جذبت اهتمام الطلاب وحققت تفاعلهم.",
+"مناسبة النشاط لقدرات الطلاب وميولهم.",
+"تنفيذ منظم ساهم في تحقيق أهداف النشاط.",
+"تحسن ملحوظ في روح التعاون داخل الفصل."
 ],
 recommend:[
-"الاستمرار في تنفيذ الأنشطة النوعية وتوسيع نطاقها لتشمل مهارات متنوعة تلبي احتياجات الطلاب.",
-"زيادة زمن حصص النشاط لإتاحة فرص أكبر للإبداع والتنفيذ المثالي.",
-"توفير مستلزمات إضافية لدعم جودة النشاط وتنويع التجارب التعليمية.",
-"تعزيز التواصل مع أولياء الأمور لرفع فاعلية النشاط المدرسي."
+"الاستمرار في تفعيل حصص النشاط بطرق جذابة ومحفزة.",
+"زيادة زمن النشاط عند الحاجة لضمان تنفيذ أفضل.",
+"توفير أدوات ومواد إضافية تدعم جودة النشاط.",
+"إتاحة مزيد من الفرص لعرض منجزات الطلاب."
 ]
 };
-
 const idx={objective:0,desc:0,steps:0,results:0,motives:0,challenges:0,strengths:0,recommend:0};
-function autoFill(key){
- idx[key]=(idx[key]+1)%autos[key].length;
- document.getElementById(key).value=autos[key][idx[key]];
+function autoFill(k){
+ idx[k]=(idx[k]+1)%autos[k].length;
+ document.getElementById(k).value=autos[k][idx[k]];
 }
 </script>
 
-<!-- خانات النصوص التلقائية -->
-<div class="field"><label>الهدف التربوي</label>
-<textarea id="objective"></textarea>
-<div class="auto-box"><div class="auto-btn" onclick="autoFill('objective')">✦</div><div class="auto-text">اضغط عدة مرات</div></div></div>
+<!-- الخانات + أيقونة النصوص -->
+<div class="field"><label>الهدف التربوي</label><textarea id="objective"></textarea><div class="auto-box"><div class="auto-btn" onclick="autoFill('objective')">✦</div><div class="auto-text">اضغط للتبديل</div></div></div>
 
-<div class="field"><label>وصف مختصر</label>
-<textarea id="desc"></textarea>
-<div class="auto-box"><div class="auto-btn" onclick="autoFill('desc')">✦</div><div class="auto-text">اضغط عدة مرات</div></div></div>
+<div class="field"><label>وصف مختصر</label><textarea id="desc"></textarea><div class="auto-box"><div class="auto-btn" onclick="autoFill('desc')">✦</div><div class="auto-text">اضغط للتبديل</div></div></div>
 
-<div class="field"><label>إجراءات التنفيذ</label>
-<textarea id="steps"></textarea>
-<div class="auto-box"><div class="auto-btn" onclick="autoFill('steps')">✦</div><div class="auto-text">اضغط عدة مرات</div></div></div>
+<div class="field"><label>إجراءات التنفيذ</label><textarea id="steps"></textarea><div class="auto-box"><div class="auto-btn" onclick="autoFill('steps')">✦</div><div class="auto-text">اضغط للتبديل</div></div></div>
 
-<div class="field"><label>النتائج</label>
-<textarea id="results"></textarea>
-<div class="auto-box"><div class="auto-btn" onclick="autoFill('results')">✦</div><div class="auto-text">اضغط عدة مرات</div></div></div>
+<div class="field"><label>النتائج</label><textarea id="results"></textarea><div class="auto-box"><div class="auto-btn" onclick="autoFill('results')">✦</div><div class="auto-text">اضغط للتبديل</div></div></div>
 
-<div class="field"><label>المحفزات</label>
-<textarea id="motives"></textarea>
-<div class="auto-box"><div class="auto-btn" onclick="autoFill('motives')">✦</div><div class="auto-text">اضغط عدة مرات</div></div></div>
+<div class="field"><label>المحفزات</label><textarea id="motives"></textarea><div class="auto-box"><div class="auto-btn" onclick="autoFill('motives')">✦</div><div class="auto-text">اضغط للتبديل</div></div></div>
 
-<div class="field"><label>التحديات</label>
-<textarea id="challenges"></textarea>
-<div class="auto-box"><div class="auto-btn" onclick="autoFill('challenges')">✦</div><div class="auto-text">اضغط عدة مرات</div></div></div>
+<div class="field"><label>التحديات</label><textarea id="challenges"></textarea><div class="auto-box"><div class="auto-btn" onclick="autoFill('challenges')">✦</div><div class="auto-text">اضغط للتبديل</div></div></div>
 
-<div class="field"><label>نقاط القوة</label>
-<textarea id="strengths"></textarea>
-<div class="auto-box"><div class="auto-btn" onclick="autoFill('strengths')">✦</div><div class="auto-text">اضغط عدة مرات</div></div></div>
+<div class="field"><label>نقاط القوة</label><textarea id="strengths"></textarea><div class="auto-box"><div class="auto-btn" onclick="autoFill('strengths')">✦</div><div class="auto-text">اضغط للتبديل</div></div></div>
 
-<div class="field"><label>التوصيات</label>
-<textarea id="recommend"></textarea>
-<div class="auto-box"><div class="auto-btn" onclick="autoFill('recommend')">✦</div><div class="auto-text">اضغط عدة مرات</div></div></div>
+<div class="field"><label>التوصيات</label><textarea id="recommend"></textarea><div class="auto-box"><div class="auto-btn" onclick="autoFill('recommend')">✦</div><div class="auto-text">اضغط للتبديل</div></div></div>
 
-<!-- الصور -->
 <div class="field"><label>صورة 1</label><input type="file" id="img1" accept="image/*"></div>
 <div class="field"><label>صورة 2</label><input type="file" id="img2" accept="image/*"></div>
 
 <button onclick="generate()">إنشاء التقرير</button>
-<button onclick="printReport()">طباعة</button>
+<button onclick="generate()">طباعة</button>
 
-</div><!-- panel -->
+</div>
 
-<iframe id="preview"></iframe>
+<div class="preview-msg">
+المعاينة عبر الطباعة المباشرة للآيفون
+</div>
 
-<!-- سكربت إنشاء التقرير + الطباعة -->
 <script>
-function getImage(id){
+function getImg(id){
  const f=document.getElementById(id).files[0];
- return f?new Promise(r=>{
-   const fr=new FileReader();
-   fr.onload=()=>r(`<img src="${fr.result}" style="width:100%;height:100%;object-fit:cover;border-radius:6px;">`);
-   fr.readAsDataURL(f);
- }):Promise.resolve("");
+ return new Promise(res=>{
+   if(!f)return res("");
+   const R=new FileReader();
+   R.onload=()=>res(`<img src="${R.result}" style="width:100%;height:100%;object-fit:cover;border-radius:6px;">`);
+   R.readAsDataURL(f);
+ });
 }
 
 async function generate(){
- const v=id=>document.getElementById(id).value||'';
- const img1=await getImage('img1');
- const img2=await getImage('img2');
+ const v=id=>document.getElementById(id).value||"";
+ const img1=await getImg('img1');
+ const img2=await getImg('img2');
 
- const html=`
-<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8">
+ const html=`<!DOCTYPE html><html lang="ar" dir="rtl"><head>
+<meta charset="UTF-8">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Cairo',sans-serif;}
-
+body{font-family:'Cairo',sans-serif;background:#ffffff;}
 @page{size:A4;margin:8mm;}
-@media print{
- *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
- .header::before{opacity:1!important}
-}
-.header{
- width:100%;height:90px;background:#083024;position:relative;
-}
+@media print{*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}}
+.header{height:90px;background:#083024;position:relative;color:#fff;}
 .header::before{
- content:"";position:absolute;inset:0;
- background:url('https://i.ibb.co/kVWFFwhW/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png')
- center/38% no-repeat;opacity:0.95;
+content:"";position:absolute;inset:0;opacity:.9;
+background:url('https://i.ibb.co/kVWFFwhW/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png') center/38% no-repeat;
 }
-.admin-top{position:absolute;top:4px;right:12px;font-size:8px;font-weight:bold;color:#fff;}
-.school{position:absolute;bottom:6px;right:12px;font-size:8px;color:#fff;}
-.date{position:absolute;bottom:6px;left:12px;font-size:8px;color:#fff;}
-
+.admin{position:absolute;top:5px;right:10px;font-size:8px;font-weight:bold;}
+.school{position:absolute;bottom:5px;right:10px;font-size:8px;}
+.date{position:absolute;bottom:5px;left:10px;font-size:8px;}
 .info{max-width:210mm;margin:auto;padding:8px;}
-.grid4{
- display:grid;grid-template-columns:repeat(4,1fr);
- gap:4px;margin-bottom:6px;
-}
-.ibox{
- border:1px solid #083024;border-radius:4px;
- padding:4px;text-align:center;font-size:7px;
-}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:6px;}
+.ibox{border:1px solid #083024;border-radius:4px;padding:4px;font-size:7px;text-align:center;}
 .ibox strong{display:block;font-size:7.5px;color:#083024;}
-
 .page{max-width:210mm;margin:auto;padding:8px;}
-
-.objective{
- background:#dcece5;border:1px solid #0b543a;border-radius:6px;
- height:70px;display:flex;align-items:center;justify-content:center;
- font-size:7.8px;font-weight:bold;text-align:center;
- margin-bottom:8px;line-height:1.6;
-}
-
-.sectors{
- display:grid;grid-template-columns:repeat(4,1fr);
- gap:6px;margin-top:8px;
-}
-.sec{border-radius:6px;padding:6px;font-size:6.5px;}
-.sec-title{
- font-size:7.2px;font-weight:bold;margin-bottom:2px;
- border-bottom:1px solid #0002;padding-bottom:2px;
-}
-.sec-content{line-height:1.4;white-space:pre-line;}
+.objective{background:#dcece5;border:1px solid #0b543a;border-radius:6px;height:70px;display:flex;align-items:center;justify-content:center;font-size:7.8px;font-weight:bold;margin-bottom:8px;text-align:center;line-height:1.6;}
+.sectors{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+.sec{padding:6px;border-radius:6px;font-size:6.5px;}
+.sec-title{font-size:7.2px;font-weight:bold;border-bottom:1px solid #3333;padding-bottom:2px;margin-bottom:2px;}
+.sec-content{white-space:pre-line;line-height:1.4;}
 
 .green{background:#e3ede8;border:1px solid #0c5c42;}
 .blue{background:#e5e9f3;border:1px solid #1e3a8a;}
@@ -266,22 +218,14 @@ body{font-family:'Cairo',sans-serif;}
 .red{background:#fde8e7;border:1px solid #a83e3e;}
 .gray{background:#f4f4f4;border:1px solid #6c6c6c;}
 
-.images{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;}
-.imgbox{
- height:130px;border-radius:6px;border:1px solid #083024;
- overflow:hidden;background:#eee;display:flex;align-items:center;justify-content:center;
-}
-
-.footer{
- max-width:210mm;margin:14px auto 0;
- display:flex;justify-content:space-between;
- font-size:9px;font-weight:bold;
-}
+.images{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
+.imgbox{height:130px;border:1px solid #083024;border-radius:6px;overflow:hidden;background:#eee;display:flex;align-items:center;justify-content:center;}
+.footer{max-width:210mm;margin:16px auto 0;display:flex;justify-content:space-between;font-size:9px;font-weight:bold;}
 </style>
 </head><body>
 
 <div class="header">
-<div class="admin-top">${v('admin')}</div>
+<div class="admin">${v('admin')}</div>
 <div class="school">${v('school')}</div>
 <div class="date" id="hDate"></div>
 </div>
@@ -293,7 +237,6 @@ body{font-family:'Cairo',sans-serif;}
 <div class="ibox"><strong>المادة</strong>${v('subject')}</div>
 <div class="ibox"><strong>التقرير</strong>${v('type')}</div>
 </div>
-
 <div class="grid4">
 <div class="ibox"><strong>المستهدفون</strong>${v('target')}</div>
 <div class="ibox"><strong>العدد</strong>${v('count')}</div>
@@ -306,23 +249,14 @@ body{font-family:'Cairo',sans-serif;}
 <div class="objective">${v('objective')}</div>
 
 <div class="sectors">
-<div class="sec green">
-<div class="sec-title">وصف مختصر</div><div class="sec-content">${v('desc')}</div></div>
-<div class="sec gray">
-<div class="sec-title">إجراءات التنفيذ</div><div class="sec-content">${v('steps')}</div></div>
-<div class="sec green">
-<div class="sec-title">النتائج</div><div class="sec-content">${v('results')}</div></div>
-<div class="sec yellow">
-<div class="sec-title">المحفزات</div><div class="sec-content">${v('motives')}</div></div>
-
-<div class="sec blue">
-<div class="sec-title">نقاط القوة</div><div class="sec-content">${v('strengths')}</div></div>
-<div class="sec red">
-<div class="sec-title">التحديات</div><div class="sec-content">${v('challenges')}</div></div>
-<div class="sec red">
-<div class="sec-title">مواطن القصور</div><div class="sec-content">${v('weak')}</div></div>
-<div class="sec blue">
-<div class="sec-title">التوصيات</div><div class="sec-content">${v('recommend')}</div></div>
+<div class="sec green"><div class="sec-title">وصف مختصر</div><div class="sec-content">${v('desc')}</div></div>
+<div class="sec gray"><div class="sec-title">إجراءات التنفيذ</div><div class="sec-content">${v('steps')}</div></div>
+<div class="sec green"><div class="sec-title">النتائج</div><div class="sec-content">${v('results')}</div></div>
+<div class="sec yellow"><div class="sec-title">المحفزات</div><div class="sec-content">${v('motives')}</div></div>
+<div class="sec blue"><div class="sec-title">نقاط القوة</div><div class="sec-content">${v('strengths')}</div></div>
+<div class="sec red"><div class="sec-title">التحديات</div><div class="sec-content">${v('challenges')}</div></div>
+<div class="sec red"><div class="sec-title">مواطن القصور</div><div class="sec-content"></div></div>
+<div class="sec blue"><div class="sec-title">التوصيات</div><div class="sec-content">${v('recommend')}</div></div>
 </div>
 
 <div class="images">
@@ -337,27 +271,18 @@ body{font-family:'Cairo',sans-serif;}
 </div>
 
 <script>
-fetch('https://api.aladhan.com/v1/gToH')
-.then(r=>r.json()).then(d=>{
+fetch('https://api.aladhan.com/v1/gToH').then(r=>r.json()).then(d=>{
  const h=d.data.hijri;
  document.getElementById('hDate').textContent=h.day+' '+h.month.ar+' '+h.year+' هـ';
+ setTimeout(()=>{window.print();window.close();},1200);
 });
 </script>
 
 </body></html>`;
 
- const frame=document.getElementById('preview');
- const doc=frame.contentWindow.document;
- doc.open();
- doc.write(html);
- doc.close();
-}
-
-function printReport(){
- const frame=document.getElementById('preview');
- const fn=()=>{frame.contentWindow.focus();frame.contentWindow.print()};
- if(frame.contentWindow.document.readyState==="complete"){fn()}
- frame.onload=fn;
+const w=window.open("","_blank");
+w.document.write(html);
+w.document.close();
 }
 </script>
 
