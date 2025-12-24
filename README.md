@@ -8,9 +8,11 @@
 *{box-sizing:border-box;font-family:'Cairo',sans-serif;}
 body{margin:0;background:#f3f4f6;}
 button{cursor:pointer}
+
 /* PAGE SWITCH */
 #formPage{display:block}
 #reportPage{display:none}
+
 /* PANEL */
 .panel{
   background:white;padding:18px;
@@ -35,18 +37,25 @@ button{
   border:none;border-radius:6px;font-size:14px;
   margin-top:10px;
 }
-/* REPORT */
-@page{size:A4;margin:8mm;}
+
+/* REPORT – ONE PAGE FIT */
+#reportPage{
+  background:white;
+  width:210mm;
+  min-height:297mm;
+  margin:auto;
+  padding:0;
+  overflow:hidden;
+}
+
+@page{size:A4;margin:6mm;}
 @media print{
   #formPage{display:none!important}
   #printBtn,#printIcon{display:none!important}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
-#reportPage{
-  background:white;
-  width:210mm;min-height:100vh;
-  margin:auto;padding:0;
-}
+
+/* HEADER */
 .header{
  height:90px;background:#083024;color:white;position:relative;
 }
@@ -58,30 +67,70 @@ button{
 .admin{position:absolute;top:6px;right:12px;font-size:8px;font-weight:bold;}
 .school{position:absolute;bottom:6px;right:12px;font-size:8px;}
 .date{position:absolute;bottom:6px;left:12px;font-size:8px;}
-.info{padding:8px;}
-.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:6px;}
-.ibox{border:1px solid #083024;border-radius:4px;padding:4px;text-align:center;font-size:7px;background:white}
-.ibox strong{display:block;font-size:7.5px;color:#083024;}
-.page{padding:8px;}
-.objective{
- background:#dcece5;border:1px solid #0b543a;border-radius:6px;
- height:70px;display:flex;align-items:center;justify-content:center;
- font-size:7.8px;font-weight:bold;text-align:center;margin-bottom:8px;line-height:1.6;
+
+/* INFO */
+.info{padding:6px 8px;}
+.grid4{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:3px;
+ margin-bottom:4px;
 }
-.sectors{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px;}
-.sec{padding:6px;border-radius:6px;font-size:6.5px;}
-.sec-title{font-size:7.2px;font-weight:bold;border-bottom:1px solid #3333;padding-bottom:2px;margin-bottom:2px;}
-.sec-content{white-space:pre-line;line-height:1.4;}
+.ibox{
+ border:1px solid #083024;border-radius:3px;
+ padding:3px;text-align:center;font-size:6.4px;background:white;
+}
+.ibox strong{display:block;font-size:7px;color:#083024;margin-bottom:1px;}
+
+/* SECTIONS */
+.page{padding:6px 8px;}
+.objective{
+ background:#dcece5;border:1px solid #0b543a;border-radius:5px;
+ height:55px;display:flex;align-items:center;justify-content:center;
+ font-size:7px;font-weight:bold;text-align:center;margin-bottom:6px;line-height:1.4;
+}
+
+.sectors{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:4px;
+ margin-top:4px;
+}
+.sec{
+ padding:4px;border-radius:4px;font-size:5.8px;
+ min-height:72px;
+}
+.sec-title{font-size:6.4px;font-weight:bold;border-bottom:1px solid #3333;padding-bottom:1px;margin-bottom:1px;}
+.sec-content{white-space:pre-line;line-height:1.3;}
+
+/* COLORS */
 .green{background:#e3ede8;border:1px solid #0c5c42;}
 .blue{background:#e5e9f3;border:1px solid #1e3a8a;}
 .yellow{background:#fff7d4;border:1px solid #c99b00;}
 .red{background:#fde8e7;border:1px solid #a83e3e;}
-.images{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
-.imgbox{height:130px;border:1px solid #083024;border-radius:6px;overflow:hidden;background:#eee;}
-.footer{margin-top:14px;display:flex;justify-content:space-between;font-size:9px;font-weight:bold;}
+.gray{background:#f4f4f4;border:1px solid #6c6c6c;}
+
+/* IMAGES */
+.images{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:6px;margin-top:6px;
+}
+.imgbox{
+ height:95px;border:1px solid #083024;border-radius:5px;
+ overflow:hidden;background:#eee;
+}
+
+/* FOOTER */
+.footer{
+ margin-top:6px;display:flex;justify-content:space-between;
+ font-size:8px;font-weight:bold;
+}
+
+/* PRINT BUTTONS */
 #printBtn{
  background:#0b4c36;color:white;
- padding:12px;border-radius:6px;
+ padding:10px;border-radius:6px;
  width:180px;margin:10px auto;display:block;font-size:14px;
 }
 #printIcon{
@@ -93,6 +142,7 @@ button{
 </head>
 <body>
 
+<!-- FORM PAGE -->
 <div id="formPage">
 <div class="panel">
 <h2 style="color:#083024;font-size:16px;">بيانات التقرير</h2>
@@ -110,86 +160,72 @@ button{
 <input class="field" id="manager" placeholder="اسم مدير المدرسة">
 
 <script>
-const autos={
-objective:[
+const autos={objective:[
 "تنمية مهارات الطلاب وتعزيز مواهبهم عبر المشاركة الفعالة في أنشطة تربوية تطبيقية.",
 "بناء شخصية قيادية متوازنة لدى الطلاب من خلال العمل الجماعي والتجارب الواقعية.",
 "تحفيز الإبداع والتفكير الناقد عبر أنشطة متنوعة تربط التعلم بالحياة اليومية.",
 "تعزيز الانتماء للمدرسة وتنمية مهارات التواصل الاجتماعي للطلاب."
-],
-desc:[
+],desc:[
 "تنفيذ نشاط داخل حصص النشاط يعزز العمل التعاوني ويتيح فرصًا للتطبيق العملي.",
 "تصميم أنشطة محفزة تسهم في تطوير المهارات التعليمية والحياتية لدى الطلاب.",
 "تفعيل مشاركة الطلاب في نشاط مدرسي يحقق الأهداف السلوكية والتعليمية.",
 "استخدام استراتيجيات تعلم حديثة لجذب انتباه الطلاب وزيادة التفاعل."
-],
-steps:[
+],steps:[
 "توضيح أهداف النشاط وتوزيع الأدوار ثم تنفيذ المهمة بإشراف المعلم.",
 "تقسيم الطلاب لمجموعات وتكليفهم بمهام محددة وعرض النتائج.",
 "تهيئة أدوات النشاط ومتابعة التنفيذ ثم التقييم البنّاء.",
 "تنظيم أدوار المشاركة وتقديم الدعم للتحسين المستمر."
-],
-results:[
+],results:[
 "ارتفاع تفاعل الطلاب وتحسن في مهارات التواصل والعمل الجماعي.",
 "بروز مواهب وقدرات جديدة ساهمت في تحقيق مخرجات إيجابية.",
 "زيادة حماس الطلاب للتعلم عبر النشاط التربوي.",
 "تحقيق أهداف النشاط وتنمية الجوانب المهارية."
-],
-motives:[
+],motives:[
 "تحفيز الطلاب بالمكافآت والإشادة بالمتميزين.",
 "تعزيز المنافسة الإيجابية لزيادة المشاركة.",
 "تهيئة بيئة تعليمية مشوقة تساعد على التفاعل.",
 "استخدام أساليب تحفيزية متنوعة."
-],
-challenges:[
+],challenges:[
 "تفاوت مستويات المشاركة بين الطلاب.",
 "ضيق الوقت مقارنة بخطة النشاط.",
 "الحاجة لضبط بعض السلوكيات التعاونية.",
 "قلة الأدوات لبعض الأنشطة."
-],
-strengths:[
+],strengths:[
 "تنوع النشاط وملاءمته لقدرات الطلاب.",
 "تنظيم ممتاز سهل عملية التنفيذ.",
 "ارتفاع التفاعل وروح المبادرة لدى الطلاب.",
 "تحسن في التعاون داخل الفصل."
-],
-develop:[
+],develop:[
 "تطوير الدعم للطلاب الأقل مشاركة لزيادة تفاعلهم.",
 "تخصيص وقت إضافي لتعزيز التطبيق العملي.",
 "زيادة تجهيزات الأنشطة لضمان تنوعها.",
 "رفع مستوى التشجيع لضمان استمرار الدافعية."
-],
-recommend:[
+],recommend:[
 "الاستمرار في تفعيل حصص النشاط بطرق متميزة.",
 "زيادة الدعم اللوجستي اللازم لتنوع الأنشطة.",
 "تخصيص مساحة لعرض منجزات الطلاب.",
 "التوسع في استخدام التقنية داخل النشاط."
-]
-};
+]};
 const idx={};for(const k in autos) idx[k]=0;
 function autoFill(k){idx[k]=(idx[k]+1)%autos[k].length;document.getElementById(k).value=autos[k][idx[k]];}
 </script>
 
 <script>
 function F(t,i){
-return `
-<div class="field">
-<label>${t}</label>
+return `<div class="field"><label>${t}</label>
 <textarea id="${i}"></textarea>
-<div class="auto-box">
-<div class="auto-btn" onclick="autoFill('${i}')">✦</div>
-<div class="auto-text">اضغط للتبديل</div>
-</div></div>`}
+<div class="auto-box"><div class="auto-btn" onclick="autoFill('${i}')">✦</div>
+<div class="auto-text">اضغط للتبديل</div></div></div>`}
 document.write(
- F("الهدف التربوي","objective")+
- F("وصف مختصر","desc")+
- F("إجراءات التنفيذ","steps")+
- F("النتائج","results")+
- F("المحفزات","motives")+
- F("التحديات","challenges")+
- F("نقاط القوة","strengths")+
- F("ما يحتاج إلى تطوير","develop")+
- F("التوصيات","recommend")
+F("الهدف التربوي","objective")+
+F("وصف مختصر","desc")+
+F("إجراءات التنفيذ","steps")+
+F("النتائج","results")+
+F("المحفزات","motives")+
+F("التحديات","challenges")+
+F("نقاط القوة","strengths")+
+F("ما يحتاج إلى تطوير","develop")+
+F("التوصيات","recommend")
 );
 </script>
 
@@ -197,9 +233,9 @@ document.write(
 <input class="field" type="file" id="img2" accept="image/*">
 
 <button onclick="showReport()">إنشاء التقرير</button>
-
 </div></div>
 
+<!-- REPORT PAGE -->
 <div id="reportPage">
 <div id="printIcon" onclick="window.print()">🖨️</div>
 <button id="printBtn" onclick="window.print()">طباعة التقرير</button>
@@ -209,65 +245,68 @@ document.write(
 <script>
 function getImg(id){
 return new Promise(res=>{
- const f=document.getElementById(id).files[0];
- if(!f)return res("");
- const R=new FileReader();
- R.onload=()=>res(`<img src="${R.result}" style="width:100%;height:100%;object-fit:cover;border-radius:6px;">`);
- R.readAsDataURL(f);
+const f=document.getElementById(id).files[0];
+if(!f)return res("");
+const R=new FileReader();
+R.onload=()=>res(`<img src="${R.result}" style="width:100%;height:100%;object-fit:cover;border-radius:5px;">`);
+R.readAsDataURL(f);
 });
 }
 
 async function showReport(){
- const v=id=>document.getElementById(id).value||"";
- const img1=await getImg("img1");
- const img2=await getImg("img2");
+const v=id=>document.getElementById(id).value||"";
+const img1=await getImg("img1"),img2=await getImg("img2");
 
 document.getElementById("reportContent").innerHTML=`
 <div class="header">
- <div class="admin">${v('admin')}</div>
- <div class="school">${v('school')}</div>
- <div class="date" id="hDate"></div>
+<div class="admin">${v('admin')}</div>
+<div class="school">${v('school')}</div>
+<div class="date" id="hDate"></div>
 </div>
 <div class="info">
- <div class="grid4">
-  <div class="ibox"><strong>الفصل</strong>${v('term')}</div>
-  <div class="ibox"><strong>الصف</strong>${v('grade')}</div>
-  <div class="ibox"><strong>المادة</strong>${v('subject')}</div>
-  <div class="ibox"><strong>التقرير</strong>${v('type')}</div>
- </div>
- <div class="grid4">
-  <div class="ibox"><strong>المستهدفون</strong>${v('target')}</div>
-  <div class="ibox"><strong>العدد</strong>${v('count')}</div>
-  <div class="ibox"><strong>مكان التنفيذ</strong>${v('place')}</div>
-  <div class="ibox"><strong>المعلم</strong>${v('teacher')}</div>
- </div>
+<div class="grid4">
+ <div class="ibox"><strong>الفصل</strong>${v('term')}</div>
+ <div class="ibox"><strong>الصف</strong>${v('grade')}</div>
+ <div class="ibox"><strong>المادة</strong>${v('subject')}</div>
+ <div class="ibox"><strong>التقرير</strong>${v('type')}</div>
 </div>
+<div class="grid4">
+ <div class="ibox"><strong>المستهدفون</strong>${v('target')}</div>
+ <div class="ibox"><strong>العدد</strong>${v('count')}</div>
+ <div class="ibox"><strong>مكان التنفيذ</strong>${v('place')}</div>
+ <div class="ibox"><strong>المعلم</strong>${v('teacher')}</div>
+</div>
+</div>
+
 <div class="page">
- <div class="objective">${v('objective')}</div>
- <div class="sectors">
-  <div class="sec green"><div class="sec-title">وصف مختصر</div><div class="sec-content">${v('desc')}</div></div>
-  <div class="sec green"><div class="sec-title">النتائج</div><div class="sec-content">${v('results')}</div></div>
-  <div class="sec blue"><div class="sec-title">نقاط القوة</div><div class="sec-content">${v('strengths')}</div></div>
-  <div class="sec red"><div class="sec-title">التحديات</div><div class="sec-content">${v('challenges')}</div></div>
-  <div class="sec gray"><div class="sec-title">إجراءات التنفيذ</div><div class="sec-content">${v('steps')}</div></div>
-  <div class="sec yellow"><div class="sec-title">المحفزات</div><div class="sec-content">${v('motives')}</div></div>
-  <div class="sec red"><div class="sec-title">ما يحتاج إلى تطوير</div><div class="sec-content">${v('develop')}</div></div>
-  <div class="sec blue"><div class="sec-title">التوصيات</div><div class="sec-content">${v('recommend')}</div></div>
- </div>
- <div class="images">
-  <div class="imgbox">${img1}</div>
-  <div class="imgbox">${img2}</div>
- </div>
- <div class="footer">
-  <div>مدير المدرسة:<br>${v('manager')}</div>
-  <div>المعلم:<br>${v('teacher')}</div>
- </div>
+<div class="objective">${v('objective')}</div>
+
+<div class="sectors">
+<div class="sec green"><div class="sec-title">وصف مختصر</div><div class="sec-content">${v('desc')}</div></div>
+<div class="sec green"><div class="sec-title">النتائج</div><div class="sec-content">${v('results')}</div></div>
+<div class="sec blue"><div class="sec-title">نقاط القوة</div><div class="sec-content">${v('strengths')}</div></div>
+<div class="sec red"><div class="sec-title">التحديات</div><div class="sec-content">${v('challenges')}</div></div>
+<div class="sec gray"><div class="sec-title">إجراءات التنفيذ</div><div class="sec-content">${v('steps')}</div></div>
+<div class="sec yellow"><div class="sec-title">المحفزات</div><div class="sec-content">${v('motives')}</div></div>
+<div class="sec red"><div class="sec-title">ما يحتاج إلى تطوير</div><div class="sec-content">${v('develop')}</div></div>
+<div class="sec blue"><div class="sec-title">التوصيات</div><div class="sec-content">${v('recommend')}</div></div>
+</div>
+
+<div class="images">
+ <div class="imgbox">${img1}</div>
+ <div class="imgbox">${img2}</div>
+</div>
+
+<div class="footer">
+<div>مدير المدرسة:<br>${v('manager')}</div>
+<div>المعلم:<br>${v('teacher')}</div>
+</div>
 </div>`;
 
 fetch('https://api.aladhan.com/v1/gToH')
 .then(r=>r.json()).then(d=>{
- const h=d.data.hijri;
- document.getElementById('hDate').textContent=h.day+' '+h.month.ar+' '+h.year+' هـ';
+const h=d.data.hijri;
+document.getElementById('hDate').textContent=h.day+' '+h.month.ar+' '+h.year+' هـ';
 });
 
 document.getElementById("formPage").style.display="none";
