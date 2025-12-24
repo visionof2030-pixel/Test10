@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -12,7 +12,7 @@ body{
   margin:0;
   background:#f3f4f6;
   display:grid;
-  grid-template-columns:380px 1fr;
+  grid-template-columns:370px 1fr;
   height:100vh;
 }
 
@@ -20,7 +20,7 @@ body{
   background:#fff;
   padding:16px;
   overflow-y:auto;
-  border-left:2px solid #083024;
+  border-left:3px solid #083024;
 }
 
 .panel h2{
@@ -39,8 +39,7 @@ body{
   border:1px solid #d1d5db;
   border-radius:4px;
 }
-
-textarea{resize:vertical;min-height:60px}
+textarea{min-height:60px;resize:vertical}
 
 button{
   width:100%;padding:10px;background:#083024;
@@ -48,13 +47,12 @@ button{
   font-size:14px;cursor:pointer;margin-top:10px;
 }
 
-iframe{width:100%;height:100%;border:none;background:white}
+iframe{width:100%;height:100%;border:none;background:#fff}
 </style>
 </head>
 <body>
 
 <div class="panel">
-
 <h2>بيانات التقرير</h2>
 
 <div class="field"><label>اسم الإدارة</label><input id="admin"></div>
@@ -88,117 +86,110 @@ iframe{width:100%;height:100%;border:none;background:white}
 
 <script>
 function readImage(id){
-  const file=document.getElementById(id).files[0];
-  return file?new Promise(res=>{
+  const f=document.getElementById(id).files[0];
+  return f?new Promise(r=>{
     const rd=new FileReader();
-    rd.onload=()=>res('<img src="'+rd.result+'" style="width:100%;height:100%;object-fit:cover;border-radius:6px;">');
-    rd.readAsDataURL(file);
-  }):Promise.resolve("شواهد الصور");
+    rd.onload=()=>r('<img src="'+rd.result+'" style="width:100%;height:100%;object-fit:cover;border-radius:6px;">');
+    rd.readAsDataURL(f);
+  }):Promise.resolve("شاهد صورة");
 }
 
 async function generate(){
   const v=id=>document.getElementById(id).value||'';
-
-  const imgA=await readImage('img1');
-  const imgB=await readImage('img2');
+  const img1=await readImage('img1');
+  const img2=await readImage('img2');
 
   const html=`<!DOCTYPE html>
-<html dir="rtl" lang="ar">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <title>تقرير</title>
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
 *{margin:0;padding:0;box-sizing:border-box;}
-html,body{width:100%;font-family:'Cairo',sans-serif;background:#fff;color:#1f2937}
+html,body{background:white;font-family:'Cairo',sans-serif;color:#1f2937;}
 
-@page{size:A4;margin:8mm;}
+@page{size:A4;margin:8mm}
 
 @media print{
-  body{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
-  .header,.info-box,.report-objective-box,.image-box{
-    -webkit-print-color-adjust:exact!important;print-color-adjust:exact!important
-  }
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
   .header::before{opacity:1!important}
 }
 
 .header{
-  width:100%;height:90px;background:#083024;position:relative;
+  height:90px;background:#083024;
+  position:relative;width:100%;
 }
 .header::before{
   content:"";position:absolute;inset:0;opacity:0.95;
-  background:url('https://i.ibb.co/kVWFFwhW/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png') no-repeat center/38%;
+  background:url('https://i.ibb.co/kVWFFwhW/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png') center/38% no-repeat;
 }
 .admin-name,.school-name,.hijri-date{
-  position:absolute;font-size:8px;color:#fff;z-index:2
+  position:absolute;font-size:8px;color:white;z-index:2;
 }
 .admin-name{top:6px;right:12px}
 .school-name{bottom:6px;right:12px}
 .hijri-date{bottom:6px;left:12px}
 
 .info-wrapper{padding:6px 10px;max-width:210mm;margin:auto}
-.info-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:6px}
-.info-box{
-  border:1px solid #083024;border-radius:4px;padding:4px;
-  text-align:center;font-size:7px;background:rgba(255,255,255,0.95);line-height:1.3;
+.info-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:4px;margin-bottom:6px;
 }
-.info-box strong{display:block;font-size:7.5px;margin-bottom:1px;color:#083024}
+.info-box{
+  background:rgba(255,255,255,0.97);
+  border:1px solid #083024;
+  border-radius:4px;
+  padding:4px;text-align:center;
+  font-size:7px;line-height:1.3;
+}
+.info-box strong{color:#083024;font-size:7.5px;display:block}
 
 .page-content{padding:10px;max-width:210mm;margin:auto}
 
-.report-objective-box{
-  background:rgba(8,48,36,0.12);
-  border:1px solid rgba(8,48,36,0.4);
-  border-radius:6px;
-  padding:8px;
-  margin-bottom:8px;
-  text-align:center;
-  font-size:7.5px;
-  line-height:1.5;
+.sections-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
 }
 
-.report-section{
-  border:1px solid rgba(0,0,0,0.18);
+.section{
   border-radius:6px;
-  padding:8px;
-  margin-bottom:8px;
-  background:#fafafa;
+  padding:6px;
 }
 
-.report-section-title{
-  font-size:7.5px;
-  font-weight:600;
-  margin-bottom:4px;
-  color:#083024;
-  border-bottom:1px solid rgba(0,0,0,0.12);
+.section-title{
+  font-size:7px;
+  font-weight:700;
+  margin-bottom:3px;
+  border-bottom:1px solid #00000010;
   padding-bottom:2px;
 }
-.report-section-content{
-  font-size:6.5px;
-  line-height:1.5;
+
+.section-content{
+  font-size:6.2px;
   white-space:pre-line;
+  line-height:1.4;
 }
 
-.image-evidence-grid{
+.s-green{background:#e6f0ed;border:1px solid #0d5a40}
+.s-blue{background:#e7ebf4;border:1px solid #1e3a8a}
+.s-gray{background:#eeeeee;border:1px solid #555}
+
+.images{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-top:8px;
+  gap:8px;margin-top:8px;
 }
-
 .image-box{
-  border:1px dashed #083024;
-  border-radius:6px;
-  height:120px;
-  font-size:7px;
-  color:#083024;
-  background:rgba(8,48,36,0.05);
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  height:120px;display:flex;align-items:center;justify-content:center;
+  border:1px dashed #083024;border-radius:6px;
+  background:#eef2ef;font-size:6.5px;
   overflow:hidden;
 }
 </style>
+
 </head>
 <body>
 
@@ -225,51 +216,55 @@ html,body{width:100%;font-family:'Cairo',sans-serif;background:#fff;color:#1f293
 
 <div class="page-content">
 
-<div class="report-objective-box">${v('objective')}</div>
+<div class="sections-grid">
+  <div class="section s-green">
+    <div class="section-title">وصف النشاط</div>
+    <div class="section-content">${v('desc')}</div>
+  </div>
 
-<div class="report-section">
-  <div class="report-section-title">وصف مختصر للنشاط</div>
-  <div class="report-section-content">${v('desc')}</div>
+  <div class="section s-blue">
+    <div class="section-title">إجراءات التنفيذ</div>
+    <div class="section-content">${v('steps')}</div>
+  </div>
+
+  <div class="section s-gray">
+    <div class="section-title">النتائج</div>
+    <div class="section-content">${v('results')}</div>
+  </div>
+
+  <div class="section s-green">
+    <div class="section-title">نقاط القوة</div>
+    <div class="section-content">${v('strengths')}</div>
+  </div>
+
+  <div class="section s-blue">
+    <div class="section-title">التوصيات</div>
+    <div class="section-content">${v('recommendations')}</div>
+  </div>
+
+  <div class="section s-gray">
+    <div class="section-title">نقاط التحسين</div>
+    <div class="section-content">${v('improvements')}</div>
+  </div>
 </div>
 
-<div class="report-section">
-  <div class="report-section-title">إجراءات التنفيذ</div>
-  <div class="report-section-content">${v('steps')}</div>
+<div class="section s-green" style="margin-top:8px;">
+  <div class="section-title">الهدف التربوي</div>
+  <div class="section-content">${v('objective')}</div>
 </div>
 
-<div class="report-section">
-  <div class="report-section-title">النتائج</div>
-  <div class="report-section-content">${v('results')}</div>
-</div>
-
-<div class="report-section">
-  <div class="report-section-title">نقاط القوة</div>
-  <div class="report-section-content">${v('strengths')}</div>
-</div>
-
-<div class="report-section">
-  <div class="report-section-title">التوصيات</div>
-  <div class="report-section-content">${v('recommendations')}</div>
-</div>
-
-<div class="report-section">
-  <div class="report-section-title">نقاط التحسين</div>
-  <div class="report-section-content">${v('improvements')}</div>
-</div>
-
-<div class="image-evidence-grid">
-  <div class="image-box">${imgA}</div>
-  <div class="image-box">${imgB}</div>
+<div class="images">
+  <div class="image-box">${img1}</div>
+  <div class="image-box">${img2}</div>
 </div>
 
 </div>
 
 <script>
 fetch('https://api.aladhan.com/v1/gToH')
-.then(r=>r.json())
-.then(d=>{
-  const h=d.data.hijri;
-  document.getElementById('hDate').textContent=
+.then(r=>r.json()).then(d=>{
+ const h=d.data.hijri;
+ document.getElementById('hDate').textContent=
    h.day+' '+h.month.ar+' '+h.year+' هـ';
 });
 <\/script>
@@ -277,16 +272,15 @@ fetch('https://api.aladhan.com/v1/gToH')
 </body>
 </html>`;
 
-  const frame=document.getElementById('preview');
-  frame.srcdoc=html;
+  document.getElementById('preview').srcdoc=html;
 }
 
 function printReport(){
   const f=document.getElementById('preview');
   if(f.contentWindow.document.readyState==="complete"){
-    f.contentWindow.focus();f.contentWindow.print();
+    f.contentWindow.print();
   }else{
-    f.onload=()=>{f.contentWindow.focus();f.contentWindow.print();}
+    f.onload=()=>f.contentWindow.print();
   }
 }
 </script>
