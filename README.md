@@ -2,14 +2,17 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>تقرير نشاط</title>
+<title>تقرير نشاط إثرائي</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+
 <style>
 @page{
   size:A4;
   margin:10mm;
 }
-*{box-sizing:border-box;margin:0;padding:0}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
 body{
   font-family:'Cairo',sans-serif;
   background:#fff;
@@ -18,46 +21,45 @@ body{
   height:297mm;
 }
 
-/* ===== الهيدر (ثابت بدون تغيير) ===== */
+/* ===== الهيدر (بدون تغيير) ===== */
 .header{
   width:100%;
   height:85px;
   background:#083024;
   position:relative;
-  margin-bottom:6px
+  margin-bottom:6px;
 }
 .header::before{
   content:"";
   position:absolute;
   inset:0;
   background:url('https://i.ibb.co/kVWFFwhW/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png') center/35% no-repeat;
-  opacity:.95
+  opacity:.95;
 }
 .admin-name,.school-name,.hijri-date{
   position:absolute;
   font-size:8px;
   color:#fff;
-  z-index:2
+  z-index:2;
 }
 .admin-name{top:6px;right:12px}
 .school-name{bottom:6px;right:12px}
 .hijri-date{bottom:6px;left:12px}
 
 /* ===== عام ===== */
-.container{
-  width:100%;
-}
+.container{width:100%}
+
 .box{
   border:2px solid #3f5f5a;
   border-radius:6px;
   padding:6px;
   font-size:9.5px;
+  line-height:1.4;
   background:#fff;
-  line-height:1.4
 }
 .box-title{
   font-weight:700;
-  margin-bottom:4px
+  margin-bottom:4px;
 }
 
 /* ===== الصفوف العلوية ===== */
@@ -65,10 +67,10 @@ body{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:5px;
-  margin-bottom:5px
+  margin-bottom:5px;
 }
 .top-grid.second{
-  grid-template-columns:repeat(4,1fr)
+  grid-template-columns:repeat(4,1fr);
 }
 
 /* ===== الهدف ===== */
@@ -77,14 +79,14 @@ body{
   border:2px solid #6fa37a;
   text-align:center;
   font-size:10.5px;
-  margin:6px 0
+  margin:6px 0;
 }
 
-/* ===== المحتوى الرئيسي ===== */
+/* ===== المحتوى ===== */
 .main-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:6px
+  gap:6px;
 }
 
 /* ===== ألوان ===== */
@@ -93,18 +95,54 @@ body{
 .strength{border-color:#3f6fa5}
 .motivation{
   background:#fff7cc;
-  border:2px dashed #e6c84f
+  border:2px dashed #e6c84f;
 }
 .weakness{
   background:#ffecec;
-  border-color:#d16a6a
+  border-color:#d16a6a;
 }
 .challenge{
   background:#ffecec;
-  border-color:#d16a6a
+  border-color:#d16a6a;
 }
+
+/* ===== شواهد الصور ===== */
+.evidence-section{
+  margin-top:8px;
+}
+.evidence-title{
+  font-size:11px;
+  font-weight:700;
+  color:#083024;
+  margin-bottom:6px;
+}
+.evidence-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+.evidence-box{
+  border:1.5px solid #083024;
+  border-radius:6px;
+  overflow:hidden;
+}
+.evidence-box img{
+  width:100%;
+  height:120px;
+  object-fit:cover;
+  display:block;
+}
+.evidence-caption{
+  padding:4px;
+  font-size:9px;
+  line-height:1.4;
+  background:#f9fafb;
+  border-top:1px solid #e5e7eb;
+}
+
 </style>
 </head>
+
 <body>
 
 <div class="header">
@@ -116,16 +154,16 @@ body{
 <div class="container">
 
   <div class="top-grid">
-    <div class="box"><strong>المادة</strong></div>
-    <div class="box"><strong>الصف</strong></div>
-    <div class="box"><strong>الفصل الدراسي</strong></div>
+    <div class="box"><strong>المادة</strong><br>أحياء</div>
+    <div class="box"><strong>الصف</strong><br>الثالث الثانوي</div>
+    <div class="box"><strong>الفصل الدراسي</strong><br>الأول</div>
   </div>
 
   <div class="top-grid second">
     <div class="box"><strong>مكان التنفيذ</strong><br>الفصل الدراسي</div>
     <div class="box"><strong>العدد</strong><br>25</div>
     <div class="box"><strong>المستهدفون</strong><br>طلاب الصف</div>
-    <div class="box"><strong>التقرير</strong></div>
+    <div class="box"><strong>التقرير</strong><br>نشاط إثرائي</div>
   </div>
 
   <div class="box objective">
@@ -134,51 +172,77 @@ body{
   </div>
 
   <div class="main-grid">
+
     <div class="box">
       <div class="box-title">إجراءات التنفيذ</div>
       عرض المفهوم الجديد، مناقشة أمثلة توضيحية، أنشطة تطبيقية جماعية،
-      حل تمارين فردية، تلخيص النقاط الرئيسية
+      حل تمارين فردية، تلخيص النقاط الرئيسية.
     </div>
 
     <div class="box">
       <div class="box-title">وصف مختصر</div>
-      تنفيذ درس نموذجي يركز على الفهم العميق والتطبيق العملي للمفاهيم
+      تنفيذ درس نموذجي يركز على الفهم العميق والتطبيق العملي للمفاهيم.
     </div>
 
     <div class="box recommend">
       <div class="box-title">التوصيات</div>
       تكرار استخدام الأنشطة التفاعلية، تخصيص وقت للمراجعة،
-      استخدام وسائل بصرية إضافية
+      استخدام وسائل بصرية إضافية.
     </div>
 
     <div class="box result">
       <div class="box-title">النتائج</div>
       استيعاب غالبية الطلاب للمفهوم، مشاركة فعالة في الأنشطة،
-      إنجاز التمارين بنجاح
+      إنجاز التمارين بنجاح.
     </div>
 
     <div class="box strength">
       <div class="box-title">نقاط القوة</div>
       وضوح الشرح، تنوع الأنشطة، إدارة الوقت الفعالة،
-      مراعاة الفروق الفردية
+      مراعاة الفروق الفردية.
     </div>
 
     <div class="box motivation">
       <div class="box-title">المحفزات</div>
       تفاعل الطلاب الإيجابي، حافز التنافس بين المجموعات،
-      استخدام الوسائل التعليمية الجذابة
+      استخدام الوسائل التعليمية الجذابة.
     </div>
 
     <div class="box weakness">
       <div class="box-title">مواطن القصور</div>
       نقص بعض الوسائل التعليمية، محدودية المساحة،
-      ضعف مشاركة بعض الطلاب
+      ضعف مشاركة بعض الطلاب.
     </div>
 
     <div class="box challenge">
       <div class="box-title">التحديات</div>
-      تفاوت سرعة الاستيعاب بين الطلاب،
-      وقت الحصة المحدود، صعوبة بعض المفاهيم
+      تفاوت سرعة الاستيعاب بين الطلاب، وقت الحصة المحدود،
+      صعوبة بعض المفاهيم.
+    </div>
+
+  </div>
+
+  <div class="evidence-section">
+    <div class="evidence-title">شواهد الصور</div>
+
+    <div class="evidence-grid">
+      <div class="evidence-box">
+        <img src="https://i.ibb.co/dwKFLM99/IMG-1941.png">
+        <div class="evidence-caption">
+          توضح الصورة تنفيذ النشاط داخل الفصل الدراسي من خلال العمل التعاوني
+          بين الطلاب، حيث تم توزيعهم في مجموعات لتنفيذ مهام تعليمية
+          تعتمد على التعلم النشط والمشاركة الفعالة.
+        </div>
+      </div>
+
+      <div class="evidence-box">
+        <img src="https://i.ibb.co/fY77kdRH/IMG-1942.png">
+        <div class="evidence-caption">
+          تُظهر الصورة نماذج من أعمال الطلاب أثناء النشاط، مع توضيح
+          تقسيم المجموعات وتنوع المهام بين الإبداع والتحدي،
+          مما أسهم في تنمية مهارات التفكير والتعاون.
+        </div>
+      </div>
     </div>
   </div>
 
@@ -189,7 +253,8 @@ fetch('https://api.aladhan.com/v1/gToH')
 .then(r=>r.json())
 .then(d=>{
  const h=d.data.hijri;
- document.getElementById('hijriDate').textContent=`${h.day} ${h.month.ar} ${h.year} هـ`
+ document.getElementById('hijriDate').textContent =
+ `${h.day} ${h.month.ar} ${h.year} هـ`;
 });
 </script>
 
