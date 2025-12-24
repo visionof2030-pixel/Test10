@@ -1,267 +1,190 @@
-<!DOCTYPE html>
-<html dir="rtl" lang="ar">
+
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>تقرير نشاط إثرائي</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap');
+<meta charset="UTF-8">
+<title>تقرير نشاط</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Cairo',sans-serif;
+  background:#fff;
+  padding:8mm;
+  color:#1f2937;
+}
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+/* ===== الهيدر (بدون أي تعديل) ===== */
+.header{
+  width:100%;
+  height:90px;
+  background:#083024;
+  position:relative;
+  margin-bottom:8px
+}
+.header::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:url('https://i.ibb.co/kVWFFwhW/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png') center/38% no-repeat;
+  opacity:.95
+}
+.admin-name,.school-name,.hijri-date{
+  position:absolute;
+  font-size:8px;
+  color:#fff;
+  z-index:2
+}
+.admin-name{top:6px;right:12px}
+.school-name{bottom:6px;right:12px}
+.hijri-date{bottom:6px;left:12px}
 
-    html, body {
-      width: 100%;
-      height: 100%;
-      font-family: 'Cairo', sans-serif;
-      background: #ffffff;
-      color: #1f2937;
-    }
+/* ===== عام ===== */
+.container{max-width:190mm;margin:auto}
+.box{
+  border:2px solid #3f5f5a;
+  border-radius:6px;
+  padding:6px;
+  font-size:10px;
+  background:#fff
+}
+.box-title{
+  font-weight:700;
+  margin-bottom:4px
+}
 
-    body { padding: 8mm; }
+/* ===== الصف العلوي ===== */
+.top-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:6px;
+  margin-bottom:6px
+}
+.top-grid.second{
+  grid-template-columns:repeat(4,1fr)
+}
 
-    .header {
-      width: 100%;
-      height: 70px;
-      background-color: #083024;
-      position: relative;
-      margin-bottom: 6px;
-    }
+/* ===== الهدف ===== */
+.objective{
+  background:#eef6ea;
+  border:2px solid #6fa37a;
+  text-align:center;
+  font-size:11px;
+  margin:8px 0
+}
 
-    .header::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image: url('https://i.ibb.co/kVWFFwhW/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png');
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 30%;
-      opacity: 0.95;
-    }
+/* ===== المحتوى الرئيسي ===== */
+.main-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-bottom:8px
+}
 
-    .admin-name {
-      position: absolute;
-      top: 4px;
-      right: 10px;
-      font-size: 9px;
-      color: #ffffff;
-    }
-
-    .school-name {
-      position: absolute;
-      bottom: 4px;
-      right: 10px;
-      font-size: 9px;
-      color: #ffffff;
-    }
-
-    .hijri-date {
-      position: absolute;
-      bottom: 4px;
-      left: 10px;
-      font-size: 9px;
-      color: #ffffff;
-    }
-
-    .container {
-      max-width: 190mm;
-      margin: auto;
-    }
-
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 5px;
-      margin-bottom: 5px;
-    }
-
-    .info-grid.second {
-      grid-template-columns: repeat(4, 1fr);
-      margin-bottom: 8px;
-    }
-
-    .info-box {
-      border: 1px solid #083024;
-      border-radius: 5px;
-      padding: 4px;
-      text-align: center;
-      font-size: 9px;
-      line-height: 1.3;
-    }
-
-    .info-box strong {
-      display: block;
-      font-size: 9.5px;
-      margin-bottom: 1px;
-      color: #083024;
-    }
-
-    .report-objective-box {
-      background: rgba(8,48,36,0.07);
-      border: 1px solid rgba(8,48,36,0.35);
-      border-radius: 6px;
-      padding: 8px;
-      margin-bottom: 8px;
-      text-align: center;
-      font-size: 10.5px;
-      line-height: 1.5;
-    }
-
-    .report-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-bottom: 8px;
-    }
-
-    .report-box {
-      border-radius: 6px;
-      border: 1px solid #d1d5db;
-      padding: 8px;
-      background: #fafafa;
-      min-height: 105px;
-    }
-
-    .report-box-title {
-      font-size: 10.5px;
-      font-weight: 600;
-      margin-bottom: 4px;
-      border-bottom: 1px solid #e5e7eb;
-      padding-bottom: 3px;
-      color: #083024;
-    }
-
-    .report-box-content {
-      font-size: 9.5px;
-      line-height: 1.45;
-      white-space: pre-line;
-    }
-
-    .improvements-box {
-      background: rgba(234,88,12,0.06);
-      border: 1px solid rgba(234,88,12,0.35);
-      border-radius: 6px;
-      padding: 8px;
-      margin-bottom: 8px;
-    }
-
-    .image-evidence-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
-    }
-
-    .image-box {
-      border: 1px solid #083024;
-      border-radius: 6px;
-      height: 120px;
-      overflow: hidden;
-    }
-
-    .image-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    @media print {
-      body { padding: 6mm; }
-    }
-  </style>
+/* ===== ألوان خاصة ===== */
+.result{border-color:#3f6fa5}
+.recommend{border-color:#3f6fa5}
+.strength{border-color:#3f6fa5}
+.motivation{
+  background:#fff7cc;
+  border:2px dashed #e6c84f
+}
+.weakness{
+  background:#ffecec;
+  border-color:#d16a6a
+}
+.challenge{
+  background:#ffecec;
+  border-color:#d16a6a
+}
+</style>
 </head>
 <body>
 
-  <div class="header">
-    <div class="admin-name">الإدارة العامة للتعليم بمنطقة الرياض</div>
-    <div class="school-name">مدرسة التجربة النموذجية</div>
-    <div class="hijri-date" id="hijriDate">—</div>
+<div class="header">
+  <div class="admin-name">الإدارة العامة للتعليم بمنطقة الرياض</div>
+  <div class="school-name">مدرسة التجربة النموذجية</div>
+  <div class="hijri-date" id="hijriDate">—</div>
+</div>
+
+<div class="container">
+
+  <div class="top-grid">
+    <div class="box"><strong>المادة</strong></div>
+    <div class="box"><strong>الصف</strong></div>
+    <div class="box"><strong>الفصل الدراسي</strong></div>
   </div>
 
-  <div class="container">
-
-    <div class="info-grid">
-      <div class="info-box"><strong>الفصل الدراسي</strong>الأول</div>
-      <div class="info-box"><strong>الصف</strong>الثالث الثانوي</div>
-      <div class="info-box"><strong>المادة</strong>أحياء</div>
-    </div>
-
-    <div class="info-grid second">
-      <div class="info-box"><strong>التقرير</strong>نشاط إثرائي</div>
-      <div class="info-box"><strong>المستهدفون</strong>الطلاب المتميزون</div>
-      <div class="info-box"><strong>العدد</strong>15</div>
-      <div class="info-box"><strong>مكان التنفيذ</strong>مختبر البحث</div>
-    </div>
-
-    <div class="report-objective-box">
-      تنمية مهارات البحث العلمي والتفكير الناقد لدى الطلاب
-      من خلال أنشطة تطبيقية تعتمد على العمل التعاوني
-      وتحليل المعلومات العلمية.
-    </div>
-
-    <div class="report-grid">
-      <div class="report-box">
-        <div class="report-box-title">خطوات التنفيذ</div>
-        <div class="report-box-content">
-تقسيم الطلاب إلى مجموعات.
-توزيع أوراق العمل.
-تنفيذ النشاط بإشراف المعلم.
-        </div>
-      </div>
-
-      <div class="report-box">
-        <div class="report-box-title">النتائج</div>
-        <div class="report-box-content">
-زيادة التفاعل والمشاركة.
-تحسن مهارات التحليل.
-تحقيق أهداف النشاط.
-        </div>
-      </div>
-
-      <div class="report-box">
-        <div class="report-box-title">نقاط القوة</div>
-        <div class="report-box-content">
-وضوح التعليمات.
-تنوع الأنشطة.
-حماس الطلاب.
-        </div>
-      </div>
-
-      <div class="report-box">
-        <div class="report-box-title">التوصيات</div>
-        <div class="report-box-content">
-تكرار الأنشطة الإثرائية.
-زيادة زمن النشاط.
-توظيف التقنية.
-        </div>
-      </div>
-    </div>
-
-    <div class="improvements-box">
-      <div class="report-box-title">نقاط التحسين</div>
-      <div class="report-box-content">
-تنويع الأسئلة.
-تحسين التقييم.
-      </div>
-    </div>
-
-    <div class="image-evidence-grid">
-      <div class="image-box">
-        <img src="https://i.ibb.co/fY77kdRH/IMG-1942.png">
-      </div>
-      <div class="image-box">
-        <img src="https://i.ibb.co/dwKFLM99/IMG-1941.png">
-      </div>
-    </div>
-
+  <div class="top-grid second">
+    <div class="box"><strong>مكان التنفيذ</strong><br>الفصل الدراسي</div>
+    <div class="box"><strong>العدد</strong><br>25</div>
+    <div class="box"><strong>المستهدفون</strong><br>طلاب الصف</div>
+    <div class="box"><strong>التقرير</strong></div>
   </div>
 
-  <script>
-    fetch('https://api.aladhan.com/v1/gToH')
-      .then(r => r.json())
-      .then(d => {
-        const h = d.data.hijri;
-        document.getElementById('hijriDate').textContent =
-          `${h.day} ${h.month.ar} ${h.year} هـ`;
-      });
-  </script>
+  <div class="box objective">
+    <div class="box-title">الهدف التربوي</div>
+    شرح مفهوم أساسي في المنهج وتطبيقه عبر أنشطة تفاعلية
+  </div>
+
+  <div class="main-grid">
+    <div class="box">
+      <div class="box-title">إجراءات التنفيذ</div>
+      عرض المفهوم الجديد، مناقشة أمثلة توضيحية، أنشطة تطبيقية جماعية،
+      حل تمارين فردية، تلخيص النقاط الرئيسية
+    </div>
+
+    <div class="box">
+      <div class="box-title">وصف مختصر</div>
+      تنفيذ درس نموذجي يركز على الفهم العميق والتطبيق العملي للمفاهيم
+    </div>
+
+    <div class="box recommend">
+      <div class="box-title">التوصيات</div>
+      تكرار استخدام الأنشطة التفاعلية، تخصيص وقت للمراجعة،
+      استخدام وسائل بصرية إضافية
+    </div>
+
+    <div class="box result">
+      <div class="box-title">النتائج</div>
+      استيعاب غالبية الطلاب للمفهوم، مشاركة فعالة في الأنشطة،
+      إنجاز التمارين بنجاح
+    </div>
+
+    <div class="box strength">
+      <div class="box-title">نقاط القوة</div>
+      وضوح الشرح، تنوع الأنشطة، إدارة الوقت الفعالة،
+      مراعاة الفروق الفردية
+    </div>
+
+    <div class="box motivation">
+      <div class="box-title">المحفزات</div>
+      تفاعل الطلاب الإيجابي، حافز التنافس بين المجموعات،
+      استخدام الوسائل التعليمية الجذابة
+    </div>
+
+    <div class="box weakness">
+      <div class="box-title">مواطن القصور</div>
+      نقص بعض الوسائل التعليمية، محدودية المساحة،
+      ضعف مشاركة بعض الطلاب
+    </div>
+
+    <div class="box challenge">
+      <div class="box-title">التحديات</div>
+      تفاوت سرعة الاستيعاب بين الطلاب،
+      وقت الحصة المحدود، صعوبة بعض المفاهيم
+    </div>
+  </div>
+
+</div>
+
+<script>
+fetch('https://api.aladhan.com/v1/gToH')
+.then(r=>r.json())
+.then(d=>{
+ const h=d.data.hijri;
+ document.getElementById('hijriDate').textContent=`${h.day} ${h.month.ar} ${h.year} هـ`
+});
+</script>
 
 </body>
 </html>
