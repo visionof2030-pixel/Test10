@@ -5,27 +5,32 @@
 <title>تقرير نشاط</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
+@page{
+  size:A4;
+  margin:10mm;
+}
 *{box-sizing:border-box;margin:0;padding:0}
 body{
   font-family:'Cairo',sans-serif;
   background:#fff;
-  padding:8mm;
   color:#1f2937;
+  width:210mm;
+  height:297mm;
 }
 
-/* ===== الهيدر (بدون أي تعديل) ===== */
+/* ===== الهيدر (ثابت بدون تغيير) ===== */
 .header{
   width:100%;
-  height:90px;
+  height:85px;
   background:#083024;
   position:relative;
-  margin-bottom:8px
+  margin-bottom:6px
 }
 .header::before{
   content:"";
   position:absolute;
   inset:0;
-  background:url('https://i.ibb.co/kVWFFwhW/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png') center/38% no-repeat;
+  background:url('https://i.ibb.co/kVWFFwhW/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png') center/35% no-repeat;
   opacity:.95
 }
 .admin-name,.school-name,.hijri-date{
@@ -39,25 +44,28 @@ body{
 .hijri-date{bottom:6px;left:12px}
 
 /* ===== عام ===== */
-.container{max-width:190mm;margin:auto}
+.container{
+  width:100%;
+}
 .box{
   border:2px solid #3f5f5a;
   border-radius:6px;
   padding:6px;
-  font-size:10px;
-  background:#fff
+  font-size:9.5px;
+  background:#fff;
+  line-height:1.4
 }
 .box-title{
   font-weight:700;
   margin-bottom:4px
 }
 
-/* ===== الصف العلوي ===== */
+/* ===== الصفوف العلوية ===== */
 .top-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:6px;
-  margin-bottom:6px
+  gap:5px;
+  margin-bottom:5px
 }
 .top-grid.second{
   grid-template-columns:repeat(4,1fr)
@@ -68,19 +76,18 @@ body{
   background:#eef6ea;
   border:2px solid #6fa37a;
   text-align:center;
-  font-size:11px;
-  margin:8px 0
+  font-size:10.5px;
+  margin:6px 0
 }
 
 /* ===== المحتوى الرئيسي ===== */
 .main-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-bottom:8px
+  gap:6px
 }
 
-/* ===== ألوان خاصة ===== */
+/* ===== ألوان ===== */
 .result{border-color:#3f6fa5}
 .recommend{border-color:#3f6fa5}
 .strength{border-color:#3f6fa5}
