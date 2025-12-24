@@ -14,32 +14,35 @@ body{
   height:100vh;
 }
 .panel{
-  background:#ffffff;
-  padding:14px;
+  background:white;
+  padding:16px;
   overflow-y:auto;
   border-left:4px solid #083024;
 }
-.field{margin-bottom:12px;}
+.field{margin-bottom:14px;}
 .field label{font-size:12px;display:block;margin-bottom:4px;}
 input,select,textarea{
   width:100%;padding:6px;font-size:12px;
-  border:1px solid #bcbcbc;border-radius:4px;
+  border:1px solid #ccc;border-radius:4px;
 }
 textarea{min-height:60px;resize:vertical}
+
 .auto-box{display:flex;gap:6px;align-items:center;margin-top:4px;}
 .auto-btn{
-  width:24px;height:24px;border-radius:4px;
-  text-align:center;line-height:22px;
+  width:26px;height:26px;border-radius:4px;
+  text-align:center;line-height:24px;
   cursor:pointer;background:#ddd;
   font-size:16px;border:1px solid #aaa;
 }
 .auto-text{font-size:9px;color:#555;}
+
 button{
   width:100%;padding:10px;
   background:#083024;color:white;
   border:none;border-radius:6px;
   font-size:14px;margin-top:10px;cursor:pointer;
 }
+
 .preview-msg{
   font-size:13px;color:#333;padding:20px;text-align:center;
 }
@@ -49,6 +52,8 @@ button{
 
 <div class="panel">
 <h2 style="color:#083024;">بيانات التقرير</h2>
+
+<!--------- الحقول الرئيسية --------->
 
 <div class="field">
 <label>الإدارة العامة للتعليم</label>
@@ -69,6 +74,7 @@ button{
 
 <div class="field"><label>الصف</label><input id="grade"></div>
 <div class="field"><label>المادة</label><input id="subject"></div>
+
 <div class="field">
 <label>نوع التقرير</label>
 <select id="type">
@@ -82,6 +88,8 @@ button{
 <div class="field"><label>اسم المعلم</label><input id="teacher"></div>
 <div class="field"><label>اسم مدير المدرسة</label><input id="manager"></div>
 
+
+<!--------- النصوص التلقائية --------->
 <script>
 const autos={
 objective:[
@@ -126,6 +134,12 @@ strengths:[
 "تنفيذ منظم ساهم في تحقيق أهداف النشاط.",
 "تحسن ملحوظ في روح التعاون داخل الفصل."
 ],
+develop:[
+"زيادة دعم الطلاب الأقل تفاعلًا لضمان مشاركة عادلة للجميع.",
+"تخصيص وقت إضافي لبعض الأنشطة لتحقيق نتائج أفضل.",
+"توفير أدوات وموارد أكثر لتنوع الأنشطة.",
+"تحسين الأساليب التحفيزية لضمان استمرارية الحماس أثناء النشاط."
+],
 recommend:[
 "الاستمرار في تفعيل حصص النشاط بطرق جذابة ومحفزة.",
 "زيادة زمن النشاط عند الحاجة لضمان تنفيذ أفضل.",
@@ -133,14 +147,17 @@ recommend:[
 "إتاحة مزيد من الفرص لعرض منجزات الطلاب."
 ]
 };
-const idx={objective:0,desc:0,steps:0,results:0,motives:0,challenges:0,strengths:0,recommend:0};
+
+const idx={objective:0,desc:0,steps:0,results:0,motives:0,challenges:0,strengths:0,develop:0,recommend:0};
 function autoFill(k){
  idx[k]=(idx[k]+1)%autos[k].length;
  document.getElementById(k).value=autos[k][idx[k]];
 }
 </script>
 
-<!-- الخانات + أيقونة النصوص -->
+
+<!--------- خانات النصوص --------->
+
 <div class="field"><label>الهدف التربوي</label><textarea id="objective"></textarea><div class="auto-box"><div class="auto-btn" onclick="autoFill('objective')">✦</div><div class="auto-text">اضغط للتبديل</div></div></div>
 
 <div class="field"><label>وصف مختصر</label><textarea id="desc"></textarea><div class="auto-box"><div class="auto-btn" onclick="autoFill('desc')">✦</div><div class="auto-text">اضغط للتبديل</div></div></div>
@@ -155,19 +172,30 @@ function autoFill(k){
 
 <div class="field"><label>نقاط القوة</label><textarea id="strengths"></textarea><div class="auto-box"><div class="auto-btn" onclick="autoFill('strengths')">✦</div><div class="auto-text">اضغط للتبديل</div></div></div>
 
+<div class="field"><label>ما يحتاج إلى تطوير</label><textarea id="develop"></textarea><div class="auto-box"><div class="auto-btn" onclick="autoFill('develop')">✦</div><div class="auto-text">اضغط للتبديل</div></div></div>
+
 <div class="field"><label>التوصيات</label><textarea id="recommend"></textarea><div class="auto-box"><div class="auto-btn" onclick="autoFill('recommend')">✦</div><div class="auto-text">اضغط للتبديل</div></div></div>
+
+
+<!--------- الصور --------->
 
 <div class="field"><label>صورة 1</label><input type="file" id="img1" accept="image/*"></div>
 <div class="field"><label>صورة 2</label><input type="file" id="img2" accept="image/*"></div>
 
+
+<!--------- الأزرار --------->
+
 <button onclick="generate()">إنشاء التقرير</button>
 <button onclick="generate()">طباعة</button>
 
-</div>
+</div><!-- panel -->
 
 <div class="preview-msg">
-المعاينة عبر الطباعة المباشرة للآيفون
+تم تفعيل الطباعة المباشرة كما كانت سابقًا
 </div>
+
+
+<!--------- سكربت إنشاء التقرير والطباعة --------->
 
 <script>
 function getImg(id){
@@ -185,29 +213,38 @@ async function generate(){
  const img1=await getImg('img1');
  const img2=await getImg('img2');
 
- const html=`<!DOCTYPE html><html lang="ar" dir="rtl"><head>
-<meta charset="UTF-8">
+ const html=`<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Cairo',sans-serif;background:#ffffff;}
+body{font-family:'Cairo',sans-serif;}
 @page{size:A4;margin:8mm;}
 @media print{*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}}
-.header{height:90px;background:#083024;position:relative;color:#fff;}
+.header{
+ height:90px;background:#083024;color:white;position:relative;
+}
 .header::before{
-content:"";position:absolute;inset:0;opacity:.9;
-background:url('https://i.ibb.co/kVWFFwhW/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png') center/38% no-repeat;
+ content:"";position:absolute;inset:0;opacity:.9;
+ background:url('https://i.ibb.co/kVWFFwhW/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png')
+ center/38% no-repeat;
 }
 .admin{position:absolute;top:5px;right:10px;font-size:8px;font-weight:bold;}
 .school{position:absolute;bottom:5px;right:10px;font-size:8px;}
 .date{position:absolute;bottom:5px;left:10px;font-size:8px;}
+
 .info{max-width:210mm;margin:auto;padding:8px;}
 .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:6px;}
-.ibox{border:1px solid #083024;border-radius:4px;padding:4px;font-size:7px;text-align:center;}
+.ibox{border:1px solid #083024;border-radius:4px;padding:4px;text-align:center;font-size:7px;}
 .ibox strong{display:block;font-size:7.5px;color:#083024;}
+
 .page{max-width:210mm;margin:auto;padding:8px;}
-.objective{background:#dcece5;border:1px solid #0b543a;border-radius:6px;height:70px;display:flex;align-items:center;justify-content:center;font-size:7.8px;font-weight:bold;margin-bottom:8px;text-align:center;line-height:1.6;}
-.sectors{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+.objective{
+ background:#dcece5;border:1px solid #0b543a;border-radius:6px;
+ height:70px;display:flex;align-items:center;justify-content:center;
+ font-size:7.8px;font-weight:bold;text-align:center;margin-bottom:8px;line-height:1.6;
+}
+
+.sectors{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px;}
 .sec{padding:6px;border-radius:6px;font-size:6.5px;}
 .sec-title{font-size:7.2px;font-weight:bold;border-bottom:1px solid #3333;padding-bottom:2px;margin-bottom:2px;}
 .sec-content{white-space:pre-line;line-height:1.4;}
@@ -220,6 +257,7 @@ background:url('https://i.ibb.co/kVWFFwhW/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871
 
 .images{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
 .imgbox{height:130px;border:1px solid #083024;border-radius:6px;overflow:hidden;background:#eee;display:flex;align-items:center;justify-content:center;}
+
 .footer{max-width:210mm;margin:16px auto 0;display:flex;justify-content:space-between;font-size:9px;font-weight:bold;}
 </style>
 </head><body>
@@ -249,14 +287,16 @@ background:url('https://i.ibb.co/kVWFFwhW/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871
 <div class="objective">${v('objective')}</div>
 
 <div class="sectors">
+
 <div class="sec green"><div class="sec-title">وصف مختصر</div><div class="sec-content">${v('desc')}</div></div>
 <div class="sec gray"><div class="sec-title">إجراءات التنفيذ</div><div class="sec-content">${v('steps')}</div></div>
 <div class="sec green"><div class="sec-title">النتائج</div><div class="sec-content">${v('results')}</div></div>
 <div class="sec yellow"><div class="sec-title">المحفزات</div><div class="sec-content">${v('motives')}</div></div>
 <div class="sec blue"><div class="sec-title">نقاط القوة</div><div class="sec-content">${v('strengths')}</div></div>
 <div class="sec red"><div class="sec-title">التحديات</div><div class="sec-content">${v('challenges')}</div></div>
-<div class="sec red"><div class="sec-title">مواطن القصور</div><div class="sec-content"></div></div>
+<div class="sec red"><div class="sec-title">ما يحتاج إلى تطوير</div><div class="sec-content">${v('develop')}</div></div>
 <div class="sec blue"><div class="sec-title">التوصيات</div><div class="sec-content">${v('recommend')}</div></div>
+
 </div>
 
 <div class="images">
@@ -268,13 +308,15 @@ background:url('https://i.ibb.co/kVWFFwhW/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871
 <div>مدير المدرسة:<br>${v('manager')}</div>
 <div>المعلم:<br>${v('teacher')}</div>
 </div>
+
 </div>
 
 <script>
-fetch('https://api.aladhan.com/v1/gToH').then(r=>r.json()).then(d=>{
+fetch('https://api.aladhan.com/v1/gToH')
+.then(r=>r.json()).then(d=>{
  const h=d.data.hijri;
  document.getElementById('hDate').textContent=h.day+' '+h.month.ar+' '+h.year+' هـ';
- setTimeout(()=>{window.print();window.close();},1200);
+ window.print();
 });
 </script>
 
