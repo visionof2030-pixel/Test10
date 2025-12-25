@@ -177,7 +177,7 @@
     .image-box {
       border: none;
       border-radius: 6px;
-      height: 200px;
+      height: 100px;
       display: flex;
       align-items: center;
       justify-content: center;
