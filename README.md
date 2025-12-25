@@ -40,7 +40,7 @@
     /* ===== Header ===== */
     .header {
       width: 100%;
-      height: 120px;
+      height: 100px;
       background-color: #083024;
       position: relative;
     }
