@@ -24,6 +24,7 @@
       color: #1f2937;
       width: 100%;
       height: auto;
+      direction: rtl;
     }
 
     body {
@@ -31,18 +32,14 @@
       margin: 0;
     }
 
-    .page {
-      width: 100%;
-      padding: 10mm;
-      background: #fff;
-    }
-
-    /* ===== Header ===== */
     .header {
       width: 100%;
       height: 100px;
       background-color: #083024;
       position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .header::before {
@@ -56,20 +53,26 @@
       opacity: 0.95;
     }
 
-    .admin-name,
-    .school-name,
-    .hijri-date {
-      position: absolute;
-      font-size: 8px;
-      color: #ffffff;
+    .header-info {
+      width: calc(100% - 20mm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 10px;
+      position: relative;
       z-index: 2;
+      color: #ffffff;
+      font-size: 8px;
     }
 
-    .admin-name { top: 6px; right: 12px; }
-    .school-name { bottom: 6px; right: 12px; }
-    .hijri-date { bottom: 6px; left: 12px; }
+    .page {
+      width: 210mm;
+      min-height: calc(297mm - 100px);
+      padding: 10mm;
+      background: #fff;
+      margin: auto;
+    }
 
-    /* ===== Info Boxes ===== */
     .info-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -96,7 +99,6 @@
       color: #083024;
     }
 
-    /* ===== Objective ===== */
     .report-objective-box {
       background: rgba(8,48,36,0.1);
       border-radius: 6px;
@@ -107,7 +109,6 @@
       color: #083024;
     }
 
-    /* ===== Two-column sections ===== */
     .report-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -134,39 +135,18 @@
       text-align: justify;
     }
 
-    .strengths {
-      background-color: #e6f6e6;
-    }
+    .strengths { background-color: #e6f6e6; }
+    .strengths .report-box-title { color: #2d7a2d; }
 
-    .strengths .report-box-title {
-      color: #2d7a2d;
-    }
+    .improvements { background-color: #fff0e6; }
+    .improvements .report-box-title { color: #c26a00; }
 
-    .improvements {
-      background-color: #fff0e6;
-    }
+    .summary { background-color: #e8f1ff; }
+    .summary .report-box-title { color: #2e4a8c; }
 
-    .improvements .report-box-title {
-      color: #c26a00;
-    }
+    .execution { background-color: #fff7e8; }
+    .execution .report-box-title { color: #a17d00; }
 
-    .summary {
-      background-color: #e8f1ff;
-    }
-
-    .summary .report-box-title {
-      color: #2e4a8c;
-    }
-
-    .execution {
-      background-color: #fff7e8;
-    }
-
-    .execution .report-box-title {
-      color: #a17d00;
-    }
-
-    /* ===== Images ===== */
     .image-evidence-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -187,20 +167,14 @@
       overflow: hidden;
     }
 
-    .image-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* منع الصفحة الفارغة عند الطباعة */
     @media print {
-      .page {
-        page-break-after: avoid;
+      html, body {
+        width: 210mm;
+        height: 297mm;
       }
-      body, html {
-        width: auto;
-        height: auto;
+      .page {
+        margin: 0;
+        page-break-after: avoid;
       }
     }
   </style>
@@ -209,12 +183,15 @@
 <body>
 
   <div class="header">
-    <div class="admin-name">قائد المدرسة: نايف اللحياني</div>
-    <div class="school-name">مدرسة المستقبل الابتدائية</div>
-    <div class="hijri-date">1447/02/15 هـ</div>
+    <div class="header-info">
+      <div>قائد المدرسة: نايف اللحياني</div>
+      <div>مدرسة المستقبل الابتدائية</div>
+      <div>1447/02/15 هـ</div>
+    </div>
   </div>
 
   <div class="page">
+
     <div class="info-grid">
       <div class="info-box"><strong>اسم المعلم</strong> فهد الخالدي</div>
       <div class="info-box"><strong>المادة</strong> العلوم</div>
