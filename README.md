@@ -3,21 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <title>تقرير تفعيل حصص النشاط</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
 *{box-sizing:border-box;font-family:'Cairo',sans-serif;}
 body{margin:0;background:#f3f4f6;}
 button{cursor:pointer}
 
+/* إخفاء عناصر GitHub Pages مثل Test10 و DOCTYPE */
+body > *:first-child:not(#formPage):not(#reportPage) {
+  display: none !important;
+}
+
 /* PAGE SWITCH */
 #formPage{display:block}
 #reportPage{display:none}
 
-/* PANEL */
+/* PANEL (FORM) */
 .panel{
   background:white;padding:18px;
   max-width:380px;margin:auto;
-  border-left:4px solid #083024;
+  border-right:4px solid #083024;
 }
 .field{margin-bottom:12px;}
 .field label{font-size:12px;display:block;margin-bottom:4px;}
@@ -38,7 +46,7 @@ button{
   margin-top:10px;
 }
 
-/* REPORT ONE PAGE */
+/* REPORT */
 #reportPage{
   background:white;
   width:210mm;
@@ -46,6 +54,7 @@ button{
   margin:auto;
   padding:0;
   overflow:hidden;
+  position:relative;
 }
 
 @page{size:A4;margin:6mm;}
@@ -57,13 +66,18 @@ button{
 
 /* HEADER */
 .header{
- height:90px;background:#083024;color:white;position:relative;
+ height:110px;background:#083024;color:white;position:relative;
 }
 .header::before{
  content:"";position:absolute;inset:0;opacity:.9;
  background:url('https://i.ibb.co/kVWFFwhW/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png')
- center/38% no-repeat;
+ center/40% no-repeat;
 }
+.ministry {
+  position:absolute;top:25px;left:50%;transform:translateX(-50%);
+  font-size:8px;text-align:center;color:white;
+}
+.ministry img {height:26px;margin-bottom:4px;}
 .admin{position:absolute;top:6px;right:12px;font-size:8px;font-weight:bold;}
 .school{position:absolute;bottom:6px;right:12px;font-size:8px;}
 .date{position:absolute;bottom:6px;left:12px;font-size:8px;}
@@ -132,16 +146,89 @@ button{
  padding:10px;border-radius:6px;
  width:48%;font-size:14px;margin:6px 1%;
 }
-#printIcon{
- position:absolute;top:10px;left:10px;background:#083024;
- width:36px;height:36px;border-radius:6px;
- display:flex;align-items:center;justify-content:center;color:white;font-size:20px;
-}
 .action-box{
  display:flex;
  justify-content:center;
+ gap:8px;
  margin-top:8px;
- gap:6px;
+}
+
+/*====== دعم كامل للجوال ======*/
+@media(max-width: 768px){
+
+  body {
+    display: block !important;
+  }
+
+  .panel {
+    width: 100% !important;
+    max-width: 95% !important;
+    margin: 0 auto !important;
+    border-right: 5px solid #083024 !important;
+  }
+
+  input, select, textarea {
+    font-size: 14px !important;
+  }
+
+  #reportPage {
+    width: 100% !important;
+    min-height: auto !important;
+    padding-bottom: 20px;
+  }
+
+  .action-box {
+    position: static !important;
+    transform: none !important;
+    margin: 10px auto !important;
+  }
+
+  #printBtn, #pdfBtn {
+    width: 45% !important;
+    font-size: 13px !important;
+  }
+
+  .header {
+    height: 120px !important;
+  }
+
+  .sectors {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .grid4 {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .ministry img {
+    height: 20px !important;
+  }
+
+  .objective {
+    height: auto !important;
+    padding: 6px !important;
+    font-size: 7.5px !important;
+  }
+
+  .sec {
+    min-height: auto !important;
+    font-size: 7px !important;
+  }
+
+  .sec-title {
+    font-size: 7.4px !important;
+  }
+
+  .images {
+    grid-template-columns: 1fr !important;
+  }
+
+  .footer {
+    font-size: 10px !important;
+    flex-direction: column !important;
+    gap: 10px;
+    text-align: center;
+  }
 }
 </style>
 </head>
@@ -166,50 +253,50 @@ button{
 
 <script>
 const autos={objective:[
-"تنمية مهارات الطلاب وتعزيز مواهبهم عبر المشاركة الفعالة.",
-"بناء شخصية قيادية متوازنة لدى الطلاب من خلال العمل الجماعي.",
-"تحفيز الإبداع والتفكير الناقد عبر أنشطة تطبيقية.",
-"تعزيز الانتماء للمدرسة وتنمية مهارات التواصل."
+"تنمية مهارات الطلاب وتعزيز مشاركتهم الفاعلة وتطوير قدراتهم.", 
+"بناء شخصية قيادية لدى الطلاب من خلال تفعيل الأنشطة التربوية.",
+"تعزيز التفكير الناقد وتنمية مهارات التواصل الاجتماعي لديهم.",
+"رفع مستوى الدافعية للتعلم عبر أنشطة تطبيقية متنوعة."
 ],desc:[
-"تنفيذ نشاط يعزز العمل التعاوني ويتيح فرصًا للتطبيق العملي.",
-"تصميم أنشطة محفزة تسهم في تطوير مهارات الطلاب.",
-"مشاركة الطلاب في نشاط يحقق الأهداف السلوكية والتعليمية.",
-"استخدام استراتيجيات تعلم حديثة لزيادة التفاعل."
+"تنفيذ نشاط تعليمي تفاعلي يعتمد على العمل الجماعي وتنمية المهارات.",
+"تطبيق استراتيجية تعليمية محفزة تسهم في تطوير مهارات الطلاب.",
+"مشاركة الطلاب في نشاط يحقق الأهداف السلوكية والمعرفية.",
+"إشراك الطلاب في مهام تعزز التعاون والتطبيق العملي."
 ],steps:[
-"توضيح الأهداف وتوزيع الأدوار ثم تنفيذ المهمة بإشراف المعلم.",
-"تقسيم الطلاب لمجموعات وتكليفهم بمهام محددة.",
-"تهيئة أدوات النشاط ومتابعة التنفيذ ثم التقييم.",
-"تنظيم أدوار المشاركة وتقديم الدعم المستمر."
+"توزيع الأدوار وشرح المطلوب ثم التنفيذ والمتابعة المباشرة.", 
+"تقسيم الطلاب لمجموعات وإدارة النقاش وتقديم التغذية الراجعة.", 
+"تهيئة الوسائل التعليمية ثم تنفيذ النشاط وتقييم الأداء.", 
+"التوجيه والتحفيز المستمر لتحقيق الأهداف الموضوعة."
 ],results:[
-"ارتفاع التفاعل وتحسن مهارات التواصل.",
-"بروز مواهب وقدرات جديدة لدى الطلاب.",
-"زيادة حماس الطلاب للتعلم عبر النشاط.",
-"تحقيق أهداف النشاط وتنمية الجوانب المهارية."
+"تحسن مستوى تفاعل الطلاب وتطور مهارات التواصل.", 
+"بروز قدرات جديدة لدى الطلاب أثناء النشاط.", 
+"زيادة الدافعية والحماس لدى الطلاب.", 
+"تحقيق نتائج إيجابية انعكست على مستوى التعلم."
 ],motives:[
-"تحفيز الطلاب بالمكافآت والإشادة بالمتميزين.",
-"تعزيز المنافسة الإيجابية لزيادة المشاركة.",
-"تهيئة بيئة تعليمية مشوقة.",
-"استخدام أساليب تحفيزية متنوعة."
+"تشجيع الطلاب بالإشادة والمكافآت المناسبة.", 
+"تعزيز المنافسة الإيجابية داخل المجموعات.", 
+"تهيئة بيئة محفزة وجاذبة للطلاب.", 
+"تنويع أساليب التحفيز لزيادة المشاركة."
 ],challenges:[
-"تفاوت مستويات المشاركة بين الطلاب.",
-"ضيق الوقت مقارنة بخطة النشاط.",
-"الحاجة لضبط بعض السلوكيات.",
-"قلة الأدوات لبعض الأنشطة."
+"تفاوت مستويات الطلاب في الفهم والمشاركة.", 
+"ضيق الوقت مقارنة بمتطلبات النشاط.", 
+"الحاجة إلى ضبط بعض السلوكيات.", 
+"نقص أدوات معينة أثناء التنفيذ."
 ],strengths:[
-"تنوع النشاط وملاءمته لقدرات الطلاب.",
-"تنظيم ممتاز لعملية التنفيذ.",
-"ارتفاع التفاعل والمبادرة.",
-"تحسن التعاون داخل الفصل."
+"تنظيم متميز وتفاعل عالٍ داخل النشاط.", 
+"تنوع الوسائل التعليمية داخل النشاط.", 
+"ارتفاع روح التعاون بين الطلاب.", 
+"وضوح التعليمات وسهولة التطبيق."
 ],develop:[
-"دعم الطلاب الأقل مشاركة.",
-"تخصيص وقت إضافي للنشاط.",
-"زيادة تجهيزات الأنشطة.",
-"رفع مستوى التشجيع."
+"زيادة دعم الطلاب الأقل مشاركة بالنشاط.", 
+"تخصيص وقت إضافي لبعض الأنشطة.", 
+"توفير تجهيزات إضافية داعمة.", 
+"رفع مستوى التشجيع الفردي."
 ],recommend:[
-"الاستمرار في تفعيل حصص النشاط.",
-"زيادة الدعم اللوجستي للأنشطة.",
-"تخصيص مساحة لعرض المنجزات.",
-"توسيع استخدام التقنية."
+"الاستمرار في تفعيل حصص النشاط.", 
+"زيادة الإمكانات الداعمة للأنشطة.", 
+"عرض منجزات الطلاب وتحفيزهم عليها.", 
+"التوسع باستخدام الوسائل التقنية."
 ]};
 const idx={};for(const k in autos) idx[k]=0;
 function autoFill(k){idx[k]=(idx[k]+1)%autos[k].length;document.getElementById(k).value=autos[k][idx[k]];}
@@ -238,20 +325,18 @@ F("التوصيات","recommend")
 <input class="field" type="file" id="img2" accept="image/*">
 
 <button onclick="showReport()">إنشاء التقرير</button>
-</div></div>
+
+</div>
+</div>
 
 <!-- REPORT PAGE -->
 <div id="reportPage">
-<div id="printIcon" onclick="window.print()">🖨️</div>
 <div class="action-box">
  <button id="printBtn" onclick="window.print()">طباعة</button>
  <button id="pdfBtn" onclick="downloadPDF()">PDF</button>
 </div>
 <div id="reportContent"></div>
 </div>
-
-<!-- PDF LIBRARY -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <script>
 function getImg(id){
@@ -270,10 +355,15 @@ const img1=await getImg("img1"),img2=await getImg("img2");
 
 document.getElementById("reportContent").innerHTML=`
 <div class="header">
+<div class="ministry">
+<img src="https://i.ibb.co/j6QD2sS/moe.png">
+وزارة التعليم<br>Ministry of Education
+</div>
 <div class="admin">${v('admin')}</div>
 <div class="school">${v('school')}</div>
 <div class="date" id="hDate"></div>
 </div>
+
 <div class="info">
 <div class="grid4">
  <div class="ibox"><strong>الفصل</strong>${v('term')}</div>
@@ -325,7 +415,7 @@ document.getElementById("reportPage").style.display="block";
 }
 
 function downloadPDF(){
-var element=document.getElementById("reportPage");
+var element=document.getElementById("reportContent");
 var opt={
  margin:0,
  filename:'تقرير-حصص-النشاط.pdf',
