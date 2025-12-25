@@ -19,11 +19,22 @@
     }
 
     html, body {
-      width: 210mm;
-      height: 297mm;
       font-family: 'Cairo', sans-serif;
       background: #ffffff;
       color: #1f2937;
+      width: 100%;
+      height: auto;
+    }
+
+    body {
+      padding: 0;
+      margin: 0;
+    }
+
+    .page {
+      width: 100%;
+      padding: 10mm;
+      background: #fff;
     }
 
     /* ===== Header ===== */
@@ -58,13 +69,6 @@
     .school-name { bottom: 6px; right: 12px; }
     .hijri-date { bottom: 6px; left: 12px; }
 
-    /* ===== Page ===== */
-    .page {
-      width: 100%;
-      min-height: calc(297mm - 90px);
-      padding: 10mm;
-    }
-
     /* ===== Info Boxes ===== */
     .info-grid {
       display: grid;
@@ -78,13 +82,12 @@
     }
 
     .info-box {
-      border: 1px solid #083024;
+      background-color: #eaf3ef;
       border-radius: 4px;
       padding: 4px;
       text-align: center;
       font-size: 7px;
       line-height: 1.2;
-      background-color: #eaf3ef;
     }
 
     .info-box strong {
@@ -96,7 +99,6 @@
     /* ===== Objective ===== */
     .report-objective-box {
       background: rgba(8,48,36,0.1);
-      border: 1px solid rgba(8,48,36,0.4);
       border-radius: 6px;
       padding: 30px;
       margin-bottom: 8px;
@@ -115,59 +117,14 @@
 
     .report-box {
       border-radius: 6px;
-      border: 9px solid rgba(0,0,0,0.2);
       padding: 40px;
-      background: rgba(0,0,0,0.03);
     }
 
     .report-box-title {
       font-size: 11px;
-      margin-bottom: 3px;
-      border-bottom: 1px solid rgba(0,0,0,0.15);
-      padding-bottom: 2px;
-      font-weight: bold;
+      margin-bottom: 5px;
       text-align: center;
-    }
-
-    /* تخصيص ألوان دلالية */
-    .strengths {
-      background-color: #e6f6e6;
-      border-color: #4CAF50;
-    }
-
-    .strengths .report-box-title {
-      color: #2d7a2d;
-      border-color: #62b562;
-    }
-
-    .improvements {
-      background-color: #fff0e6;
-      border-color: #FF9800;
-    }
-
-    .improvements .report-box-title {
-      color: #c26a00;
-      border-color: #ffc266;
-    }
-
-    .summary {
-      background-color: #e8f1ff;
-      border-color: #4e7fcf;
-    }
-
-    .summary .report-box-title {
-      color: #2e4a8c;
-      border-color: #89a9e9;
-    }
-
-    .execution {
-      background-color: #fff7e8;
-      border-color: #e0b200;
-    }
-
-    .execution .report-box-title {
-      color: #a17d00;
-      border-color: #f0d45c;
+      font-weight: bold;
     }
 
     .report-box-content {
@@ -175,6 +132,38 @@
       line-height: 1.4;
       white-space: pre-line;
       text-align: justify;
+    }
+
+    .strengths {
+      background-color: #e6f6e6;
+    }
+
+    .strengths .report-box-title {
+      color: #2d7a2d;
+    }
+
+    .improvements {
+      background-color: #fff0e6;
+    }
+
+    .improvements .report-box-title {
+      color: #c26a00;
+    }
+
+    .summary {
+      background-color: #e8f1ff;
+    }
+
+    .summary .report-box-title {
+      color: #2e4a8c;
+    }
+
+    .execution {
+      background-color: #fff7e8;
+    }
+
+    .execution .report-box-title {
+      color: #a17d00;
     }
 
     /* ===== Images ===== */
@@ -186,7 +175,7 @@
     }
 
     .image-box {
-      border: 1px dashed #083024;
+      border: none;
       border-radius: 6px;
       height: 200px;
       display: flex;
@@ -203,19 +192,29 @@
       height: 100%;
       object-fit: cover;
     }
+
+    /* منع الصفحة الفارغة عند الطباعة */
+    @media print {
+      .page {
+        page-break-after: avoid;
+      }
+      body, html {
+        width: auto;
+        height: auto;
+      }
+    }
   </style>
 </head>
 
 <body>
 
   <div class="header">
-    <div class="admin-name">قائد المدرسة: نايف اللحياني </div>
+    <div class="admin-name">قائد المدرسة: نايف اللحياني</div>
     <div class="school-name">مدرسة المستقبل الابتدائية</div>
     <div class="hijri-date">1447/02/15 هـ</div>
   </div>
 
   <div class="page">
-
     <div class="info-grid">
       <div class="info-box"><strong>اسم المعلم</strong> فهد الخالدي</div>
       <div class="info-box"><strong>المادة</strong> العلوم</div>
