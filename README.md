@@ -6,17 +6,18 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
   <style>
-    @page { size: A4; margin: 0; }
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
     html, body {
       font-family: 'Cairo', sans-serif;
       background: #ffffff;
       color: #1f2937;
       width: 100%;
-      height: auto;
       direction: rtl;
     }
+
     body { padding: 0; margin: 0; }
 
     .btn-container {
@@ -38,26 +39,14 @@
       color: #ffffff;
       border: none;
       padding: 10px 25px;
-      font-size: 16px;
+      font-size: 15px;
       border-radius: 6px;
       cursor: pointer;
     }
+
     button:hover { background: #05523a; }
 
     @media print { .btn-container { display: none; } }
-
-    .top-title {
-      width: 100%;
-      background-color: #066d4d;
-      color: #ffffff;
-      text-align: center;
-      font-size: 32px;
-      font-weight: bold;
-      padding: 20px 0;
-      position: relative;
-      z-index: 3;
-      margin-top: 60px;
-    }
 
     .header {
       width: 100%;
@@ -67,6 +56,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      margin-top: 60px;
     }
 
     .header::before {
@@ -81,7 +71,7 @@
     }
 
     .header-info {
-      width: calc(100% - 20mm);
+      width: 95%;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -89,70 +79,70 @@
       position: relative;
       z-index: 2;
       color: #ffffff;
-      font-size: 8px;
+      font-size: 10px;
     }
 
     .page {
-      width: 210mm;
-      min-height: calc(297mm - 100px);
-      padding: 10mm;
+      width: 100%;
+      padding: 10px;
       background: #fff;
       margin: auto;
     }
 
     .info-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
       gap: 4px;
       margin-bottom: 6px;
     }
-    .info-grid.second { grid-template-columns: repeat(4, 1fr); }
+
     .info-box {
       background-color: #eaf3ef;
       border-radius: 4px;
-      padding: 4px;
+      padding: 6px;
       text-align: center;
-      font-size: 7px;
-      line-height: 1.2;
+      font-size: 10px;
+      line-height: 1.3;
     }
+
     .info-box strong {
       display: block;
-      font-size: 7.5px;
+      font-size: 11px;
       color: #083024;
     }
 
     .report-objective-box {
       background: rgba(8,48,36,0.1);
       border-radius: 6px;
-      padding: 30px;
+      padding: 12px;
       margin-bottom: 8px;
-      font-size: 11px;
+      font-size: 13px;
       text-align: center;
       color: #083024;
     }
 
     .report-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap: 8px;
       margin-bottom: 8px;
     }
 
     .report-box {
       border-radius: 6px;
-      padding: 40px;
+      padding: 20px;
     }
 
     .report-box-title {
-      font-size: 11px;
-      margin-bottom: 5px;
+      font-size: 13px;
+      margin-bottom: 6px;
       text-align: center;
       font-weight: bold;
     }
 
     .report-box-content {
-      font-size: 6px;
-      line-height: 1.4;
+      font-size: 11px;
+      line-height: 1.6;
       white-space: pre-line;
       text-align: justify;
     }
@@ -177,16 +167,19 @@
     }
 
     .image-box {
-      border: none;
       border-radius: 6px;
       height: 100px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 7px;
+      font-size: 11px;
       color: #083024;
       background: rgba(8,48,36,0.05);
-      overflow: hidden;
+    }
+
+    @media (min-width: 600px) {
+      .report-grid { grid-template-columns: 1fr 1fr; }
+      .page { width: 800px; }
     }
   </style>
 </head>
@@ -199,7 +192,6 @@
   </div>
 
   <div id="report-content">
-    <div class="top-title">التقارير التربوية</div>
 
     <div class="header">
       <div class="header-info">
@@ -215,9 +207,6 @@
         <div class="info-box"><strong>اسم المعلم</strong> فهد الخالدي</div>
         <div class="info-box"><strong>المادة</strong> العلوم</div>
         <div class="info-box"><strong>الصف</strong> الخامس</div>
-      </div>
-
-      <div class="info-grid second">
         <div class="info-box"><strong>عدد الطلاب</strong> 28</div>
         <div class="info-box"><strong>نسبة الحضور</strong> 96%</div>
         <div class="info-box"><strong>نوع التقرير</strong> إشرافي</div>
