@@ -1,22 +1,14 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>تقرير تعليمي</title>
+  <title>تقرير تعليمي PDF</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
   <style>
-    @page {
-      size: A4;
-      margin: 0;
-    }
-
+    @page { size: A4; margin: 0; }
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body {
       font-family: 'Cairo', sans-serif;
       background: #ffffff;
@@ -25,13 +17,9 @@
       height: auto;
       direction: rtl;
     }
+    body { padding: 0; margin: 0; }
 
-    body {
-      padding: 0;
-      margin: 0;
-    }
-
-    .print-btn-container {
+    .btn-container {
       text-align: center;
       padding: 10px;
       background: #f5f5f5;
@@ -40,9 +28,12 @@
       left: 0;
       width: 100%;
       z-index: 10;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
     }
 
-    .print-btn {
+    button {
       background: #066d4d;
       color: #ffffff;
       border: none;
@@ -51,16 +42,9 @@
       border-radius: 6px;
       cursor: pointer;
     }
+    button:hover { background: #05523a; }
 
-    .print-btn:hover {
-      background: #05523a;
-    }
-
-    @media print {
-      .print-btn-container {
-        display: none;
-      }
-    }
+    @media print { .btn-container { display: none; } }
 
     .top-title {
       width: 100%;
@@ -72,6 +56,7 @@
       padding: 20px 0;
       position: relative;
       z-index: 3;
+      margin-top: 60px;
     }
 
     .header {
@@ -121,11 +106,7 @@
       gap: 4px;
       margin-bottom: 6px;
     }
-
-    .info-grid.second {
-      grid-template-columns: repeat(4, 1fr);
-    }
-
+    .info-grid.second { grid-template-columns: repeat(4, 1fr); }
     .info-box {
       background-color: #eaf3ef;
       border-radius: 4px;
@@ -134,7 +115,6 @@
       font-size: 7px;
       line-height: 1.2;
     }
-
     .info-box strong {
       display: block;
       font-size: 7.5px;
@@ -208,99 +188,105 @@
       background: rgba(8,48,36,0.05);
       overflow: hidden;
     }
-
-    @media print {
-      html, body {
-        width: 210mm;
-        height: 297mm;
-      }
-      .page {
-        margin: 0;
-        page-break-after: avoid;
-      }
-    }
   </style>
 </head>
 
 <body>
 
-  <div class="print-btn-container">
-    <button class="print-btn" onclick="window.print()">طباعة PDF</button>
+  <div class="btn-container">
+    <button onclick="window.print()">طباعة</button>
+    <button onclick="downloadPDF()">تنزيل PDF</button>
   </div>
 
-  <div class="top-title">التقارير التربوية</div>
+  <div id="report-content">
+    <div class="top-title">التقارير التربوية</div>
 
-  <div class="header">
-    <div class="header-info">
-      <div>قائد المدرسة: نايف اللحياني</div>
-      <div>مدرسة المستقبل الابتدائية</div>
-      <div>1447/02/15 هـ</div>
+    <div class="header">
+      <div class="header-info">
+        <div>قائد المدرسة: نايف اللحياني</div>
+        <div>مدرسة المستقبل الابتدائية</div>
+        <div>1447/02/15 هـ</div>
+      </div>
+    </div>
+
+    <div class="page">
+
+      <div class="info-grid">
+        <div class="info-box"><strong>اسم المعلم</strong> فهد الخالدي</div>
+        <div class="info-box"><strong>المادة</strong> العلوم</div>
+        <div class="info-box"><strong>الصف</strong> الخامس</div>
+      </div>
+
+      <div class="info-grid second">
+        <div class="info-box"><strong>عدد الطلاب</strong> 28</div>
+        <div class="info-box"><strong>نسبة الحضور</strong> 96%</div>
+        <div class="info-box"><strong>نوع التقرير</strong> إشرافي</div>
+        <div class="info-box"><strong>الفصل</strong> الأول</div>
+      </div>
+
+      <div class="report-objective-box">
+        يهدف هذا التقرير إلى توثيق سير العملية التعليمية وتحليل مستوى التفاعل والتحصيل لدى الطلاب
+      </div>
+
+      <div class="report-grid">
+        <div class="report-box summary">
+          <div class="report-box-title">نبذة مختصرة</div>
+          <div class="report-box-content">
+            يتناول هذا التقرير وصفًا موجزًا للدرس من حيث الفكرة العامة ومستوى تفاعل الطلاب ومدى تحقق نواتج التعلم.
+          </div>
+        </div>
+
+        <div class="report-box execution">
+          <div class="report-box-title">إجراءات التنفيذ</div>
+          <div class="report-box-content">
+            • تهيئة تمهيدية للدرس
+            • عرض المحتوى باستخدام وسائل تعليمية
+            • تنفيذ نشاط تطبيقي
+            • تقويم ختامي
+          </div>
+        </div>
+      </div>
+
+      <div class="report-grid">
+        <div class="report-box strengths">
+          <div class="report-box-title">نقاط القوة</div>
+          <div class="report-box-content">
+            • وضوح الأهداف
+            • تنوع الاستراتيجيات
+            • تفاعل إيجابي
+          </div>
+        </div>
+
+        <div class="report-box improvements">
+          <div class="report-box-title">نقاط التحسين</div>
+          <div class="report-box-content">
+            • زيادة الأنشطة التطبيقية
+            • تعزيز التقويم التكويني
+          </div>
+        </div>
+      </div>
+
+      <div class="image-evidence-grid">
+        <div class="image-box">صورة توثيقية 1</div>
+        <div class="image-box">صورة توثيقية 2</div>
+      </div>
+
     </div>
   </div>
 
-  <div class="page">
-
-    <div class="info-grid">
-      <div class="info-box"><strong>اسم المعلم</strong> فهد الخالدي</div>
-      <div class="info-box"><strong>المادة</strong> العلوم</div>
-      <div class="info-box"><strong>الصف</strong> الخامس</div>
-    </div>
-
-    <div class="info-grid second">
-      <div class="info-box"><strong>عدد الطلاب</strong> 28</div>
-      <div class="info-box"><strong>نسبة الحضور</strong> 96%</div>
-      <div class="info-box"><strong>نوع التقرير</strong> إشرافي</div>
-      <div class="info-box"><strong>الفصل</strong> الأول</div>
-    </div>
-
-    <div class="report-objective-box">
-      يهدف هذا التقرير إلى توثيق سير العملية التعليمية وتحليل مستوى التفاعل والتحصيل لدى الطلاب
-    </div>
-
-    <div class="report-grid">
-      <div class="report-box summary">
-        <div class="report-box-title">نبذة مختصرة</div>
-        <div class="report-box-content">
-          يتناول هذا التقرير وصفًا موجزًا للدرس من حيث الفكرة العامة ومستوى تفاعل الطلاب ومدى تحقق نواتج التعلم.
-        </div>
-      </div>
-
-      <div class="report-box execution">
-        <div class="report-box-title">إجراءات التنفيذ</div>
-        <div class="report-box-content">
-          • تهيئة تمهيدية للدرس
-          • عرض المحتوى باستخدام وسائل تعليمية
-          • تنفيذ نشاط تطبيقي
-          • تقويم ختامي
-        </div>
-      </div>
-    </div>
-
-    <div class="report-grid">
-      <div class="report-box strengths">
-        <div class="report-box-title">نقاط القوة</div>
-        <div class="report-box-content">
-          • وضوح الأهداف
-          • تنوع الاستراتيجيات
-          • تفاعل إيجابي
-        </div>
-      </div>
-
-      <div class="report-box improvements">
-        <div class="report-box-title">نقاط التحسين</div>
-        <div class="report-box-content">
-          • زيادة الأنشطة التطبيقية
-          • تعزيز التقويم التكويني
-        </div>
-      </div>
-    </div>
-
-    <div class="image-evidence-grid">
-      <div class="image-box">صورة توثيقية 1</div>
-      <div class="image-box">صورة توثيقية 2</div>
-    </div>
-
-  </div>
+  <script>
+    function downloadPDF() {
+      var element = document.getElementById('report-content');
+      var options = {
+        margin: 0,
+        filename: 'report.pdf',
+        image: { type: 'jpeg', quality: 1 },
+        html2canvas: { scale: 3 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+      html2pdf().set(options).from(element).save();
+    }
+  </script>
 
 </body>
 </html>
