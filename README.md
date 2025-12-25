@@ -1,4 +1,3 @@
-
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
@@ -30,6 +29,18 @@
     body {
       padding: 0;
       margin: 0;
+    }
+
+    .top-title {
+      width: 100%;
+      background-color: #066d4d;
+      color: #ffffff;
+      text-align: center;
+      font-size: 32px;
+      font-weight: bold;
+      padding: 20px 0;
+      position: relative;
+      z-index: 3;
     }
 
     .header {
@@ -181,6 +192,8 @@
 </head>
 
 <body>
+
+  <div class="top-title">التقارير التربوية</div>
 
   <div class="header">
     <div class="header-info">
