@@ -6,9 +6,14 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
   <style>
+    @page { size: A4; margin: 0; }
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     html, body {
       font-family: 'Cairo', sans-serif;
@@ -18,35 +23,41 @@
       direction: rtl;
     }
 
-    body { padding: 0; margin: 0; }
+    body {
+      padding: 0;
+      margin: 0;
+    }
 
     .btn-container {
       text-align: center;
       padding: 10px;
       background: #f5f5f5;
+      width: 100%;
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
       z-index: 10;
-      display: flex;
-      gap: 10px;
-      justify-content: center;
     }
 
-    button {
+    .pdf-btn {
       background: #066d4d;
       color: #ffffff;
       border: none;
       padding: 10px 25px;
-      font-size: 15px;
+      font-size: 16px;
       border-radius: 6px;
       cursor: pointer;
     }
 
-    button:hover { background: #05523a; }
+    .pdf-btn:hover {
+      background: #05523a;
+    }
 
-    @media print { .btn-container { display: none; } }
+    @media print {
+      .btn-container {
+        display: none;
+      }
+    }
 
     .header {
       width: 100%;
@@ -71,7 +82,7 @@
     }
 
     .header-info {
-      width: 95%;
+      width: calc(100% - 20mm);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -79,70 +90,75 @@
       position: relative;
       z-index: 2;
       color: #ffffff;
-      font-size: 10px;
+      font-size: 8px;
     }
 
     .page {
-      width: 100%;
-      padding: 10px;
+      width: 210mm;
+      min-height: calc(297mm - 100px);
+      padding: 10mm;
       background: #fff;
       margin: auto;
     }
 
     .info-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 4px;
       margin-bottom: 6px;
+    }
+
+    .info-grid.second {
+      grid-template-columns: repeat(4, 1fr);
     }
 
     .info-box {
       background-color: #eaf3ef;
       border-radius: 4px;
-      padding: 6px;
+      padding: 4px;
       text-align: center;
-      font-size: 10px;
-      line-height: 1.3;
+      font-size: 7px;
+      line-height: 1.2;
     }
 
     .info-box strong {
       display: block;
-      font-size: 11px;
+      font-size: 7.5px;
       color: #083024;
     }
 
     .report-objective-box {
       background: rgba(8,48,36,0.1);
       border-radius: 6px;
-      padding: 12px;
+      padding: 30px;
       margin-bottom: 8px;
-      font-size: 13px;
+      font-size: 11px;
       text-align: center;
       color: #083024;
     }
 
     .report-grid {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr 1fr;
       gap: 8px;
       margin-bottom: 8px;
     }
 
     .report-box {
       border-radius: 6px;
-      padding: 20px;
+      padding: 40px;
     }
 
     .report-box-title {
-      font-size: 13px;
-      margin-bottom: 6px;
+      font-size: 11px;
+      margin-bottom: 5px;
       text-align: center;
       font-weight: bold;
     }
 
     .report-box-content {
-      font-size: 11px;
-      line-height: 1.6;
+      font-size: 6px;
+      line-height: 1.4;
       white-space: pre-line;
       text-align: justify;
     }
@@ -167,28 +183,38 @@
     }
 
     .image-box {
+      border: none;
       border-radius: 6px;
       height: 100px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 11px;
+      font-size: 7px;
       color: #083024;
       background: rgba(8,48,36,0.05);
+      overflow: hidden;
     }
 
-    @media (min-width: 600px) {
-      .report-grid { grid-template-columns: 1fr 1fr; }
-      .page { width: 800px; }
+    @media (max-width: 768px) {
+      .page {
+        width: 100%;
+        padding: 10px;
+      }
+      .report-grid {
+        grid-template-columns: 1fr;
+      }
+      .image-evidence-grid {
+        grid-template-columns: 1fr;
+      }
     }
+
   </style>
 </head>
 
 <body>
 
   <div class="btn-container">
-    <button onclick="window.print()">طباعة</button>
-    <button onclick="downloadPDF()">تنزيل PDF</button>
+    <button class="pdf-btn" onclick="downloadPDF()">تنزيل PDF</button>
   </div>
 
   <div id="report-content">
@@ -207,6 +233,9 @@
         <div class="info-box"><strong>اسم المعلم</strong> فهد الخالدي</div>
         <div class="info-box"><strong>المادة</strong> العلوم</div>
         <div class="info-box"><strong>الصف</strong> الخامس</div>
+      </div>
+
+      <div class="info-grid second">
         <div class="info-box"><strong>عدد الطلاب</strong> 28</div>
         <div class="info-box"><strong>نسبة الحضور</strong> 96%</div>
         <div class="info-box"><strong>نوع التقرير</strong> إشرافي</div>
@@ -270,7 +299,7 @@
         margin: 0,
         filename: 'report.pdf',
         image: { type: 'jpeg', quality: 1 },
-        html2canvas: { scale: 3 },
+        html2canvas: { scale: 4 },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
       html2pdf().set(options).from(element).save();
