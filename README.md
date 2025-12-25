@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -85,22 +84,25 @@
       text-align: center;
       font-size: 7px;
       line-height: 1.2;
+      background-color: #eaf3ef;
     }
 
     .info-box strong {
       display: block;
       font-size: 7.5px;
+      color: #083024;
     }
 
     /* ===== Objective ===== */
     .report-objective-box {
-      background: rgba(8,48,36,0.15);
+      background: rgba(8,48,36,0.1);
       border: 1px solid rgba(8,48,36,0.4);
       border-radius: 6px;
       padding: 30px;
       margin-bottom: 8px;
       font-size: 11px;
       text-align: center;
+      color: #083024;
     }
 
     /* ===== Two-column sections ===== */
@@ -123,12 +125,56 @@
       margin-bottom: 3px;
       border-bottom: 1px solid rgba(0,0,0,0.15);
       padding-bottom: 2px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    /* تخصيص ألوان دلالية */
+    .strengths {
+      background-color: #e6f6e6;
+      border-color: #4CAF50;
+    }
+
+    .strengths .report-box-title {
+      color: #2d7a2d;
+      border-color: #62b562;
+    }
+
+    .improvements {
+      background-color: #fff0e6;
+      border-color: #FF9800;
+    }
+
+    .improvements .report-box-title {
+      color: #c26a00;
+      border-color: #ffc266;
+    }
+
+    .summary {
+      background-color: #e8f1ff;
+      border-color: #4e7fcf;
+    }
+
+    .summary .report-box-title {
+      color: #2e4a8c;
+      border-color: #89a9e9;
+    }
+
+    .execution {
+      background-color: #fff7e8;
+      border-color: #e0b200;
+    }
+
+    .execution .report-box-title {
+      color: #a17d00;
+      border-color: #f0d45c;
     }
 
     .report-box-content {
       font-size: 6px;
       line-height: 1.4;
       white-space: pre-line;
+      text-align: justify;
     }
 
     /* ===== Images ===== */
@@ -162,14 +208,12 @@
 
 <body>
 
-  <!-- ===== Header ===== -->
   <div class="header">
     <div class="admin-name">قائد المدرسة: نايف اللحياني </div>
     <div class="school-name">مدرسة المستقبل الابتدائية</div>
     <div class="hijri-date">1447/02/15 هـ</div>
   </div>
 
-  <!-- ===== Page Content ===== -->
   <div class="page">
 
     <div class="info-grid">
@@ -185,49 +229,43 @@
       <div class="info-box"><strong>الفصل</strong> الأول</div>
     </div>
 
-    <!-- الهدف التربوي -->
     <div class="report-objective-box">
-      يهدف هذا التقرير إلى توثيق سير العملية التعليمية
-      وتحليل مستوى التفاعل والتحصيل لدى الطلاب
+      يهدف هذا التقرير إلى توثيق سير العملية التعليمية وتحليل مستوى التفاعل والتحصيل لدى الطلاب
     </div>
 
-    <!-- نبذة مختصرة + إجراءات التنفيذ -->
     <div class="report-grid">
-      <div class="report-box">
+      <div class="report-box summary">
         <div class="report-box-title">نبذة مختصرة</div>
         <div class="report-box-content">
-          يتناول هذا التقرير وصفًا موجزًا للدرس
-          من حيث الفكرة العامة ومستوى تفاعل الطلاب
-          ومدى تحقق نواتج التعلم.
+          يتناول هذا التقرير وصفًا موجزًا للدرس من حيث الفكرة العامة ومستوى تفاعل الطلاب ومدى تحقق نواتج التعلم.
         </div>
       </div>
 
-      <div class="report-box">
+      <div class="report-box execution">
         <div class="report-box-title">إجراءات التنفيذ</div>
         <div class="report-box-content">
-          • تهيئة تمهيدية للدرس  
-          • عرض المحتوى باستخدام وسائل تعليمية  
-          • تنفيذ نشاط تطبيقي  
+          • تهيئة تمهيدية للدرس
+          • عرض المحتوى باستخدام وسائل تعليمية
+          • تنفيذ نشاط تطبيقي
           • تقويم ختامي
         </div>
       </div>
     </div>
 
-    <!-- نقاط القوة + نقاط التحسين -->
     <div class="report-grid">
-      <div class="report-box">
+      <div class="report-box strengths">
         <div class="report-box-title">نقاط القوة</div>
         <div class="report-box-content">
-          • وضوح الأهداف  
-          • تنوع الاستراتيجيات  
+          • وضوح الأهداف
+          • تنوع الاستراتيجيات
           • تفاعل إيجابي
         </div>
       </div>
 
-      <div class="report-box">
+      <div class="report-box improvements">
         <div class="report-box-title">نقاط التحسين</div>
         <div class="report-box-content">
-          • زيادة الأنشطة التطبيقية  
+          • زيادة الأنشطة التطبيقية
           • تعزيز التقويم التكويني
         </div>
       </div>
