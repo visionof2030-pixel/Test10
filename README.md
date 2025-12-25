@@ -26,30 +26,57 @@
       direction: rtl;
     }
 
+    body {
+      padding: 0;
+      margin: 0;
+    }
+
+    .print-btn-container {
+      text-align: center;
+      padding: 10px;
+      background: #f5f5f5;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 10;
+    }
+
+    .print-btn {
+      background: #066d4d;
+      color: #ffffff;
+      border: none;
+      padding: 10px 25px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .print-btn:hover {
+      background: #05523a;
+    }
+
+    @media print {
+      .print-btn-container {
+        display: none;
+      }
+    }
+
     .top-title {
       width: 100%;
       background-color: #066d4d;
       color: #ffffff;
       text-align: center;
-      font-size: 38px;
+      font-size: 32px;
       font-weight: bold;
-      padding: 25px 0;
+      padding: 20px 0;
       position: relative;
-      z-index: 5;
-    }
-
-    .title-curve {
-      width: 100%;
-      height: 40px;
-      background: #066d4d;
-      border-bottom-left-radius: 50% 100%;
-      border-bottom-right-radius: 50% 100%;
-      margin-top: -2px;
+      z-index: 3;
     }
 
     .header {
       width: 100%;
-      height: 90px;
+      height: 100px;
       background-color: #083024;
       position: relative;
       display: flex;
@@ -64,8 +91,8 @@
       background-image: url('https://i.ibb.co/kVWFFwhW/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png');
       background-repeat: no-repeat;
       background-position: center;
-      background-size: 45%;
-      opacity: 0.90;
+      background-size: 50%;
+      opacity: 0.95;
     }
 
     .header-info {
@@ -77,23 +104,22 @@
       position: relative;
       z-index: 2;
       color: #ffffff;
-      font-size: 10px;
+      font-size: 8px;
     }
 
     .page {
       width: 210mm;
-      height: calc(297mm - 130px);
-      padding: 6mm;
+      min-height: calc(297mm - 100px);
+      padding: 10mm;
       background: #fff;
       margin: auto;
-      overflow: hidden;
     }
 
     .info-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 4px;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
 
     .info-grid.second {
@@ -103,7 +129,7 @@
     .info-box {
       background-color: #eaf3ef;
       border-radius: 4px;
-      padding: 3px;
+      padding: 4px;
       text-align: center;
       font-size: 7px;
       line-height: 1.2;
@@ -111,16 +137,16 @@
 
     .info-box strong {
       display: block;
-      font-size: 7.3px;
+      font-size: 7.5px;
       color: #083024;
     }
 
     .report-objective-box {
       background: rgba(8,48,36,0.1);
       border-radius: 6px;
-      padding: 10px;
-      margin-bottom: 6px;
-      font-size: 10px;
+      padding: 30px;
+      margin-bottom: 8px;
+      font-size: 11px;
       text-align: center;
       color: #083024;
     }
@@ -128,26 +154,25 @@
     .report-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 6px;
-      margin-bottom: 6px;
+      gap: 8px;
+      margin-bottom: 8px;
     }
 
     .report-box {
       border-radius: 6px;
-      padding: 20px;
-      min-height: 100px;
+      padding: 40px;
     }
 
     .report-box-title {
-      font-size: 10px;
-      margin-bottom: 4px;
+      font-size: 11px;
+      margin-bottom: 5px;
       text-align: center;
       font-weight: bold;
     }
 
     .report-box-content {
-      font-size: 6.5px;
-      line-height: 1.25;
+      font-size: 6px;
+      line-height: 1.4;
       white-space: pre-line;
       text-align: justify;
     }
@@ -167,14 +192,14 @@
     .image-evidence-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 6px;
-      margin-top: 6px;
+      gap: 8px;
+      margin-top: 8px;
     }
 
     .image-box {
       border: none;
       border-radius: 6px;
-      height: 90px;
+      height: 100px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -190,6 +215,7 @@
         height: 297mm;
       }
       .page {
+        margin: 0;
         page-break-after: avoid;
       }
     }
@@ -198,8 +224,11 @@
 
 <body>
 
+  <div class="print-btn-container">
+    <button class="print-btn" onclick="window.print()">طباعة PDF</button>
+  </div>
+
   <div class="top-title">التقارير التربوية</div>
-  <div class="title-curve"></div>
 
   <div class="header">
     <div class="header-info">
