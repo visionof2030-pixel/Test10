@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -51,10 +51,32 @@ body{display:flex;justify-content:center;}
 
 #report-content{width:100%;margin:20px auto;}
 
-.header{background:#083024;padding:10px;min-height:120px;position:relative;color:#fff;text-align:center;}
-.header img{width:160px;opacity:.95;}
-.header-left-bottom{position:absolute;bottom:6px;left:12px;font-size:12px;font-weight:700;text-align:right;}
+/*********** HEADER ***********/
+.header{
+background:#083024;padding:8px;min-height:130px;position:relative;
+color:#fff;text-align:center;overflow:hidden;
+display:flex;align-items:center;justify-content:center;
+}
+.header img{width:155px;opacity:.97;}
 
+.header-school{
+position:absolute;bottom:6px;right:10px;
+font-size:13px;font-weight:700;
+}
+.header-education{
+position:absolute;bottom:6px;left:50%;
+transform:translateX(-50%);
+font-size:12px;font-weight:700;
+color:#d7f2ea;
+text-align:center;
+white-space:nowrap;
+}
+.header-date-box{
+position:absolute;top:6px;left:10px;
+font-size:11px;text-align:right;line-height:1.3;
+}
+
+/*******************************************/
 .info-grid{
 display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:10px;
 }
@@ -112,10 +134,13 @@ display:flex;align-items:center;justify-content:center;background:#ffffff;overfl
 
 <label>إدارة التعليم</label>
 <select id="education" oninput="updateReport()">
-<option value="">مثال: الإدارة العامة للتعليم بمكة</option>
+<option value="">مثال: الإدارة العامة للتعليم بمنطقة مكة</option>
 <option>الإدارة العامة للتعليم بمنطقة مكة المكرمة</option>
 <option>الإدارة العامة للتعليم بمحافظة جدة</option>
 </select>
+
+<label>اسم المدرسة</label>
+<input id="school" placeholder="مثال: مدرسة سعيد بن العاص" oninput="updateReport()">
 
 <label>اسم التقرير</label>
 <select id="reportType" oninput="handleReportType()">
@@ -207,10 +232,16 @@ function autoFill(x){document.getElementById(x).value=autoTexts[x].join(" ");upd
 
 <div class="header">
 <img src="https://i.ibb.co/1fc5gB6v/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png">
-<div class="header-left-bottom">
+
+<div class="header-school" id="schoolBox"></div>
+
+<div class="header-education" id="educationBox"></div>
+
+<div class="header-date-box">
 <span id="hDate"></span><br>
 <span id="gDate"></span>
 </div>
+
 </div>
 
 <div class="info-grid">
@@ -244,8 +275,8 @@ function autoFill(x){document.getElementById(x).value=autoTexts[x].join(" ");upd
 </div>
 
 <div class="image-evidence-grid">
-<div class="image-box" id="imgBox1">صورة توثيقية 1</div>
-<div class="image-box" id="imgBox2">صورة توثيقية 2</div>
+<div class="image-box" id="imgBox1">صورة توثيقية ١</div>
+<div class="image-box" id="imgBox2">صورة توثيقية ٢</div>
 </div>
 
 <div class="signature-section">
@@ -266,15 +297,23 @@ function autoFill(x){document.getElementById(x).value=autoTexts[x].join(" ");upd
 
 <script>
 function updateReport(){
-termBox.innerText=term.value;
-gradeBox.innerText=grade.value;
-subjectBox.innerText=subject.value;
-targetBox.innerText=target.value;
-countBox.innerText=count.value;
-placeBox.innerText=place.value;
-teacherBox.innerText=teacher.value;
-principalBox.innerText=principal.value;
-reportTypeBox.innerText=(reportType.value==="أخرى")?reportTypeInput.value:reportType.value;
+document.getElementById("educationBox").innerText = education.value;
+document.getElementById("schoolBox").innerText = school.value;
+document.getElementById("termBox").innerText = term.value;
+document.getElementById("gradeBox").innerText = grade.value;
+document.getElementById("subjectBox").innerText = subject.value;
+document.getElementById("targetBox").innerText = target.value;
+document.getElementById("countBox").innerText = count.value;
+document.getElementById("placeBox").innerText = place.value;
+document.getElementById("teacherBox").innerText = teacher.value;
+document.getElementById("principalBox").innerText = principal.value;
+
+if(reportType.value==="أخرى"){
+reportTypeBox.innerText=reportTypeInput.value;
+}else{
+reportTypeBox.innerText=reportType.value;
+}
+
 goalBox.innerText=goal.value;
 summaryBox.innerText=summary.value;
 stepsBox.innerText=steps.value;
@@ -283,82 +322,62 @@ strengthsBox.innerText=strengths.value;
 improveBox.innerText=improve.value;
 recommBox.innerText=recomm.value;
 }
+
 function handleReportType(){
-reportTypeInput.style.display=(reportType.value==="أخرى")?"block":"none";
+reportTypeInput.style.display = reportType.value==="أخرى" ? "block" : "none";
 updateReport();
 }
+
 function loadImage(input,target){
-let reader=new FileReader();
-reader.onload=()=>document.getElementById(target).innerHTML=`<img src="${reader.result}">`;
-reader.readAsDataURL(input.files[0]);
+let f=input.files[0];
+let r=new FileReader();
+r.onload=()=>document.getElementById(target).innerHTML=`<img src="${r.result}">`;
+r.readAsDataURL(f);
 }
 
-function downloadPDF() {
-    const element = document.getElementById("report-content");
-    const opt = {
-        margin: 0,
-        filename: "report.pdf",
-        image: { type: "jpeg", quality: 1 },
-        html2canvas: {
-            scale: 4,
-            useCORS: true,
-            scrollY: 0,
-            letterRendering: true
-        },
-        jsPDF: {
-            unit: "mm",
-            format: "a4",
-            orientation: "portrait"
-        }
-    };
-
-    html2pdf().set(opt).from(element).save();
+function downloadPDF(){
+html2pdf().set({
+margin:0,filename:"report.pdf",
+image:{type:"jpeg",quality:1},
+html2canvas:{scale:4,useCORS:true,scrollY:0},
+jsPDF:{unit:"mm",format:"a4",orientation:"portrait"}
+}).from(document.getElementById("report-content")).save();
 }
 
-async function makePDFBlob() {
-    const element = document.getElementById("report-content");
-    const opt = {
-        margin: 0,
-        image: { type: "jpeg", quality: 1 },
-        html2canvas: {
-            scale: 4,
-            useCORS: true,
-            scrollY: 0,
-            letterRendering: true
-        },
-        jsPDF: {
-            unit: "mm",
-            format: "a4",
-            orientation: "portrait"
-        }
-    };
-
-    return await html2pdf().set(opt).from(element).outputPdf("blob");
+async function makePDFBlob(){
+return await html2pdf().set({
+margin:0,
+image:{type:"jpeg",quality:1},
+html2canvas:{scale:4,useCORS:true,scrollY:0},
+jsPDF:{unit:"mm",format:"a4",orientation:"portrait"}
+}).from(document.getElementById("report-content")).outputPdf("blob");
 }
 
-async function sharePDFWhatsApp() {
-    const blob = await makePDFBlob();
-    const file = new File([blob], "report.pdf", { type: "application/pdf" });
-
-    if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        await navigator.share({
-            files: [file],
-            title: "تقرير نشاط",
-            text: "تقرير جاهز"
-        });
-    } else {
-        const url = URL.createObjectURL(blob);
-        window.open(`https://wa.me/?text=${encodeURIComponent(url)}`, "_blank");
-    }
+async function sharePDFWhatsApp(){
+let blob=await makePDFBlob();
+let file=new File([blob],"report.pdf",{type:"application/pdf"});
+if(navigator.canShare && navigator.canShare({files:[file]})){
+await navigator.share({files:[file],title:"تقرير",text:"جاهز"});
+}else{
+let url=URL.createObjectURL(blob);
+window.open(`https://wa.me/?text=${encodeURIComponent(url)}`,"_blank");
+}
 }
 
+/********** تاريخ هجري دقيق **********/
 async function loadDates(){
-let g=new Date();
-gDate.innerText=`${g.getDate()}-${g.getMonth()+1}-${g.getFullYear()} م`;
-let r=await fetch(`https://api.aladhan.com/v1/gToH?date=${g.getFullYear()}-${g.getMonth()+1}-${g.getDate()}`);
-let d=await r.json();
-let h=d.data.hijri;
+const gd=new Date();
+gDate.innerText = gd.toLocaleDateString('ar-EG')+" م";
+
+try{
+let url=`https://api.aladhan.com/v1/gToH?date=${gd.getDate()}-${gd.getMonth()+1}-${gd.getFullYear()}`;
+let res=await fetch(url);
+let data=await res.json();
+let h=data.data.hijri;
 hDate.innerText=`${h.weekday.ar} ${h.day} ${h.month.ar} ${h.year} هـ`;
+}catch(e){
+hDate.innerText="التاريخ الهجري غير متاح الآن";
+}
 }
 loadDates();
 </script>
