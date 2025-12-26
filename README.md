@@ -160,7 +160,7 @@ display:flex;align-items:center;justify-content:center;background:#ffffff;overfl
 <option>المعلمة</option>
 </select>
 
-<label>اسم المعلم</label>
+<label>اسم المعلّم</label>
 <input id="teacher" placeholder="اسم المعلّم/ــة" oninput="updateReport()">
 
 <label>صفة المدير</label>
@@ -194,19 +194,6 @@ display:flex;align-items:center;justify-content:center;background:#ffffff;overfl
 
 <label>مكان التنفيذ</label>
 <input id="place" placeholder="مثال: داخل الصف – المختبر" oninput="updateReport()">
-
-<script>
-const autoTexts={
-goal:["تنمية مهارات الطلاب من خلال أنشطة تعليمية تفاعلية."],
-summary:["تم تنفيذ النشاط بمشاركة جميع الطلاب وتحفيز التعلم."],
-steps:["شرح الدرس وتقسيم الطلاب إلى مجموعات."],
-strategies:["التعلم التعاوني والعصف الذهني."],
-strengths:["تفاعل ممتاز من الطلاب وتحسن في مستوى الفهم."],
-improve:["زيادة الأنشطة التفاعلية ودعم الطلاب المتعثرين."],
-recomm:["الاستمرار في توظيف التقنيات التعليمية داخل الصف."]
-};
-function autoFill(x){document.getElementById(x).value=autoTexts[x].join(" ");updateReport();}
-</script>
 
 <label>الهدف التربوي</label>
 <textarea id="goal" placeholder="أدخل الهدف التربوي" oninput="updateReport()">تنمية مهارات الطلاب من خلال أنشطة تعليمية تفاعلية.</textarea>
@@ -256,8 +243,8 @@ function autoFill(x){document.getElementById(x).value=autoTexts[x].join(" ");upd
 <div class="header-education" id="educationBox">الإدارة العامة للتعليم بمنطقة مكة المكرمة</div>
 
 <div class="header-date-box">
-<span id="hDate">السبت 10 رجب 1446 هـ</span><br>
-<span id="gDate">21-12-2024 م</span>
+<span id="hDate"></span><br>
+<span id="gDate"></span>
 </div>
 </div>
 
@@ -313,20 +300,31 @@ function autoFill(x){document.getElementById(x).value=autoTexts[x].join(" ");upd
 </div>
 
 <script>
+const autoTexts={
+goal:["تنمية مهارات الطلاب من خلال أنشطة تعليمية تفاعلية."],
+summary:["تم تنفيذ النشاط بمشاركة جميع الطلاب وتحفيز التعلم."],
+steps:["شرح الدرس وتقسيم الطلاب إلى مجموعات."],
+strategies:["التعلم التعاوني والعصف الذهني."],
+strengths:["تفاعل ممتاز من الطلاب وتحسن في مستوى الفهم."],
+improve:["زيادة الأنشطة التفاعلية ودعم الطلاب المتعثرين."],
+recomm:["الاستمرار في توظيف التقنيات التعليمية داخل الصف."]
+};
+function autoFill(x){
+document.getElementById(x).value=autoTexts[x].join(" ");
+updateReport();
+}
+
 function updateReport(){
 educationBox.innerText=education.value;
 schoolBox.innerText=school.value;
-
 termBox.innerText=term.value;
 gradeBox.innerText=grade.value;
 subjectBox.innerText=subject.value;
 targetBox.innerText=target.value;
 countBox.innerText=count.value;
 placeBox.innerText=place.value;
-
 teacherBox.innerText=teacher.value;
 principalBox.innerText=principal.value;
-
 teacherTypeBox.innerText=teacherType.value;
 principalTypeBox.innerText=principalType.value;
 
@@ -357,15 +355,24 @@ reader.onload=()=>document.getElementById(target).innerHTML=`<img src="${reader.
 reader.readAsDataURL(input.files[0]);
 }
 
+/******* Download PDF with Fixed Position Fix *******/
 function downloadPDF(){
+document.querySelector('.btn-container').style.display = 'none';
+
 html2pdf().set({
 margin:0,filename:"report.pdf",
 image:{type:"jpeg",quality:1},
 html2canvas:{scale:4,useCORS:true,scrollY:0,letterRendering:true},
 jsPDF:{unit:"mm",format:"a4",orientation:"portrait"}
-}).from(document.getElementById("report-content")).save();
+})
+.from(document.getElementById("report-content"))
+.save()
+.then(()=>{
+document.querySelector('.btn-container').style.display = 'flex';
+});
 }
 
+/******* Share WhatsApp *******/
 async function makePDFBlob(){
 return await html2pdf().set({
 margin:0,image:{type:"jpeg",quality:1},
@@ -400,6 +407,7 @@ hDate.innerText=`${h.weekday.ar} ${h.day} ${h.month.ar} ${h.year} هـ`;
 hDate.innerText="تعذر تحميل التاريخ الهجري";
 }
 }
+
 loadDates();
 updateReport();
 </script>
