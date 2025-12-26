@@ -115,6 +115,12 @@ color:#083024;
 font-weight:600;
 min-height:50px;
 }
+
+.footer{
+width:100%;background:#083024;color:#ffffff;
+text-align:center;font-size:10px;padding:4px 0;
+margin-top:25px;border-radius:4px;
+}
 </style>
 </head>
 
@@ -129,7 +135,7 @@ min-height:50px;
 
 <div class="header">
 <div class="header-right-top">إدارة التعليم</div>
-<div class="header-right-bottom" id="schoolName">اسم المدرسة</div>
+<div class="header-right-bottom">مدرسة سعيد بن العاص</div>
 <div class="header-left-bottom">
 <span id="gDate"></span> | <span id="hDate"></span>
 </div>
@@ -149,7 +155,6 @@ min-height:50px;
 
 <div class="objective-box">
 <div class="objective-title">الهدف التربوي</div>
-<div id="goal"></div>
 </div>
 
 <div class="report-row">
@@ -191,15 +196,18 @@ min-height:50px;
 </div>
 
 <div class="signature-section">
-<div class="signature-box">اسم المعلم / التوقيع</div>
-<div class="signature-box">مدير المدرسة / التوقيع</div>
+<div class="signature-box">المعلم / فهد الخالدي</div>
+<div class="signature-box">مدير المدرسة / نايف اللحياني</div>
+</div>
+
+<div class="footer">
+وزارة التعليم – المملكة العربية السعودية
 </div>
 
 </div>
 </div>
 
 <script>
-// توليد PDF للحفظ
 function downloadPDF(){
 var el=document.getElementById("report-content");
 html2pdf().set({
@@ -211,7 +219,6 @@ jsPDF:{unit:"mm",format:"a4",orientation:"portrait"}
 }).from(el).save();
 }
 
-// مشاركة PDF عبر واتساب أو مشاركة iOS
 async function sharePDFWhatsApp(){
 var el=document.getElementById("report-content");
 const options={
@@ -222,10 +229,8 @@ html2canvas:{scale:3,useCORS:true},
 jsPDF:{unit:"mm",format:"a4",orientation:"portrait"}
 };
 const worker=html2pdf().set(options).from(el);
-
 const pdfBlob=await worker.outputPdf("blob");
 const file=new File([pdfBlob],"report.pdf",{type:"application/pdf"});
-
 if(navigator.share){
 await navigator.share({
 title:"تقرير إشرافي",
@@ -236,7 +241,6 @@ worker.save();
 }
 }
 
-// التاريخ هجري + ميلادي API أم القرى
 async function loadDates(){
 let g=new Date();
 let gy=g.getFullYear(),gm=g.getMonth()+1,gd=g.getDate();
