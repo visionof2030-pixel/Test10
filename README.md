@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -6,142 +6,159 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html, body {
   font-family: 'Cairo', sans-serif;
-  background: #ffffff;
   direction: rtl;
+  background: #ffffff;
 }
+
 .btn-container {
   text-align: center;
   padding: 10px;
-  background: #f2f2f2;
+  background: #eaeaea;
   position: fixed;
   top: 0; left: 0;
   width: 100%; z-index: 10;
-  display: flex; gap: 10px;
+  gap: 10px;
+  display: flex;
   justify-content: center;
 }
 button {
-  background: #b29234;
+  background: #0d3b29;
   color: #ffffff;
   border: none;
   padding: 10px 25px;
-  font-size: 15px;
-  border-radius: 6px;
+  font-size: 14px;
+  border-radius: 4px;
   cursor: pointer;
 }
-button:hover { background: #8b7229; }
-@media print {
-  .btn-container { display: none; }
-}
+button:hover { background: #0a2d20; }
+
+@media print { .btn-container { display: none; } }
+
 .header {
   width: 100%;
-  height: 180px;
-  background: #0d241c;
+  height: 130px;
+  background: #0d3b29;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.header img { width: 40%; }
+.header span {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+}
+
 .header-info {
   width: 95%;
   display: flex;
   justify-content: space-between;
+  margin: 10px auto;
   font-size: 12px;
-  color: #0d241c;
-  padding: 8px 10px;
-  font-weight: 600;
+  color: #0d3b29;
 }
+
 .page {
   width: 100%;
+  max-width: 850px;
   padding: 10px;
-  background: #fff;
   margin: auto;
+  background: #fff;
 }
+
 .info-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
   gap: 6px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 .info-box {
-  background: #ffffff;
-  border: 1px solid #d6c48e;
-  border-radius: 6px;
-  padding: 6px;
+  border: 1px solid #cdd5cf;
+  border-radius: 4px;
   text-align: center;
+  padding: 6px;
   font-size: 11px;
+  background: #f9f9f9;
 }
-.info-box strong { color: #8b7229; display: block; font-size: 12px; }
-.decor-line {
-  width: 100%;
-  height: 12px;
-  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMHB4IiB2aWV3Qm94PSIwIDAgMTAwIDEwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0wIDVsNSA1TDEwIDBsNSA1TDE1IDBsNSA1TDIwIDBsNSA1TDI1IDBsNSA1TDMwIDBsNSA1IiBzdHJva2U9IiNiMjkyMzQiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIvPjwvc3ZnPg==');
-  background-repeat: repeat-x;
-  margin: 14px 0;
+.info-box strong {
+  display: block;
+  font-weight: 700;
+  font-size: 12px;
+  color: #0d3b29;
 }
+
+.section-title {
+  background: #0d3b29;
+  color: #fff;
+  padding: 6px;
+  font-size: 13px;
+  text-align: center;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
 .report-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
+  margin-top: 8px;
 }
+
 .report-box {
-  background: #ffffff;
-  border: 1px solid #d6c48e;
-  border-radius: 10px;
-  padding: 14px;
-}
-.report-box-title {
-  font-size: 13px;
-  margin-bottom: 4px;
-  text-align: center;
-  font-weight: bold;
-  color: #0d241c;
+  border: 1px solid #cdd5cf;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 11px;
+  min-height: 120px;
+  background: #fff;
 }
 .report-box-content {
-  font-size: 11px;
   white-space: pre-line;
   line-height: 1.5;
-  text-align: justify;
+  font-size: 11px;
   color: #333;
 }
+
 .image-evidence-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  margin-top: 15px;
   gap: 10px;
-  margin-top: 10px;
 }
 .image-box {
-  border-radius: 8px;
-  border: 1px dashed #b29234;
-  font-size: 11px;
+  border: 1px dashed #0d3b29;
+  border-radius: 4px;
   height: 100px;
+  text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #8b7229;
-}
-@media (min-width: 600px){
-  .page { width: 850px; }
+  font-size: 11px;
+  color: #0d3b29;
 }
 </style>
 </head>
+
 <body>
+
 <div class="btn-container">
   <button onclick="window.print()">طباعة</button>
   <button onclick="downloadPDF()">تنزيل PDF</button>
 </div>
 
 <div id="report-content">
+
   <div class="header">
-    <img crossorigin="anonymous" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABkAAAARwCAYAAAD3lGnRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAgAElEQVR4nOzde3hU5d0/8KfNmbtJm42kSUIAiQbSHIMJQ6GtVRFQ0QIeV1EbUJEB7pQWpRcBVJBdoHeiFpffoU8SqS+CBqkNUtYVbT2pBIpZpSLL+1SQIK3HOhA2/MmTmzm3MZmbvjffecb45x45yZ3zvn3PPyfOc853vtc/FzRtAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA2Cgk93QxAAAAAElFTkSuQmCC">
+    <span>وزارة التعليم</span>
   </div>
 
   <div class="header-info">
-    <div id="leader"></div>
-    <div id="school"></div>
-    <div id="date"></div>
+    <div id="leader">قائد المدرسة:</div>
+    <div id="school">اسم المدرسة:</div>
+    <div id="date">التاريخ:</div>
   </div>
 
   <div class="page">
@@ -155,46 +172,25 @@ button:hover { background: #8b7229; }
       <div class="info-box"><strong>نوع التقرير</strong><span id="type"></span></div>
     </div>
 
+    <div class="section-title">نبذة مختصرة وإجراءات التنفيذ</div>
     <div class="report-row">
-      <div class="report-box">
-        <div class="report-box-title">نبذة مختصرة</div>
-        <div class="report-box-content" id="box1"></div>
-      </div>
-
-      <div class="report-box">
-        <div class="report-box-title">إجراءات التنفيذ</div>
-        <div class="report-box-content" id="box2"></div>
-      </div>
+      <div class="report-box"><div class="report-box-content" id="box1"></div></div>
+      <div class="report-box"><div class="report-box-content" id="box2"></div></div>
     </div>
 
-    <div class="decor-line"></div>
-
+    <div class="section-title">استراتيجيات ونقاط القوة</div>
     <div class="report-row">
-      <div class="report-box">
-        <div class="report-box-title">استراتيجيات</div>
-        <div class="report-box-content" id="box3"></div>
-      </div>
-
-      <div class="report-box">
-        <div class="report-box-title">نقاط القوة</div>
-        <div class="report-box-content" id="box4"></div>
-      </div>
+      <div class="report-box"><div class="report-box-content" id="box3"></div></div>
+      <div class="report-box"><div class="report-box-content" id="box4"></div></div>
     </div>
 
-    <div class="decor-line"></div>
-
+    <div class="section-title">نقاط التحسين والتوصيات</div>
     <div class="report-row">
-      <div class="report-box">
-        <div class="report-box-title">نقاط التحسين</div>
-        <div class="report-box-content" id="box5"></div>
-      </div>
-
-      <div class="report-box">
-        <div class="report-box-title">توصيات</div>
-        <div class="report-box-content" id="box6"></div>
-      </div>
+      <div class="report-box"><div class="report-box-content" id="box5"></div></div>
+      <div class="report-box"><div class="report-box-content" id="box6"></div></div>
     </div>
 
+    <div class="section-title">صور توثيقية</div>
     <div class="image-evidence-grid">
       <div class="image-box">صورة توثيقية 1</div>
       <div class="image-box">صورة توثيقية 2</div>
@@ -214,8 +210,7 @@ function downloadPDF(){
     html2canvas:{ scale:3, useCORS:true },
     jsPDF:{ unit:'mm', format:'a4', orientation:'portrait' }
   })
-  .from(el)
-  .save();
+  .from(el).save();
 }
 </script>
 
