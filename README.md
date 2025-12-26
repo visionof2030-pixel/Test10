@@ -11,9 +11,7 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{font-family:'Cairo',sans-serif;background:#ffffff;direction:rtl;overflow-x:hidden;}
 
-.wrapper{
-max-width:830px;margin:auto;padding:15px;
-}
+.wrapper{max-width:830px;margin:auto;padding:15px;}
 
 .btn-container{
 text-align:center;padding:12px;background:#f5f5f5;position:fixed;top:0;left:0;width:100%;z-index:20;
@@ -30,11 +28,9 @@ max-width:100%;
 }
 
 label{font-size:15px;font-weight:700;margin-top:15px;display:block;color:#083024;}
-
 input,select,textarea{
 width:100%;padding:12px;margin-top:6px;border:2px solid #066d4d;border-radius:8px;font-size:15px;background:#ffffff;
 }
-
 textarea{height:85px;resize:none;font-size:15px !important;line-height:1.7;}
 
 .auto-buttons{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;}
@@ -52,7 +48,7 @@ button.main-btn{min-width:100px;font-size:13px;padding:10px;}
 
 body{display:flex;justify-content:center;}
 .input-section{max-width:830px !important;margin:0 auto !important;}
-input,select,textarea{width:100% !important;}
+
 #report-content{width:100%;margin:20px auto;}
 
 .header{background:#083024;padding:10px;min-height:120px;position:relative;color:#fff;text-align:center;}
@@ -90,10 +86,10 @@ border:1px solid rgba(6,109,77,0.35);min-height:95px;
 
 .image-evidence-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
 .image-box{
-min-height:140px;border:1px dashed #066d4d;border-radius:8px;
-display:flex;align-items:center;justify-content:center;background:#fff;overflow:hidden;
+min-height:140px;max-height:140px;border:1px dashed #066d4d;border-radius:8px;
+display:flex;align-items:center;justify-content:center;background:#ffffff;overflow:hidden;
 }
-.image-box img{max-width:100%;max-height:100%;}
+.image-box img{max-width:100%;max-height:100%;object-fit:contain;}
 
 .signature-section{margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:20px;}
 .signature-box{text-align:center;font-size:12px;color:#083024;font-weight:700;}
@@ -116,46 +112,46 @@ display:flex;align-items:center;justify-content:center;background:#fff;overflow:
 
 <label>إدارة التعليم</label>
 <select id="education" oninput="updateReport()">
-<option value="">اختر الإدارة</option>
+<option value="">مثال: الإدارة العامة للتعليم بمكة</option>
 <option>الإدارة العامة للتعليم بمنطقة مكة المكرمة</option>
 <option>الإدارة العامة للتعليم بمحافظة جدة</option>
 </select>
 
 <label>اسم التقرير</label>
 <select id="reportType" oninput="handleReportType()">
-<option value="">اختر نوع التقرير</option>
+<option value="">مثال: تقرير نشاط إثرائي</option>
 <option>تقرير نشاط إثرائي</option>
 <option>أخرى</option>
 </select>
-<input id="reportTypeInput" oninput="updateReport()" placeholder="اكتب اسم التقرير يدوياً" style="display:none;">
+<input id="reportTypeInput" placeholder="أدخل اسم التقرير" oninput="updateReport()" style="display:none;">
 
 <label>الصف</label>
-<input id="grade" oninput="updateReport()">
+<input id="grade" placeholder="مثال: ٥/٣" oninput="updateReport()">
 
 <label>الفصل الدراسي</label>
 <select id="term" oninput="updateReport()">
-<option value="">اختر الفصل</option>
+<option value="">مثال: الأول</option>
 <option>الأول</option>
 <option>الثاني</option>
 </select>
 
 <label>المادة</label>
-<input id="subject" oninput="updateReport()">
+<input id="subject" placeholder="مثال: لغتي – علوم – رياضيات" oninput="updateReport()">
 
 <label>المستهدفون</label>
-<input id="target" oninput="updateReport()">
+<input id="target" placeholder="مثال: طلاب الصف بالكامل" oninput="updateReport()">
 
 <label>عدد الحضور</label>
-<input id="count" oninput="updateReport()">
+<input id="count" placeholder="مثال: ٢٥ طالب" oninput="updateReport()">
 
 <label>مكان التنفيذ</label>
-<input id="place" oninput="updateReport()">
+<input id="place" placeholder="مثال: داخل الصف – المختبر" oninput="updateReport()">
 
 <label>اسم المعلم</label>
-<input id="teacher" oninput="updateReport()">
+<input id="teacher" placeholder="مثال: فهد الخالدي" oninput="updateReport()">
 
 <label>اسم المدير</label>
-<input id="principal" oninput="updateReport()">
+<input id="principal" placeholder="مثال: نايف اللحياني" oninput="updateReport()">
 
 <script>
 const autoTexts={
@@ -171,31 +167,31 @@ function autoFill(x){document.getElementById(x).value=autoTexts[x].join(" ");upd
 </script>
 
 <label>الهدف التربوي</label>
-<textarea id="goal" oninput="updateReport()"></textarea>
+<textarea id="goal" placeholder="أدخل الهدف التربوي" oninput="updateReport()"></textarea>
 <div class="auto-buttons"><button onclick="autoFill('goal')">تعبئة</button></div>
 
 <label>نبذة مختصرة</label>
-<textarea id="summary" oninput="updateReport()"></textarea>
+<textarea id="summary" placeholder="أدخل نبذة مختصرة" oninput="updateReport()"></textarea>
 <div class="auto-buttons"><button onclick="autoFill('summary')">تعبئة</button></div>
 
 <label>إجراءات التنفيذ</label>
-<textarea id="steps" oninput="updateReport()"></textarea>
+<textarea id="steps" placeholder="كيف تم تنفيذ النشاط؟" oninput="updateReport()"></textarea>
 <div class="auto-buttons"><button onclick="autoFill('steps')">تعبئة</button></div>
 
 <label>الاستراتيجيات</label>
-<textarea id="strategies" oninput="updateReport()"></textarea>
+<textarea id="strategies" placeholder="ما هي الاستراتيجيات المتبعة؟" oninput="updateReport()"></textarea>
 <div class="auto-buttons"><button onclick="autoFill('strategies')">تعبئة</button></div>
 
 <label>نقاط القوة</label>
-<textarea id="strengths" oninput="updateReport()"></textarea>
+<textarea id="strengths" placeholder="أبرز نقاط القوة" oninput="updateReport()"></textarea>
 <div class="auto-buttons"><button onclick="autoFill('strengths')">تعبئة</button></div>
 
 <label>نقاط التحسين</label>
-<textarea id="improve" oninput="updateReport()"></textarea>
+<textarea id="improve" placeholder="ما الذي يحتاج تطوير؟" oninput="updateReport()"></textarea>
 <div class="auto-buttons"><button onclick="autoFill('improve')">تعبئة</button></div>
 
 <label>التوصيات</label>
-<textarea id="recomm" oninput="updateReport()"></textarea>
+<textarea id="recomm" placeholder="توصيات مستقبلية" oninput="updateReport()"></textarea>
 <div class="auto-buttons"><button onclick="autoFill('recomm')">تعبئة</button></div>
 
 <label>الصورة 1</label>
