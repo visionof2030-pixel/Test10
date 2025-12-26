@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -104,7 +104,7 @@ padding:6px 10px;border-radius:8px;margin-bottom:10px;min-height:90px;
 .report-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0;}
 .report-box{
 background:#ffffff;border-radius:8px;padding:6px;
-border:1px solid rgba(6,109,77,0.35);min-height:95px;
+border:1px solid rgba(6,109,77,0.35);min-height:115px;
 }
 .report-box-title{text-align:center;font-size:13px;font-weight:700;color:#083024;border-bottom:1px solid #ccd9d0;margin-bottom:4px;}
 .report-box-content{font-size:14px;line-height:1.6;}
@@ -355,7 +355,7 @@ reader.onload=()=>document.getElementById(target).innerHTML=`<img src="${reader.
 reader.readAsDataURL(input.files[0]);
 }
 
-/******* Download PDF with Fixed Position Fix *******/
+/******* Download PDF Fix *******/
 function downloadPDF(){
 document.querySelector('.btn-container').style.display = 'none';
 
@@ -396,7 +396,6 @@ window.open(`https://wa.me/?text=${encodeURIComponent(url)}`,"_blank");
 async function loadDates(){
 const g=new Date();
 gDate.innerText=g.toLocaleDateString('ar-EG')+" م";
-
 try{
 let url=`https://api.aladhan.com/v1/gToH?date=${g.getDate()}-${g.getMonth()+1}-${g.getFullYear()}`;
 let res=await fetch(url);
