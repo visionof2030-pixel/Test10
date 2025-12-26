@@ -22,84 +22,104 @@ padding:10px 25px;font-size:15px;border-radius:6px;cursor:pointer;
 button:hover{background:#05523a;}
 @media print{.btn-container{display:none;}}
 
-/* رأس الصفحة */
+/* HEADER */
 .header{
-width:100%;height:128px;
+width:100%;height:135px;
 background:#083024;
-background-image:url('https://i.ibb.co/1fc5gB6v/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png');
-background-repeat:no-repeat;background-position:center;
-background-size:34%;margin-top:60px;position:relative;
+position:relative;margin-top:60px;
+display:flex;align-items:center;justify-content:center;
+overflow:hidden;
 }
-.header-right-top{position:absolute;top:5px;right:10px;font-size:13px;color:#ffffff;font-weight:700;}
-.header-right-bottom{position:absolute;bottom:5px;right:10px;font-size:12px;color:#ffffff;font-weight:600;}
-.header-left-bottom{position:absolute;bottom:5px;left:10px;font-size:12px;color:#ffffff;font-weight:600;text-align:left;direction:ltr;}
+.header img{
+width:180px;opacity:.95;
+}
+.header-right-top{
+position:absolute;top:6px;right:12px;
+font-size:13px;color:#ffffff;font-weight:700;
+}
+.header-right-bottom{
+position:absolute;bottom:6px;right:12px;
+font-size:12px;color:#ffffff;font-weight:600;
+}
+.header-left-bottom{
+position:absolute;bottom:6px;left:12px;
+font-size:12px;color:#ffffff;font-weight:600;
+direction:ltr;text-align:left;
+}
 
 .page{width:100%;max-width:830px;padding:10px;margin:auto;}
 
 .info-grid{
 display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-gap:6px;margin-bottom:14px;
+gap:6px;margin-bottom:12px;
 }
 .info-box{
-background:#eaf3ef;border-radius:4px;
+background:#e8f2ee;border-radius:6px;
 font-size:11px;font-weight:600;
 color:#083024;text-align:center;
-height:40px;display:flex;align-items:center;justify-content:center;
+height:42px;display:flex;align-items:center;justify-content:center;
 }
 
-/* إلغاء الـ Outline للأيقونات */
-.icon-title{display:flex;align-items:center;gap:6px;justify-content:center;font-size:13px;font-weight:700;color:#083024;}
-.icon-title svg{width:14px;height:14px;fill:#066d4d;stroke:none;}
-
-/* الهدف التربوي */
+/* OBJECTIVE */
 .objective-box{
-background:#f2f9f6;border:2px solid #066d4d;
-padding:8px 10px;border-radius:6px;margin-bottom:12px;
-height:115px;overflow:auto;
+background:#f3f9f6;border:2px solid #066d4d;
+padding:6px 10px;border-radius:6px;margin-bottom:10px;
+height:110px;overflow:auto;
+box-shadow:0 1px 4px rgba(0,0,0,.08);
 }
-.objective-box::-webkit-scrollbar{width:5px;}
-.objective-box::-webkit-scrollbar-thumb{background:#066d4d;border-radius:4px;}
-.objective-box .icon-title{
-border-bottom:1px solid #066d4d;margin-bottom:4px;padding-bottom:3px;
+.objective-title{
+text-align:center;font-size:13px;font-weight:700;
+border-bottom:1px solid #066d4d;padding-bottom:3px;margin-bottom:3px;color:#083024;
 }
 
-/* صناديق ثابتة + Scroll */
-.report-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+/* REPORT BOXES */
+.report-row{
+display:grid;grid-template-columns:1fr 1fr;
+gap:10px;margin-bottom:10px;
+}
 .report-box{
 background:#ffffff;border-radius:6px;
-padding:8px;border:1px solid #cdd5cf;
-height:120px;overflow:auto;
+padding:6px;border:1px solid #c9d5cf;
+height:115px;overflow:auto;
+box-shadow:0 1px 4px rgba(0,0,0,.07);
 }
-.report-box::-webkit-scrollbar{width:5px;}
-.report-box::-webkit-scrollbar-thumb{background:#066d4d;border-radius:4px;}
-
-.report-box-content{
-font-size:10px;line-height:1.3;
+.report-box-title{
+font-size:12px;font-weight:700;text-align:center;
+border-bottom:1px solid #ccd9d0;margin-bottom:4px;padding-bottom:3px;color:#083024;
 }
+.report-box-content{font-size:10px;line-height:1.3;}
 
+.report-box::-webkit-scrollbar,
+.objective-box::-webkit-scrollbar{width:5px;}
+.report-box::-webkit-scrollbar-thumb,
+.objective-box::-webkit-scrollbar-thumb{background:#066d4d;border-radius:4px;}
+
+/* IMAGES */
 .image-evidence-grid{
 display:grid;grid-template-columns:1fr 1fr;
 gap:8px;margin-top:8px;
 }
 .image-box{
-height:70px;border:1px dashed #066d4d;border-radius:6px;
+height:110px;border:1px dashed #066d4d;border-radius:6px;
 display:flex;align-items:center;justify-content:center;
 color:#066d4d;font-size:10px;overflow:hidden;
 }
 
+/* SIGNATURE */
 .signature-section{
 margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:20px;
 }
 .signature-box{text-align:center;font-size:11px;color:#083024;font-weight:600;}
 .signature-line{
-margin-top:10px;border-top:1px solid #083024;
-width:80%;margin-inline:auto;font-size:10px;margin-bottom:4px;
+margin-top:8px;border-top:1px solid #083024;
+width:80%;margin-inline:auto;
+font-size:10px;margin-bottom:4px;
 }
 
+/* FOOTER */
 .footer{
 width:100%;background:#083024;color:#ffffff;
-text-align:center;font-size:10px;padding:3px 0;margin-top:18px;
-border-radius:4px;
+text-align:center;font-size:10px;padding:4px 0;margin-top:18px;
 }
 </style>
 </head>
@@ -114,6 +134,7 @@ border-radius:4px;
 <div id="report-content">
 
 <div class="header">
+<img src="https://i.ibb.co/1fc5gB6v/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png">
 <div class="header-right-top">إدارة التعليم</div>
 <div class="header-right-bottom">مدرسة سعيد بن العاص</div>
 <div class="header-left-bottom"><span id="gDate"></span> | <span id="hDate"></span></div>
@@ -132,62 +153,39 @@ border-radius:4px;
 </div>
 
 <div class="objective-box">
-<div class="icon-title">
-<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>
-الهدف التربوي
-</div>
+<div class="objective-title">الهدف التربوي</div>
+<div class="report-box-content"></div>
 </div>
 
 <div class="report-row">
 <div class="report-box">
-<div class="icon-title">
-<svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="16"/></svg>
-نبذة مختصرة
-</div>
+<div class="report-box-title">نبذة مختصرة</div>
 <div class="report-box-content"></div>
 </div>
-
 <div class="report-box">
-<div class="icon-title">
-<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></svg>
-إجراءات التنفيذ
-</div>
+<div class="report-box-title">إجراءات التنفيذ</div>
 <div class="report-box-content"></div>
 </div>
 </div>
 
 <div class="report-row">
 <div class="report-box">
-<div class="icon-title">
-<svg viewBox="0 0 24 24"><path d="M10 3h4v18h-4z"/></svg>
-استراتيجيات
-</div>
+<div class="report-box-title">الاستراتيجيات</div>
 <div class="report-box-content"></div>
 </div>
-
 <div class="report-box">
-<div class="icon-title">
-<svg viewBox="0 0 24 24"><path d="M20 6l-11 11-5-5"/></svg>
-نقاط القوة
-</div>
+<div class="report-box-title">نقاط القوة</div>
 <div class="report-box-content"></div>
 </div>
 </div>
 
 <div class="report-row">
 <div class="report-box">
-<div class="icon-title">
-<svg viewBox="0 0 24 24"><path d="M12 4v16M6 10l6-6 6 6"/></svg>
-نقاط التحسين
-</div>
+<div class="report-box-title">نقاط التحسين</div>
 <div class="report-box-content"></div>
 </div>
-
 <div class="report-box">
-<div class="icon-title">
-<svg viewBox="0 0 24 24"><path d="M6 4h12v16H6z"/></svg>
-توصيات
-</div>
+<div class="report-box-title">التوصيات</div>
 <div class="report-box-content"></div>
 </div>
 </div>
@@ -218,7 +216,8 @@ border-radius:4px;
 <script>
 function downloadPDF(){
 html2pdf().set({
-margin:0,filename:"report.pdf",
+margin:0,
+filename:"report.pdf",
 image:{type:"jpeg",quality:1},
 html2canvas:{scale:3,useCORS:true},
 jsPDF:{unit:"mm",format:"a4",orientation:"portrait"}
@@ -227,16 +226,19 @@ jsPDF:{unit:"mm",format:"a4",orientation:"portrait"}
 
 async function sharePDFWhatsApp(){
 const el=document.getElementById("report-content");
-const pdf=html2pdf().set({
+const worker=html2pdf().set({
 margin:0,filename:"report.pdf",
 image:{type:"jpeg",quality:1},
 html2canvas:{scale:3,useCORS:true},
 jsPDF:{unit:"mm",format:"a4",orientation:"portrait"}
 }).from(el);
-const blob=await pdf.outputPdf("blob");
+const blob=await worker.outputPdf("blob");
 const file=new File([blob],"report.pdf",{type:"application/pdf"});
-if(navigator.share){navigator.share({title:"تقرير إشرافي",files:[file]});}
-else{pdf.save();}
+if(navigator.share){
+navigator.share({title:"تقرير إشرافي",files:[file]});
+}else{
+worker.save();
+}
 }
 
 async function loadDates(){
