@@ -21,25 +21,22 @@ button {
 button:hover { background: #05523a; }
 @media print { .btn-container { display: none; } }
 
+/* HEADER */
 .header {
   width: 100%; height: 160px;
   background-color: #083024;
   background-image: url('https://i.ibb.co/1fc5gB6v/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png');
   background-repeat: no-repeat; background-position: center;
   background-size: 40%; margin-top: 60px;
-  display: flex; align-items: flex-end;
-}
-.header-info {
-  width: 95%; display: flex; justify-content: space-between;
-  padding: 8px 10px; position: relative; z-index: 2;
-  color: #ffffff; font-size: 10px; font-weight: 600; margin-bottom: 8px;
 }
 
+/* PAGE */
 .page {
   width: 100%; max-width: 830px;
   padding: 10px; margin: auto;
 }
 
+/* INFO GRID */
 .info-grid {
   display: grid; grid-template-columns: repeat(auto-fit,minmax(120px,1fr));
   gap: 6px; margin-bottom: 14px;
@@ -50,6 +47,7 @@ button:hover { background: #05523a; }
   font-weight: 600; color: #083024;
 }
 
+/* OBJECTIVE */
 .objective-box {
   background: #f2f9f6; border: 2px solid #066d4d;
   padding: 10px; border-radius: 6px; margin-bottom: 10px;
@@ -60,6 +58,7 @@ button:hover { background: #05523a; }
   border-bottom: 1px solid #066d4d;
 }
 
+/* REPORT SECTIONS */
 .report-row {
   display: grid; grid-template-columns: 1fr 1fr;
   gap: 8px; margin-bottom: 8px;
@@ -77,16 +76,30 @@ button:hover { background: #05523a; }
   font-size: 11px; line-height: 1.5; min-height: 70px;
 }
 
-.image-evidence-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 8px; margin-top: 10px;
+/* FOOTER SIGNATURE */
+.signature-section {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
 }
-.image-box {
-  height: 100px; border: 1px dashed #066d4d;
-  border-radius: 6px; font-size: 11px;
-  display: flex; justify-content: center; align-items: center;
+.signature-box {
+  border-top: 1px solid #083024;
+  text-align: center;
+  padding-top: 8px;
+  font-size: 12px;
+  color: #083024;
+  position: relative;
+}
+.signature-icon {
+  font-size: 20px;
+  position: absolute;
+  top: -15px;
+  right: 50%;
+  transform: translateX(50%);
   color: #066d4d;
 }
+
 </style>
 </head>
 
@@ -99,13 +112,7 @@ button:hover { background: #05523a; }
 
 <div id="report-content">
 
-  <div class="header">
-    <div class="header-info">
-      <div>قائد المدرسة:</div>
-      <div>اسم المدرسة:</div>
-      <div>التاريخ:</div>
-    </div>
-  </div>
+  <div class="header"></div>
 
   <div class="page">
 
@@ -159,9 +166,16 @@ button:hover { background: #05523a; }
       </div>
     </div>
 
-    <div class="image-evidence-grid">
-      <div class="image-box">صورة توثيقية 1</div>
-      <div class="image-box">صورة توثيقية 2</div>
+    <!-- توقيع المعلم ومدير المدرسة -->
+    <div class="signature-section">
+      <div class="signature-box">
+        <span class="signature-icon">✒️</span>
+        اسم المعلم / التوقيع
+      </div>
+      <div class="signature-box">
+        <span class="signature-icon">✒️</span>
+        مدير المدرسة / التوقيع
+      </div>
     </div>
 
   </div>
