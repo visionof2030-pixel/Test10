@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -46,20 +46,6 @@ button:hover { background: #05523a; }
 
 @media print { .btn-container { display: none; } }
 
-.top-bar {
-  width: 100%;
-  height: 130px;
-  background-color: #0e2b22;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.top-bar img {
-  width: 260px;
-  opacity: 1;
-}
-
 .header-info {
   width: 95%;
   display: flex;
@@ -68,7 +54,7 @@ button:hover { background: #05523a; }
   padding: 6px 10px;
   color: #083024;
   font-size: 10px;
-  margin-top: 6px;
+  margin-top: 60px;
 }
 
 .page {
@@ -82,7 +68,7 @@ button:hover { background: #05523a; }
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   gap: 4px;
-  margin-bottom: 6px;
+  margin-bottom: 12px;
 }
 
 .info-box {
@@ -96,27 +82,24 @@ button:hover { background: #05523a; }
 
 .info-box strong { font-size: 11px; color: #083024; display: block; }
 
-.report-objective-box {
-  background: rgba(8,48,36,0.1);
-  border-radius: 6px;
-  padding: 12px;
-  margin-bottom: 8px;
-  font-size: 12px;
-  text-align: center;
-  color: #083024;
+.decor-line {
+  width: 100%;
+  height: 4px;
+  background: repeating-linear-gradient(90deg, #083024, #083024 10px, transparent 10px, transparent 20px);
+  margin: 10px 0;
 }
 
-.report-grid {
+.report-row {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 6px;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .report-box {
   border-radius: 6px;
-  padding: 16px;
-  min-height: 120px;
+  padding: 14px;
+  min-height: 110px;
 }
 
 .report-box-title {
@@ -132,18 +115,18 @@ button:hover { background: #05523a; }
   line-height: 1.5;
 }
 
-.box-color-1 { background: #ffecec; color: #5b1e1e; }
-.box-color-2 { background: #e6f6e6; color: #245c24; }
-.box-color-3 { background: #fff0e6; color: #7c4c00; }
-.box-color-4 { background: #e8f1ff; color: #22386c; }
-.box-color-5 { background: #fff7e8; color: #5a4a00; }
-.box-color-6 { background: #f1e8ff; color: #4d339b; }
+.box1 { background: #e8f1ff; color: #2e4a8c; }
+.box2 { background: #fff7e8; color: #a17d00; }
+.box3 { background: #e6f6e6; color: #2d7a2d; }
+.box4 { background: #ffecec; color: #b02222; }
+.box5 { background: #fff0e6; color: #c26a00; }
+.box6 { background: #f1e8ff; color: #5d3da3; }
 
 .image-evidence-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
 .image-box {
@@ -156,9 +139,7 @@ button:hover { background: #05523a; }
   justify-content: center;
 }
 
-@media (min-width: 600px) {
-  .page { width: 850px; }
-}
+@media (min-width: 600px) { .page { width: 850px; } }
 </style>
 </head>
 
@@ -170,10 +151,6 @@ button:hover { background: #05523a; }
 </div>
 
 <div id="report-content">
-
-  <div class="top-bar">
-    <img src="https://i.ibb.co/1fc5gB6v/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png">
-  </div>
 
   <div class="header-info">
     <div id="leader"></div>
@@ -192,43 +169,49 @@ button:hover { background: #05523a; }
       <div class="info-box"><strong>نوع التقرير</strong> <span id="type"></span></div>
     </div>
 
-    <div class="report-objective-box" id="objective"></div>
-
-    <div class="report-grid">
-      <div class="report-box box-color-1">
+    <div class="report-row">
+      <div class="report-box box1">
         <div class="report-box-title">نبذة مختصرة</div>
         <div class="report-box-content" id="box1"></div>
       </div>
 
-      <div class="report-box box-color-2">
-        <div class="report-box-title">نقاط قوة</div>
+      <div class="report-box box2">
+        <div class="report-box-title">إجراءات التنفيذ</div>
         <div class="report-box-content" id="box2"></div>
       </div>
+    </div>
 
-      <div class="report-box box-color-3">
-        <div class="report-box-title">نقاط تحسين</div>
+    <div class="decor-line"></div>
+
+    <div class="report-row">
+      <div class="report-box box3">
+        <div class="report-box-title">استراتيجيات</div>
         <div class="report-box-content" id="box3"></div>
       </div>
 
-      <div class="report-box box-color-4">
-        <div class="report-box-title">استراتيجيات</div>
+      <div class="report-box box4">
+        <div class="report-box-title">نقاط القوة</div>
         <div class="report-box-content" id="box4"></div>
       </div>
+    </div>
 
-      <div class="report-box box-color-5">
-        <div class="report-box-title">إجراءات التنفيذ</div>
+    <div class="decor-line"></div>
+
+    <div class="report-row">
+      <div class="report-box box5">
+        <div class="report-box-title">نقاط التحسين</div>
         <div class="report-box-content" id="box5"></div>
       </div>
 
-      <div class="report-box box-color-6">
+      <div class="report-box box6">
         <div class="report-box-title">توصيات</div>
         <div class="report-box-content" id="box6"></div>
       </div>
     </div>
 
     <div class="image-evidence-grid">
-      <div class="image-box">صورة 1</div>
-      <div class="image-box">صورة 2</div>
+      <div class="image-box">صورة توثيقية 1</div>
+      <div class="image-box">صورة توثيقية 2</div>
     </div>
 
   </div>
