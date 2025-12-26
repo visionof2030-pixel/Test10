@@ -50,11 +50,9 @@ button.main-btn{min-width:100px;font-size:13px;padding:10px;}
 .image-evidence-grid{grid-template-columns:1fr;}
 }
 
-/********** جعل خانات الإدخال مطابقة لعرض التقرير **********/
 body{display:flex;justify-content:center;}
 .input-section{max-width:830px !important;margin:0 auto !important;}
 input,select,textarea{width:100% !important;}
-
 #report-content{width:100%;margin:20px auto;}
 
 .header{background:#083024;padding:10px;min-height:120px;position:relative;color:#fff;text-align:center;}
@@ -299,29 +297,63 @@ reader.onload=()=>document.getElementById(target).innerHTML=`<img src="${reader.
 reader.readAsDataURL(input.files[0]);
 }
 
-function downloadPDF(){
-html2pdf().set({
-margin:0,
-filename:"report.pdf",
-image:{type:"jpeg",quality:1},
-html2canvas:{scale:3,useCORS:true},
-jsPDF:{unit:"mm",format:"a4",orientation:"portrait"}
-}).from(document.getElementById("report-content")).save();
+function downloadPDF() {
+    const element = document.getElementById("report-content");
+    const opt = {
+        margin: 0,
+        filename: "report.pdf",
+        image: { type: "jpeg", quality: 1 },
+        html2canvas: {
+            scale: 4,
+            useCORS: true,
+            scrollY: 0,
+            letterRendering: true
+        },
+        jsPDF: {
+            unit: "mm",
+            format: "a4",
+            orientation: "portrait"
+        }
+    };
+
+    html2pdf().set(opt).from(element).save();
 }
 
-async function sharePDFWhatsApp(){
-let blob=await html2pdf().from(document.getElementById("report-content")).set({
-margin:0,image:{type:"jpeg",quality:1},
-html2canvas:{scale:3,useCORS:true},
-jsPDF:{unit:"mm",format:"a4",orientation:"portrait"}
-}).outputPdf("blob");
-let file=new File([blob],"report.pdf",{type:"application/pdf"});
-if(navigator.canShare && navigator.canShare({files:[file]})){
-navigator.share({files:[file],title:"تقرير نشاط"});
-}else{
-let url=URL.createObjectURL(blob);
-window.open(`https://wa.me/?text=${encodeURIComponent(url)}`);
+async function makePDFBlob() {
+    const element = document.getElementById("report-content");
+    const opt = {
+        margin: 0,
+        image: { type: "jpeg", quality: 1 },
+        html2canvas: {
+            scale: 4,
+            useCORS: true,
+            scrollY: 0,
+            letterRendering: true
+        },
+        jsPDF: {
+            unit: "mm",
+            format: "a4",
+            orientation: "portrait"
+        }
+    };
+
+    return await html2pdf().set(opt).from(element).outputPdf("blob");
 }
+
+async function sharePDFWhatsApp() {
+    const blob = await makePDFBlob();
+    const file = new File([blob], "report.pdf", { type: "application/pdf" });
+
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+            files: [file],
+            title: "تقرير نشاط",
+            text: "تقرير جاهز"
+        });
+    } else {
+        const url = URL.createObjectURL(blob);
+        window.open(`https://wa.me/?text=${encodeURIComponent(url)}`, "_blank");
+    }
 }
 
 async function loadDates(){
