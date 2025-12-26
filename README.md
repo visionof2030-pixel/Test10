@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -46,6 +46,21 @@ button:hover { background: #05523a; }
 
 @media print { .btn-container { display: none; } }
 
+.header {
+  width: 100%;
+  height: 130px;
+  background: #0e2b22;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header img {
+  width: 30%;
+  opacity: 1;
+}
+
 .header-info {
   width: 95%;
   display: flex;
@@ -54,7 +69,7 @@ button:hover { background: #05523a; }
   padding: 6px 10px;
   color: #083024;
   font-size: 10px;
-  margin-top: 60px;
+  margin-top: 6px;
 }
 
 .page {
@@ -80,19 +95,23 @@ button:hover { background: #05523a; }
   line-height: 1.3;
 }
 
-.info-box strong { font-size: 11px; color: #083024; display: block; }
+.info-box strong {
+  font-size: 11px;
+  color: #083024;
+  display: block;
+}
 
 .decor-line {
   width: 100%;
   height: 4px;
-  background: repeating-linear-gradient(90deg, #083024, #083024 10px, transparent 10px, transparent 20px);
-  margin: 10px 0;
+  background: repeating-linear-gradient(90deg, #083024, #083024 12px, transparent 12px, transparent 24px);
+  margin: 12px 0;
 }
 
 .report-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 6px;
+  gap: 8px;
   margin-bottom: 6px;
 }
 
@@ -100,6 +119,7 @@ button:hover { background: #05523a; }
   border-radius: 6px;
   padding: 14px;
   min-height: 110px;
+  border: 1px solid #d2d2d2;
 }
 
 .report-box-title {
@@ -107,20 +127,22 @@ button:hover { background: #05523a; }
   margin-bottom: 4px;
   text-align: center;
   font-weight: bold;
+  color: #083024;
 }
 
 .report-box-content {
   font-size: 10px;
   white-space: pre-line;
   line-height: 1.5;
+  text-align: justify;
 }
 
-.box1 { background: #e8f1ff; color: #2e4a8c; }
-.box2 { background: #fff7e8; color: #a17d00; }
-.box3 { background: #e6f6e6; color: #2d7a2d; }
-.box4 { background: #ffecec; color: #b02222; }
-.box5 { background: #fff0e6; color: #c26a00; }
-.box6 { background: #f1e8ff; color: #5d3da3; }
+.box1 { background: #e8f1ff; }
+.box2 { background: #fff7e8; }
+.box3 { background: #e6f6e6; }
+.box4 { background: #ffecec; }
+.box5 { background: #fff0e6; }
+.box6 { background: #f1e8ff; }
 
 .image-evidence-grid {
   display: grid;
@@ -139,7 +161,9 @@ button:hover { background: #05523a; }
   justify-content: center;
 }
 
-@media (min-width: 600px) { .page { width: 850px; } }
+@media (min-width: 600px) {
+  .page { width: 850px; }
+}
 </style>
 </head>
 
@@ -152,6 +176,10 @@ button:hover { background: #05523a; }
 
 <div id="report-content">
 
+  <div class="header">
+    <img src="https://i.ibb.co/1fc5gB6v/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png">
+  </div>
+
   <div class="header-info">
     <div id="leader"></div>
     <div id="school"></div>
@@ -161,7 +189,7 @@ button:hover { background: #05523a; }
   <div class="page">
 
     <div class="info-grid">
-      <div class="info-box"><strong>اسم المعلم</strong> <span id="teacher"></span></div>
+      <div class="info-box"><strong>مكان التنفيذ</strong> <span id="place"></span></div>
       <div class="info-box"><strong>المادة</strong> <span id="subject"></span></div>
       <div class="info-box"><strong>الصف</strong> <span id="grade"></span></div>
       <div class="info-box"><strong>عدد الطلاب</strong> <span id="students"></span></div>
