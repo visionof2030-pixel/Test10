@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -22,12 +22,13 @@ padding:10px 25px;font-size:15px;border-radius:6px;cursor:pointer;
 button:hover{background:#05523a;}
 @media print{.btn-container{display:none;}}
 
+/* 1) تقليل ارتفاع الهيدر */
 .header{
 width:100%;height:128px;
 background:#083024;
 background-image:url('https://i.ibb.co/1fc5gB6v/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png');
 background-repeat:no-repeat;background-position:center;
-background-size:38%;margin-top:60px;position:relative;
+background-size:34%;margin-top:60px;position:relative;
 }
 .header-right-top{position:absolute;top:5px;right:10px;font-size:13px;color:#ffffff;font-weight:700;}
 .header-right-bottom{position:absolute;bottom:5px;right:10px;font-size:12px;color:#ffffff;font-weight:600;}
@@ -46,65 +47,57 @@ color:#083024;text-align:center;
 height:40px;display:flex;align-items:center;justify-content:center;
 }
 
-.icon-title{
-display:flex;align-items:center;justify-content:center;
-gap:6px;color:#083024;font-size:13px;font-weight:700;
-}
-.icon-title svg{width:14px;height:14px;stroke:#066d4d;stroke-width:2;fill:none;}
-
+/* 2) تقليل ارتفاع الهدف التربوي وتفعيل Scroll */
 .objective-box{
 background:#f2f9f6;border:2px solid #066d4d;
-padding:8px 10px;border-radius:6px;margin-bottom:14px;
-height:118px;overflow:hidden;
+padding:8px 10px;border-radius:6px;margin-bottom:12px;
+height:115px;overflow:auto;
 }
-.objective-box .icon-title{
-border-bottom:1px solid #066d4d;
-padding-bottom:3px;margin-bottom:5px;
-}
+.objective-box::-webkit-scrollbar{width:5px;}
+.objective-box::-webkit-scrollbar-thumb{background:#066d4d;border-radius:4px;}
 
-.report-row{
-display:grid;grid-template-columns:1fr 1fr;
-gap:10px;margin-bottom:12px;
-}
+.icon-title{display:flex;align-items:center;gap:6px;justify-content:center;font-size:13px;font-weight:700;color:#083024;}
+.icon-title svg{width:14px;height:14px;stroke:#066d4d;stroke-width:2;fill:none;}
+.objective-box .icon-title{border-bottom:1px solid #066d4d;margin-bottom:4px;padding-bottom:3px;}
+
+/* 3) تثبيت ارتفاع صناديق التقرير + Scroll */
+.report-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
 .report-box{
 background:#ffffff;border-radius:6px;
 padding:8px;border:1px solid #cdd5cf;
-height:118px;overflow:hidden;
+height:120px;overflow:auto;
 }
+.report-box::-webkit-scrollbar{width:5px;}
+.report-box::-webkit-scrollbar-thumb{background:#066d4d;border-radius:4px;}
 .report-box-title{
-margin-bottom:4px;padding-bottom:3px;
-border-bottom:1px solid #ccd9d0;font-size:12px;
+font-size:12px;font-weight:700;
+border-bottom:1px solid #ccd9d0;margin-bottom:4px;padding-bottom:3px;
 }
-.report-box-content{
-font-size:10px;line-height:1.3;height:85px;overflow:hidden;
-}
+.report-box-content{font-size:10px;line-height:1.3;}
 
 .image-evidence-grid{
 display:grid;grid-template-columns:1fr 1fr;
 gap:8px;margin-top:8px;
 }
 .image-box{
-height:75px;border:1px dashed #066d4d;
-border-radius:6px;font-size:10px;
+height:70px;border:1px dashed #066d4d;border-radius:6px;
 display:flex;align-items:center;justify-content:center;
-color:#066d4d;overflow:hidden;
+color:#066d4d;font-size:10px;overflow:hidden;
 }
 
 .signature-section{
-margin-top:20px;
-display:grid;grid-template-columns:1fr 1fr;
-gap:20px;
+margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:20px;
 }
 .signature-box{text-align:center;font-size:11px;color:#083024;font-weight:600;}
 .signature-line{
 margin-top:10px;border-top:1px solid #083024;
-width:80%;margin-inline:auto;font-size:10px;margin-bottom:4px;text-align:center;
+width:80%;margin-inline:auto;font-size:10px;margin-bottom:4px;
 }
 
 .footer{
 width:100%;background:#083024;color:#ffffff;
-text-align:center;font-size:10px;padding:3px 0;
-margin-top:18px;border-radius:4px;
+text-align:center;font-size:10px;padding:3px 0;margin-top:18px;
+border-radius:4px;
 }
 </style>
 </head>
@@ -145,7 +138,7 @@ margin-top:18px;border-radius:4px;
 
 <div class="report-row">
 <div class="report-box">
-<div class="report-box-title icon-title">
+<div class="icon-title">
 <svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="16" rx="2"/></svg>
 نبذة مختصرة
 </div>
@@ -153,7 +146,7 @@ margin-top:18px;border-radius:4px;
 </div>
 
 <div class="report-box">
-<div class="report-box-title icon-title">
+<div class="icon-title">
 <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></svg>
 إجراءات التنفيذ
 </div>
@@ -163,7 +156,7 @@ margin-top:18px;border-radius:4px;
 
 <div class="report-row">
 <div class="report-box">
-<div class="report-box-title icon-title">
+<div class="icon-title">
 <svg viewBox="0 0 24 24"><path d="M9 2h6l-2 11h-2zM12 22a2 2 0 100-4 2 2 0 000 4z"/></svg>
 استراتيجيات
 </div>
@@ -171,7 +164,7 @@ margin-top:18px;border-radius:4px;
 </div>
 
 <div class="report-box">
-<div class="report-box-title icon-title">
+<div class="icon-title">
 <svg viewBox="0 0 24 24"><path d="M20 6l-11 11-5-5"/></svg>
 نقاط القوة
 </div>
@@ -181,7 +174,7 @@ margin-top:18px;border-radius:4px;
 
 <div class="report-row">
 <div class="report-box">
-<div class="report-box-title icon-title">
+<div class="icon-title">
 <svg viewBox="0 0 24 24"><path d="M12 4v16M6 10l6-6 6 6"/></svg>
 نقاط التحسين
 </div>
@@ -189,7 +182,7 @@ margin-top:18px;border-radius:4px;
 </div>
 
 <div class="report-box">
-<div class="report-box-title icon-title">
+<div class="icon-title">
 <svg viewBox="0 0 24 24"><path d="M6 4h12v16H6zM9 9h6M9 13h4"/></svg>
 توصيات
 </div>
