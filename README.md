@@ -22,7 +22,7 @@ padding:10px 25px;font-size:15px;border-radius:6px;cursor:pointer;
 button:hover{background:#05523a;}
 @media print{.btn-container{display:none;}}
 
-/* 1) تقليل ارتفاع الهيدر */
+/* رأس الصفحة */
 .header{
 width:100%;height:128px;
 background:#083024;
@@ -47,7 +47,11 @@ color:#083024;text-align:center;
 height:40px;display:flex;align-items:center;justify-content:center;
 }
 
-/* 2) تقليل ارتفاع الهدف التربوي وتفعيل Scroll */
+/* إلغاء الـ Outline للأيقونات */
+.icon-title{display:flex;align-items:center;gap:6px;justify-content:center;font-size:13px;font-weight:700;color:#083024;}
+.icon-title svg{width:14px;height:14px;fill:#066d4d;stroke:none;}
+
+/* الهدف التربوي */
 .objective-box{
 background:#f2f9f6;border:2px solid #066d4d;
 padding:8px 10px;border-radius:6px;margin-bottom:12px;
@@ -55,12 +59,11 @@ height:115px;overflow:auto;
 }
 .objective-box::-webkit-scrollbar{width:5px;}
 .objective-box::-webkit-scrollbar-thumb{background:#066d4d;border-radius:4px;}
+.objective-box .icon-title{
+border-bottom:1px solid #066d4d;margin-bottom:4px;padding-bottom:3px;
+}
 
-.icon-title{display:flex;align-items:center;gap:6px;justify-content:center;font-size:13px;font-weight:700;color:#083024;}
-.icon-title svg{width:14px;height:14px;stroke:#066d4d;stroke-width:2;fill:none;}
-.objective-box .icon-title{border-bottom:1px solid #066d4d;margin-bottom:4px;padding-bottom:3px;}
-
-/* 3) تثبيت ارتفاع صناديق التقرير + Scroll */
+/* صناديق ثابتة + Scroll */
 .report-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
 .report-box{
 background:#ffffff;border-radius:6px;
@@ -69,18 +72,17 @@ height:120px;overflow:auto;
 }
 .report-box::-webkit-scrollbar{width:5px;}
 .report-box::-webkit-scrollbar-thumb{background:#066d4d;border-radius:4px;}
-.report-box-title{
-font-size:12px;font-weight:700;
-border-bottom:1px solid #ccd9d0;margin-bottom:4px;padding-bottom:3px;
+
+.report-box-content{
+font-size:10px;line-height:1.3;
 }
-.report-box-content{font-size:10px;line-height:1.3;}
 
 .image-evidence-grid{
 display:grid;grid-template-columns:1fr 1fr;
 gap:8px;margin-top:8px;
 }
 .image-box{
-height:120px;border:1px dashed #066d4d;border-radius:6px;
+height:70px;border:1px dashed #066d4d;border-radius:6px;
 display:flex;align-items:center;justify-content:center;
 color:#066d4d;font-size:10px;overflow:hidden;
 }
@@ -131,10 +133,7 @@ border-radius:4px;
 
 <div class="objective-box">
 <div class="icon-title">
-<svg viewBox="0 0 24 24">
-  <circle cx="12" cy="12" r="10" stroke-width="1.5" fill="none"/>
-  <path d="M9 12l2 2 4-4" stroke-width="1.5" fill="none"/>
-</svg>
+<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>
 الهدف التربوي
 </div>
 </div>
@@ -142,12 +141,7 @@ border-radius:4px;
 <div class="report-row">
 <div class="report-box">
 <div class="icon-title">
-<svg viewBox="0 0 24 24">
-  <rect x="3" y="3" width="18" height="18" rx="2" ry="2" stroke-width="1.5" fill="none"/>
-  <line x1="8" y1="8" x2="16" y2="8" stroke-width="1.5"/>
-  <line x1="8" y1="12" x2="16" y2="12" stroke-width="1.5"/>
-  <line x1="8" y1="16" x2="12" y2="16" stroke-width="1.5"/>
-</svg>
+<svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="16"/></svg>
 نبذة مختصرة
 </div>
 <div class="report-box-content"></div>
@@ -155,10 +149,7 @@ border-radius:4px;
 
 <div class="report-box">
 <div class="icon-title">
-<svg viewBox="0 0 24 24">
-  <path d="M12 3v18M3 12h18" stroke-width="1.5" fill="none"/>
-  <circle cx="12" cy="12" r="8" stroke-width="1.5" fill="none"/>
-</svg>
+<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></svg>
 إجراءات التنفيذ
 </div>
 <div class="report-box-content"></div>
@@ -168,11 +159,7 @@ border-radius:4px;
 <div class="report-row">
 <div class="report-box">
 <div class="icon-title">
-<svg viewBox="0 0 24 24">
-  <path d="M12 2L2 7l10 5 10-5-10-5z" stroke-width="1.5" fill="none"/>
-  <path d="M2 17l10 5 10-5" stroke-width="1.5" fill="none"/>
-  <path d="M2 12l10 5 10-5" stroke-width="1.5" fill="none"/>
-</svg>
+<svg viewBox="0 0 24 24"><path d="M10 3h4v18h-4z"/></svg>
 استراتيجيات
 </div>
 <div class="report-box-content"></div>
@@ -180,10 +167,7 @@ border-radius:4px;
 
 <div class="report-box">
 <div class="icon-title">
-<svg viewBox="0 0 24 24">
-  <polyline points="20 6 9 17 4 12" stroke-width="1.5" fill="none"/>
-  <circle cx="12" cy="12" r="10" stroke-width="1.5" fill="none"/>
-</svg>
+<svg viewBox="0 0 24 24"><path d="M20 6l-11 11-5-5"/></svg>
 نقاط القوة
 </div>
 <div class="report-box-content"></div>
@@ -193,10 +177,7 @@ border-radius:4px;
 <div class="report-row">
 <div class="report-box">
 <div class="icon-title">
-<svg viewBox="0 0 24 24">
-  <path d="M17 8l-5 5-5-5" stroke-width="1.5" fill="none"/>
-  <line x1="12" y1="4" x2="12" y2="20" stroke-width="1.5"/>
-</svg>
+<svg viewBox="0 0 24 24"><path d="M12 4v16M6 10l6-6 6 6"/></svg>
 نقاط التحسين
 </div>
 <div class="report-box-content"></div>
@@ -204,13 +185,7 @@ border-radius:4px;
 
 <div class="report-box">
 <div class="icon-title">
-<svg viewBox="0 0 24 24">
-  <rect x="3" y="3" width="18" height="18" rx="2" ry="2" stroke-width="1.5" fill="none"/>
-  <line x1="8" y1="8" x2="16" y2="8" stroke-width="1.5"/>
-  <line x1="8" y1="12" x2="16" y2="12" stroke-width="1.5"/>
-  <line x1="8" y1="16" x2="12" y2="16" stroke-width="1.5"/>
-  <circle cx="18" cy="6" r="2" stroke-width="1.5" fill="none"/>
-</svg>
+<svg viewBox="0 0 24 24"><path d="M6 4h12v16H6z"/></svg>
 توصيات
 </div>
 <div class="report-box-content"></div>
