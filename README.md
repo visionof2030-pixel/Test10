@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -177,7 +177,7 @@ button:hover { background: #05523a; }
 <div id="report-content">
 
   <div class="header">
-    <img src="https://i.ibb.co/1fc5gB6v/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png">
+    <img src="https://raw.githubusercontent.com/openai-tools/files/main/vision/ministry-logo-white.png" crossorigin="anonymous">
   </div>
 
   <div class="header-info">
@@ -253,7 +253,7 @@ function downloadPDF() {
     margin: 0,
     filename: 'report.pdf',
     image: { type: 'jpeg', quality: 1 },
-    html2canvas: { scale: 3 },
+    html2canvas: { scale: 3, useCORS: true },
     jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
   };
   html2pdf().set(options).from(element).save();
