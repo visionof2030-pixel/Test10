@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -31,7 +31,7 @@ label{font-size:15px;font-weight:700;margin-top:15px;display:block;color:#083024
 input,select,textarea{
 width:100%;padding:12px;margin-top:6px;border:2px solid #066d4d;border-radius:8px;font-size:15px;background:#ffffff;
 }
-textarea{height:85px;resize:none;font-size:15px !important;line-height:1.7;}
+textarea{height:95px;resize:none;font-size:15px !important;line-height:1.7;}
 
 .auto-buttons{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;}
 .auto-buttons button{
@@ -59,7 +59,6 @@ display:flex;align-items:center;justify-content:center;
 }
 .header img{width:155px;opacity:.97;}
 
-/* اسم المدرسة */
 .header-school-title{
 position:absolute;bottom:36px;right:8px;font-size:12px;font-weight:600;
 }
@@ -67,13 +66,11 @@ position:absolute;bottom:36px;right:8px;font-size:12px;font-weight:600;
 position:absolute;bottom:20px;right:8px;font-size:12px;font-weight:700;
 }
 
-/* إدارة التعليم */
 .header-education{
 position:absolute;bottom:8px;left:50%;transform:translateX(-50%);
 font-size:11px;font-weight:700;color:#d7f2ea;white-space:nowrap;
 }
 
-/* التاريخ */
 .header-date-box{
 position:absolute;top:6px;left:10px;
 font-size:11px;text-align:right;line-height:1.3;
@@ -81,13 +78,16 @@ font-size:11px;text-align:right;line-height:1.3;
 
 /*******************************************/
 .info-grid{
-display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:10px;
+display:grid;grid-template-columns:repeat(4,1fr);
+gap:4px;margin-top:10px;
 }
 .info-grid2{
-display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-bottom:8px;
+display:grid;grid-template-columns:repeat(3,1fr);
+gap:4px;margin-bottom:8px;margin-top:10px;
 }
+
 .info-box{
-background:#e8f2ee;border-radius:6px;height:32px;
+background:#e8f2ee;border-radius:6px;height:34px;
 display:flex;flex-direction:column;justify-content:center;align-items:center;
 border:1px solid rgba(6,109,77,0.3);
 }
@@ -96,16 +96,15 @@ border:1px solid rgba(6,109,77,0.3);
 
 .objective-box{
 background:#f3f9f6;border:1px solid rgba(6,109,77,0.35);
-padding:6px 10px;border-radius:8px;margin-bottom:10px;
-min-height:120px;
+padding:6px 10px;border-radius:8px;margin-bottom:10px;min-height:120px;
 }
 .objective-title{text-align:center;font-size:14px;font-weight:700;}
 .objective-content{font-size:15px;line-height:1.7;}
 
-.report-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0;}
+.report-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0;}
 .report-box{
 background:#ffffff;border-radius:8px;padding:6px;
-border:1px solid rgba(6,109,77,0.35);min-height:115px;
+border:1px solid rgba(6,109,77,0.35);min-height:130px;
 }
 .report-box-title{text-align:center;font-size:13px;font-weight:700;color:#083024;border-bottom:1px solid #ccd9d0;margin-bottom:4px;}
 .report-box-content{font-size:14px;line-height:1.6;}
