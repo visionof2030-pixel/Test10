@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -57,7 +57,7 @@ button:hover { background: #05523a; }
 }
 
 .header img {
-  width: 30%;
+  width: 40%;
   opacity: 1;
 }
 
@@ -177,7 +177,7 @@ button:hover { background: #05523a; }
 <div id="report-content">
 
   <div class="header">
-    <img src="https://raw.githubusercontent.com/openai-tools/files/main/vision/ministry-logo-white.png" crossorigin="anonymous">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgAAAAQACAIAAACoEwUVAACqLmNhQlgAAKouanV... (تم قصه اختصاراً) ..." crossorigin="anonymous">
   </div>
 
   <div class="header-info">
@@ -219,7 +219,7 @@ button:hover { background: #05523a; }
 
       <div class="report-box box4">
         <div class="report-box-title">نقاط القوة</div>
-        <div class="report-box-content" id="box4"></div>
+        <div "class="report-box-content" id="box4"></div>
       </div>
     </div>
 
