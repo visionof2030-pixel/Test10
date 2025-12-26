@@ -26,12 +26,8 @@ button:hover{background:#05523a;}
 .header{
 width:100%;height:135px;margin-top:60px;
 position:relative;overflow:hidden;
-background:linear-gradient(to bottom,#083024,#0c5a41);
+background:#083024;
 display:flex;align-items:center;justify-content:center;
-}
-.header::before{
-content:"";position:absolute;inset:0;
-background:radial-gradient(circle at center,rgba(255,255,255,0.08) 0%,transparent 70%);
 }
 .header img{
 position:relative;z-index:2;width:180px;opacity:.95;
