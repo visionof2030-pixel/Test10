@@ -51,11 +51,15 @@ button:hover { background: #05523a; }
 .objective-box {
   background: #f2f9f6; border: 2px solid #066d4d;
   padding: 10px; border-radius: 6px; margin-bottom: 10px;
+  min-height: 120px;
 }
 .objective-title {
   text-align: center; font-size: 13px; font-weight: 700;
   margin-bottom: 6px; color: #083024;
   border-bottom: 1px solid #066d4d;
+}
+#goal {
+  min-height: 80px;
 }
 
 /* REPORT SECTIONS */
@@ -67,16 +71,30 @@ button:hover { background: #05523a; }
   background-color: #ffffff;
   border-radius: 6px;
   padding: 10px; border: 1px solid #cdd5cf;
+  min-height: 120px;
 }
 .report-box-title {
   text-align: center; font-size: 12px; color: #083024; font-weight: 700;
   border-bottom: 1px solid #ccd9d0; margin-bottom: 6px;
 }
 .report-box-content {
-  font-size: 11px; line-height: 1.5; min-height: 70px;
+  font-size: 11px; line-height: 1.5;
+  min-height: 70px;
 }
 
-/* FOOTER SIGNATURE */
+/* IMAGES */
+.image-evidence-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 8px; margin-top: 10px;
+}
+.image-box {
+  height: 100px; border: 1px dashed #066d4d;
+  border-radius: 6px; font-size: 11px;
+  display: flex; justify-content: center; align-items: center;
+  color: #066d4d;
+}
+
+/* SIGNATURES */
 .signature-section {
   margin-top: 30px;
   display: grid;
@@ -166,7 +184,11 @@ button:hover { background: #05523a; }
       </div>
     </div>
 
-    <!-- توقيع المعلم ومدير المدرسة -->
+    <div class="image-evidence-grid">
+      <div class="image-box">صورة توثيقية 1</div>
+      <div class="image-box">صورة توثيقية 2</div>
+    </div>
+
     <div class="signature-section">
       <div class="signature-box">
         <span class="signature-icon">✒️</span>
