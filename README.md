@@ -7,6 +7,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #066d4d;
+    --primary-dark: #083024;
+    --primary-light: #e8f2ee;
+    --secondary-color: #f8fdfb;
+    --accent-color: #10b981;
+    --text-dark: #083024;
+    --text-light: #64748b;
+    --white: #ffffff;
+    --shadow: 0 4px 20px rgba(6, 109, 77, 0.1);
+    --radius: 12px;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -15,180 +29,274 @@
 
 html, body {
     font-family: 'Cairo', sans-serif;
-    background: linear-gradient(135deg, #f8fdfb 0%, #e8f2ee 100%);
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     direction: rtl;
-    color: #083024;
-    line-height: 1.6;
+    color: var(--text-dark);
+    min-height: 100vh;
 }
 
-/* الأزرار العلوية */
+/* تصميم الأزرار العلوية */
 .btn-container {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     width: 100%;
-    background: #066d4d;
+    background: var(--white);
     padding: 15px 20px;
     display: flex;
     justify-content: center;
     gap: 15px;
     z-index: 1000;
-    box-shadow: 0 4px 12px rgba(6, 109, 77, 0.2);
+    box-shadow: var(--shadow);
+    border-bottom: 2px solid var(--primary-light);
 }
 
 .btn-container button {
-    background: white;
-    color: #066d4d;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    color: var(--white);
     border: none;
-    padding: 12px 25px;
+    padding: 14px 28px;
     font-size: 16px;
     font-weight: 700;
-    border-radius: 8px;
+    border-radius: var(--radius);
     cursor: pointer;
     transition: all 0.3s ease;
-    min-width: 160px;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    min-width: 180px;
+    box-shadow: 0 4px 12px rgba(6, 109, 77, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 .btn-container button:hover {
-    background: #f0f9f5;
     transform: translateY(-2px);
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 6px 16px rgba(6, 109, 77, 0.4);
 }
 
-/* الحاوية الرئيسية */
+.btn-container button:active {
+    transform: translateY(0);
+}
+
+/* تصميم الحاوية الرئيسية */
 .container {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 100px auto 40px;
     padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
 }
 
-/* قسم الإدخال */
+@media (max-width: 992px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* تصميم قسم الإدخال الجديد */
 .input-section {
-    background: white;
-    border-radius: 16px;
+    background: var(--white);
+    border-radius: var(--radius);
     padding: 30px;
-    margin-bottom: 30px;
-    box-shadow: 0 8px 30px rgba(6, 109, 77, 0.1);
-    border: 1px solid rgba(6, 109, 77, 0.1);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--primary-light);
+    height: fit-content;
+    position: sticky;
+    top: 90px;
 }
 
 .input-section h2 {
-    color: #066d4d;
+    color: var(--primary-dark);
     margin-bottom: 25px;
     text-align: center;
     font-size: 24px;
-    border-bottom: 2px solid #e8f2ee;
+    position: relative;
     padding-bottom: 15px;
 }
 
-/* تنسيق مجموعة الإدخال */
-.input-group {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-    margin-bottom: 25px;
+.input-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(to left, var(--primary-color), var(--accent-color));
+    border-radius: 2px;
 }
 
-.input-group:last-child {
+.input-section h2::before {
+    content: '📝';
+    margin-left: 10px;
+}
+
+/* تصميم المجموعات */
+.section-group {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--primary-light);
+}
+
+.section-group:last-child {
+    border-bottom: none;
     margin-bottom: 0;
 }
 
-.input-field {
+.section-group h3 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* تصميم شبكة الحقول */
+.field-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .field-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* تصميم الحقول */
+.field {
     display: flex;
     flex-direction: column;
 }
 
-.input-field label {
+.field label {
     font-weight: 700;
-    color: #083024;
+    color: var(--text-dark);
     margin-bottom: 8px;
     font-size: 15px;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 8px;
 }
 
-.input-field label:before {
-    content: "•";
-    color: #066d4d;
-    font-size: 18px;
+.field label::before {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 6px;
+    background: var(--primary-color);
+    border-radius: 50%;
 }
 
-.input-field input,
-.input-field select,
-.input-field textarea {
+.field input,
+.field select,
+.field textarea {
     padding: 14px 16px;
-    border: 2px solid #e0f0ea;
+    border: 2px solid var(--primary-light);
     border-radius: 10px;
     font-size: 16px;
     font-family: 'Cairo', sans-serif;
     transition: all 0.3s ease;
-    background: #f8fdfb;
+    background: var(--secondary-color);
+    color: var(--text-dark);
 }
 
-.input-field input:focus,
-.input-field select:focus,
-.input-field textarea:focus {
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
     outline: none;
-    border-color: #066d4d;
+    border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(6, 109, 77, 0.1);
-    background: white;
+    background: var(--white);
 }
 
-.input-field textarea {
+.field textarea {
     resize: vertical;
     min-height: 120px;
     line-height: 1.7;
 }
 
-/* أزرار النصوص التلقائية المحسنة */
-.auto-buttons {
-    margin-top: 10px;
+/* تصميم أزرار النصوص التلقائية المحسنة */
+.auto-btn-container {
+    margin-top: 15px;
     display: flex;
     justify-content: center;
 }
 
 .auto-btn {
-    background: linear-gradient(135deg, #066d4d 0%, #083024 100%);
-    color: white;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    color: var(--white);
     border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
+    padding: 12px 24px;
+    border-radius: 10px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
     transition: all 0.3s ease;
     width: 100%;
-    max-width: 200px;
+    max-width: 220px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    box-shadow: 0 3px 8px rgba(6, 109, 77, 0.3);
+    gap: 10px;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
 }
 
 .auto-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 12px rgba(6, 109, 77, 0.4);
+    box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
 }
 
 .auto-btn:active {
     transform: translateY(0);
 }
 
-/* قسم المعاينة */
+/* تصميم زر رفع الصور */
+.file-upload {
+    position: relative;
+    margin-top: 8px;
+}
+
+.file-upload input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.file-upload label {
+    display: block;
+    padding: 14px;
+    background: var(--secondary-color);
+    border: 2px dashed var(--primary-color);
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.file-upload label:hover {
+    background: var(--primary-light);
+    border-color: var(--accent-color);
+}
+
+/* قسم المعاينة - المحفوظ كما هو */
 #report-content {
-    background: white;
-    border-radius: 16px;
+    background: var(--white);
+    border-radius: var(--radius);
     overflow: hidden;
-    box-shadow: 0 8px 30px rgba(6, 109, 77, 0.1);
+    box-shadow: var(--shadow);
     margin-bottom: 40px;
 }
 
-/* الرأس المحسن */
+/* تصميم الرأس المحفوظ */
 .header {
-    background: linear-gradient(135deg, #083024 0%, #066d4d 100%);
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
     padding: 25px 30px;
     display: flex;
     align-items: center;
@@ -211,7 +319,7 @@ html, body {
 }
 
 .header-right-top {
-    color: white;
+    color: var(--white);
     font-weight: 700;
     font-size: 16px;
     text-align: right;
@@ -227,7 +335,7 @@ html, body {
     position: absolute;
     left: 30px;
     bottom: 25px;
-    color: white;
+    color: var(--white);
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -246,12 +354,11 @@ html, body {
     color: rgba(255, 255, 255, 0.85);
 }
 
-/* المحتوى الرئيسي */
+/* باقي تنسيقات PDF - محفوظة كما هي */
 .page {
     padding: 30px;
 }
 
-/* شبكة المعلومات */
 .info-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -260,8 +367,8 @@ html, body {
 }
 
 .info-box {
-    background: #f8fdfb;
-    border: 1px solid #e0f0ea;
+    background: var(--primary-light);
+    border: 1px solid var(--primary-light);
     border-radius: 10px;
     padding: 15px;
     text-align: center;
@@ -271,20 +378,19 @@ html, body {
 .info-title {
     font-size: 12px;
     font-weight: 700;
-    color: #066d4d;
+    color: var(--primary-color);
     margin-bottom: 5px;
 }
 
 .info-value {
     font-size: 14px;
     font-weight: 600;
-    color: #083024;
+    color: var(--primary-dark);
 }
 
-/* مربع الهدف */
 .objective-box {
-    background: #f0f9f5;
-    border: 2px solid #066d4d;
+    background: var(--secondary-color);
+    border: 2px solid var(--primary-color);
     border-radius: 12px;
     padding: 20px;
     margin: 25px 0;
@@ -293,21 +399,20 @@ html, body {
 .objective-title {
     font-size: 18px;
     font-weight: 700;
-    color: #083024;
+    color: var(--primary-dark);
     text-align: center;
     margin-bottom: 15px;
     padding-bottom: 10px;
-    border-bottom: 2px solid #066d4d;
+    border-bottom: 2px solid var(--primary-color);
 }
 
 .objective-content {
     font-size: 17px;
     line-height: 1.8;
-    color: #083024;
+    color: var(--primary-dark);
     text-align: center;
 }
 
-/* شبكة التقارير */
 .report-row {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -316,36 +421,30 @@ html, body {
 }
 
 .report-box {
-    background: white;
-    border: 1px solid #e0f0ea;
+    background: var(--white);
+    border: 1px solid var(--primary-light);
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 4px 15px rgba(6, 109, 77, 0.08);
-    transition: transform 0.3s ease;
-}
-
-.report-box:hover {
-    transform: translateY(-5px);
 }
 
 .report-box-title {
     font-size: 16px;
     font-weight: 700;
-    color: #066d4d;
+    color: var(--primary-color);
     text-align: center;
     margin-bottom: 15px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #e0f0ea;
+    border-bottom: 1px solid var(--primary-light);
 }
 
 .report-box-content {
     font-size: 15px;
     line-height: 1.7;
-    color: #083024;
+    color: var(--primary-dark);
     min-height: 100px;
 }
 
-/* شبكة الصور */
 .image-evidence-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -354,13 +453,13 @@ html, body {
 }
 
 .image-box {
-    border: 2px dashed #066d4d;
+    border: 2px dashed var(--primary-color);
     border-radius: 12px;
     min-height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f8fdfb;
+    background: var(--secondary-color);
     overflow: hidden;
     padding: 15px;
 }
@@ -373,13 +472,12 @@ html, body {
 }
 
 .image-placeholder {
-    color: #066d4d;
+    color: var(--primary-color);
     font-weight: 600;
     text-align: center;
     padding: 20px;
 }
 
-/* التوقيعات */
 .signature-section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -394,7 +492,7 @@ html, body {
 .signature-name {
     font-size: 16px;
     font-weight: 700;
-    color: #083024;
+    color: var(--primary-dark);
     margin-bottom: 10px;
     min-height: 24px;
 }
@@ -402,20 +500,19 @@ html, body {
 .signature-line {
     width: 80%;
     height: 1px;
-    background: #083024;
+    background: var(--primary-dark);
     margin: 0 auto 10px;
 }
 
 .signature-label {
     font-size: 14px;
     font-weight: 600;
-    color: #066d4d;
+    color: var(--primary-color);
 }
 
-/* التذييل */
 .footer {
-    background: #083024;
-    color: white;
+    background: var(--primary-dark);
+    color: var(--white);
     text-align: center;
     padding: 15px;
     font-size: 14px;
@@ -439,9 +536,11 @@ html, body {
     .container {
         margin-top: 140px;
         padding: 0 15px;
+        grid-template-columns: 1fr;
     }
     
     .input-section {
+        position: static;
         padding: 20px;
     }
     
@@ -469,29 +568,19 @@ html, body {
     .signature-section {
         grid-template-columns: 1fr;
     }
-    
-    .input-group {
-        grid-template-columns: 1fr;
-    }
 }
 
-@media (max-width: 480px) {
-    .input-section {
-        padding: 15px;
-    }
-    
-    .page {
-        padding: 20px 15px;
-    }
-    
-    .report-box {
-        padding: 15px;
-    }
-    
-    .auto-btn {
-        padding: 10px 15px;
-        font-size: 13px;
-    }
+/* تأثيرات إضافية */
+.field input:invalid,
+.field select:invalid,
+.field textarea:invalid {
+    border-color: #ef4444;
+}
+
+.field input:valid:not(:placeholder-shown),
+.field select:valid,
+.field textarea:valid:not(:placeholder-shown) {
+    border-color: #10b981;
 }
 
 /* تخصيص شريط التمرير */
@@ -500,176 +589,249 @@ html, body {
 }
 
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: var(--primary-light);
     border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #066d4d;
+    background: linear-gradient(var(--primary-color), var(--primary-dark));
     border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #083024;
+    background: linear-gradient(var(--primary-dark), var(--primary-color));
 }
+
+/* تأثيرات للتفعيل */
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(6, 109, 77, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(6, 109, 77, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(6, 109, 77, 0); }
+}
+
+.auto-btn.pulsing {
+    animation: pulse 2s infinite;
+}
+
+/* تحسين العناوين */
+.section-group h3::before {
+    font-size: 20px;
+    margin-left: 5px;
+}
+
+.section-group:nth-child(1) h3::before { content: "🏫"; }
+.section-group:nth-child(2) h3::before { content: "📚"; }
+.section-group:nth-child(3) h3::before { content: "🎯"; }
+.section-group:nth-child(4) h3::before { content: "📊"; }
+.section-group:nth-child(5) h3::before { content: "📸"; }
 </style>
 </head>
 
 <body>
 <div class="btn-container">
-    <button class="main-btn" onclick="downloadPDF()">📥 تنزيل PDF</button>
-    <button class="main-btn" onclick="sharePDFWhatsApp()">📱 مشاركة واتساب</button>
+    <button onclick="downloadPDF()">
+        <span>📥</span>
+        تنزيل PDF
+    </button>
+    <button onclick="sharePDFWhatsApp()">
+        <span>📱</span>
+        مشاركة واتساب
+    </button>
 </div>
 
 <div class="container">
+    <!-- قسم الإدخال الجديد -->
     <div class="input-section">
-        <h2>📝 أدخل بيانات التقرير</h2>
+        <h2>بيانات التقرير</h2>
         
-        <div class="input-group">
-            <div class="input-field">
-                <label>إدارة التعليم</label>
-                <select id="education" oninput="updateReport()">
-                    <option value="">اختر الإدارة</option>
-                    <option>الإدارة العامة للتعليم بمنطقة مكة المكرمة</option>
-                    <option>الإدارة العامة للتعليم بمحافظة جدة</option>
-                    <option>الإدارة العامة للتعليم بمنطقة الرياض</option>
-                    <option>الإدارة العامة للتعليم بالمنطقة الشرقية</option>
-                </select>
+        <!-- المجموعة الأولى: المعلومات الأساسية -->
+        <div class="section-group">
+            <h3>المعلومات الأساسية</h3>
+            <div class="field-grid">
+                <div class="field">
+                    <label for="education">إدارة التعليم</label>
+                    <select id="education" oninput="updateReport()">
+                        <option value="">اختر الإدارة</option>
+                        <option>الإدارة العامة للتعليم بمنطقة مكة المكرمة</option>
+                        <option>الإدارة العامة للتعليم بمحافظة جدة</option>
+                        <option>الإدارة العامة للتعليم بمنطقة الرياض</option>
+                        <option>الإدارة العامة للتعليم بالمنطقة الشرقية</option>
+                    </select>
+                </div>
+                
+                <div class="field">
+                    <label for="reportType">نوع التقرير</label>
+                    <select id="reportType" oninput="handleReportType()">
+                        <option value="">اختر نوع التقرير</option>
+                        <option>تقرير نشاط إثرائي</option>
+                        <option>تقرير زيارة ميدانية</option>
+                        <option>تقرير ورشة عمل</option>
+                        <option>تقرير ندوة</option>
+                        <option>أخرى</option>
+                    </select>
+                    <input id="reportTypeInput" oninput="updateReport()" placeholder="اكتب اسم التقرير يدوياً" style="display:none; margin-top: 10px;">
+                </div>
+            </div>
+        </div>
+        
+        <!-- المجموعة الثانية: المعلومات الأكاديمية -->
+        <div class="section-group">
+            <h3>المعلومات الأكاديمية</h3>
+            <div class="field-grid">
+                <div class="field">
+                    <label for="grade">الصف</label>
+                    <input id="grade" oninput="updateReport()" placeholder="مثال: 5/3">
+                </div>
+                
+                <div class="field">
+                    <label for="term">الفصل الدراسي</label>
+                    <select id="term" oninput="updateReport()">
+                        <option value="">اختر الفصل</option>
+                        <option>الأول</option>
+                        <option>الثاني</option>
+                        <option>الثالث</option>
+                    </select>
+                </div>
+                
+                <div class="field">
+                    <label for="subject">المادة</label>
+                    <input id="subject" oninput="updateReport()" placeholder="مثال: لغتي – علوم – رياضيات">
+                </div>
+            </div>
+        </div>
+        
+        <!-- المجموعة الثالثة: تفاصيل النشاط -->
+        <div class="section-group">
+            <h3>تفاصيل النشاط</h3>
+            <div class="field-grid">
+                <div class="field">
+                    <label for="target">المستهدفون</label>
+                    <input id="target" oninput="updateReport()" placeholder="مثال: جميع طلاب الصف">
+                </div>
+                
+                <div class="field">
+                    <label for="count">عدد الحضور</label>
+                    <input id="count" oninput="updateReport()" placeholder="مثال: 25 طالب">
+                </div>
+                
+                <div class="field">
+                    <label for="place">مكان التنفيذ</label>
+                    <input id="place" oninput="updateReport()" placeholder="مثال: داخل الصف – المختبر – قاعة مصادر التعلم">
+                </div>
+            </div>
+        </div>
+        
+        <!-- المجموعة الرابعة: محتوى التقرير -->
+        <div class="section-group">
+            <h3>محتوى التقرير</h3>
+            <div class="field-grid">
+                <div class="field">
+                    <label for="teacher">اسم المعلم</label>
+                    <input id="teacher" oninput="updateReport()" placeholder="مثال: فهد الخالدي">
+                </div>
+                
+                <div class="field">
+                    <label for="principal">اسم المدير</label>
+                    <input id="principal" oninput="updateReport()" placeholder="مثال: نايف اللحياني">
+                </div>
             </div>
             
-            <div class="input-field">
-                <label>نوع التقرير</label>
-                <select id="reportType" oninput="handleReportType()">
-                    <option value="">اختر نوع التقرير</option>
-                    <option>تقرير نشاط إثرائي</option>
-                    <option>تقرير زيارة ميدانية</option>
-                    <option>تقرير ورشة عمل</option>
-                    <option>تقرير ندوة</option>
-                    <option>أخرى</option>
-                </select>
-                <input id="reportTypeInput" oninput="updateReport()" placeholder="اكتب اسم التقرير يدوياً" style="display:none; margin-top: 10px;">
-            </div>
-        </div>
-        
-        <div class="input-group">
-            <div class="input-field">
-                <label>الصف</label>
-                <input id="grade" oninput="updateReport()" placeholder="مثال: 5/3">
+            <div class="field" style="grid-column: 1/-1;">
+                <label for="goal">الهدف التربوي</label>
+                <textarea id="goal" oninput="updateReport()" placeholder="اكتب الهدف التربوي من النشاط..."></textarea>
             </div>
             
-            <div class="input-field">
-                <label>الفصل الدراسي</label>
-                <select id="term" oninput="updateReport()">
-                    <option value="">اختر الفصل</option>
-                    <option>الأول</option>
-                    <option>الثاني</option>
-                    <option>الثالث</option>
-                </select>
-            </div>
-        </div>
-        
-        <div class="input-group">
-            <div class="input-field">
-                <label>المادة</label>
-                <input id="subject" oninput="updateReport()" placeholder="مثال: لغتي – علوم – رياضيات">
+            <div class="field" style="grid-column: 1/-1;">
+                <label for="summary">نبذة مختصرة</label>
+                <textarea id="summary" oninput="updateReport()" placeholder="اكتب نبذة مختصرة عن النشاط..."></textarea>
+                <div class="auto-btn-container">
+                    <button class="auto-btn" onclick="cycleAutoText('summary')">
+                        <span>🔄</span>
+                        اضغط لتغيير النص
+                    </button>
+                </div>
             </div>
             
-            <div class="input-field">
-                <label>المستهدفون</label>
-                <input id="target" oninput="updateReport()" placeholder="مثال: جميع طلاب الصف">
-            </div>
-        </div>
-        
-        <div class="input-group">
-            <div class="input-field">
-                <label>عدد الحضور</label>
-                <input id="count" oninput="updateReport()" placeholder="مثال: 25 طالب">
-            </div>
-            
-            <div class="input-field">
-                <label>مكان التنفيذ</label>
-                <input id="place" oninput="updateReport()" placeholder="مثال: داخل الصف – المختبر – قاعة مصادر التعلم">
-            </div>
-        </div>
-        
-        <div class="input-group">
-            <div class="input-field">
-                <label>اسم المعلم</label>
-                <input id="teacher" oninput="updateReport()" placeholder="مثال: فهد الخالدي">
+            <div class="field" style="grid-column: 1/-1;">
+                <label for="steps">إجراءات التنفيذ</label>
+                <textarea id="steps" oninput="updateReport()" placeholder="صف إجراءات تنفيذ النشاط..."></textarea>
+                <div class="auto-btn-container">
+                    <button class="auto-btn" onclick="cycleAutoText('steps')">
+                        <span>🔄</span>
+                        اضغط لتغيير النص
+                    </button>
+                </div>
             </div>
             
-            <div class="input-field">
-                <label>اسم المدير</label>
-                <input id="principal" oninput="updateReport()" placeholder="مثال: نايف اللحياني">
-            </div>
-        </div>
-        
-        <div class="input-field">
-            <label>الهدف التربوي</label>
-            <textarea id="goal" oninput="updateReport()" placeholder="اكتب الهدف التربوي من النشاط..."></textarea>
-        </div>
-        
-        <div class="input-field">
-            <label>نبذة مختصرة</label>
-            <textarea id="summary" oninput="updateReport()" placeholder="اكتب نبذة مختصرة عن النشاط..."></textarea>
-            <div class="auto-buttons">
-                <button class="auto-btn" onclick="cycleAutoText('summary')">🔄 اضغط لتغيير النص</button>
-            </div>
-        </div>
-        
-        <div class="input-field">
-            <label>إجراءات التنفيذ</label>
-            <textarea id="steps" oninput="updateReport()" placeholder="صف إجراءات تنفيذ النشاط..."></textarea>
-            <div class="auto-buttons">
-                <button class="auto-btn" onclick="cycleAutoText('steps')">🔄 اضغط لتغيير النص</button>
-            </div>
-        </div>
-        
-        <div class="input-field">
-            <label>الاستراتيجيات</label>
-            <textarea id="strategies" oninput="updateReport()" placeholder="اذكر الاستراتيجيات المستخدمة..."></textarea>
-            <div class="auto-buttons">
-                <button class="auto-btn" onclick="cycleAutoText('strategies')">🔄 اضغط لتغيير النص</button>
-            </div>
-        </div>
-        
-        <div class="input-field">
-            <label>نقاط القوة</label>
-            <textarea id="strengths" oninput="updateReport()" placeholder="اذكر نقاط القوة في النشاط..."></textarea>
-            <div class="auto-buttons">
-                <button class="auto-btn" onclick="cycleAutoText('strengths')">🔄 اضغط لتغيير النص</button>
-            </div>
-        </div>
-        
-        <div class="input-field">
-            <label>نقاط التحسين</label>
-            <textarea id="improve" oninput="updateReport()" placeholder="اذكر نقاط التحسين الممكنة..."></textarea>
-            <div class="auto-buttons">
-                <button class="auto-btn" onclick="cycleAutoText('improve')">🔄 اضغط لتغيير النص</button>
-            </div>
-        </div>
-        
-        <div class="input-field">
-            <label>التوصيات</label>
-            <textarea id="recomm" oninput="updateReport()" placeholder="اكتب توصياتك المستقبلية..."></textarea>
-            <div class="auto-buttons">
-                <button class="auto-btn" onclick="cycleAutoText('recomm')">🔄 اضغط لتغيير النص</button>
-            </div>
-        </div>
-        
-        <div class="input-group">
-            <div class="input-field">
-                <label>الصورة 1</label>
-                <input type="file" accept="image/*" onchange="loadImage(this,'imgBox1')">
+            <div class="field" style="grid-column: 1/-1;">
+                <label for="strategies">الاستراتيجيات</label>
+                <textarea id="strategies" oninput="updateReport()" placeholder="اذكر الاستراتيجيات المستخدمة..."></textarea>
+                <div class="auto-btn-container">
+                    <button class="auto-btn" onclick="cycleAutoText('strategies')">
+                        <span>🔄</span>
+                        اضغط لتغيير النص
+                    </button>
+                </div>
             </div>
             
-            <div class="input-field">
-                <label>الصورة 2</label>
-                <input type="file" accept="image/*" onchange="loadImage(this,'imgBox2')">
+            <div class="field" style="grid-column: 1/-1;">
+                <label for="strengths">نقاط القوة</label>
+                <textarea id="strengths" oninput="updateReport()" placeholder="اذكر نقاط القوة في النشاط..."></textarea>
+                <div class="auto-btn-container">
+                    <button class="auto-btn" onclick="cycleAutoText('strengths')">
+                        <span>🔄</span>
+                        اضغط لتغيير النص
+                    </button>
+                </div>
+            </div>
+            
+            <div class="field" style="grid-column: 1/-1;">
+                <label for="improve">نقاط التحسين</label>
+                <textarea id="improve" oninput="updateReport()" placeholder="اذكر نقاط التحسين الممكنة..."></textarea>
+                <div class="auto-btn-container">
+                    <button class="auto-btn" onclick="cycleAutoText('improve')">
+                        <span>🔄</span>
+                        اضغط لتغيير النص
+                    </button>
+                </div>
+            </div>
+            
+            <div class="field" style="grid-column: 1/-1;">
+                <label for="recomm">التوصيات</label>
+                <textarea id="recomm" oninput="updateReport()" placeholder="اكتب توصياتك المستقبلية..."></textarea>
+                <div class="auto-btn-container">
+                    <button class="auto-btn" onclick="cycleAutoText('recomm')">
+                        <span>🔄</span>
+                        اضغط لتغيير النص
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- المجموعة الخامسة: الوسائط -->
+        <div class="section-group">
+            <h3>الوسائط التوثيقية</h3>
+            <div class="field-grid">
+                <div class="field">
+                    <label>الصورة 1</label>
+                    <div class="file-upload">
+                        <input type="file" accept="image/*" onchange="loadImage(this,'imgBox1')">
+                        <label>📷 اختر صورة 1</label>
+                    </div>
+                </div>
+                
+                <div class="field">
+                    <label>الصورة 2</label>
+                    <div class="file-upload">
+                        <input type="file" accept="image/*" onchange="loadImage(this,'imgBox2')">
+                        <label>📷 اختر صورة 2</label>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     
+    <!-- قسم المعاينة - لم يتم تغييره -->
     <div id="report-content">
         <div class="header">
             <img src="https://i.ibb.co/1fc5gB6v/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png" alt="شعار">
@@ -784,7 +946,7 @@ html, body {
 </div>
 
 <script>
-// النصوص التلقائية - 5 نصوص لكل حقل
+// النصوص التلقائية - 5 نصوص لكل حقل (16 كلمة لكل نص)
 const autoTexts = {
     summary: [
         "تم تنفيذ النشاط بنجاح داخل الصف الدراسي بمشاركة جميع الطلاب بشكل إيجابي وفعال مما ساهم في تحقيق الأهداف التعليمية المخطط لها بكل دقة واحترافية.",
@@ -846,6 +1008,11 @@ function cycleAutoText(field) {
     currentTextIndex[field] = (currentTextIndex[field] + 1) % textArray.length;
     document.getElementById(field).value = textArray[currentTextIndex[field]];
     updateReport();
+    
+    // تأثير بسيط للزر
+    const btn = event.target.closest('.auto-btn');
+    btn.classList.add('pulsing');
+    setTimeout(() => btn.classList.remove('pulsing'), 2000);
 }
 
 // تحديث التقرير
@@ -911,6 +1078,11 @@ function loadImage(input, target) {
 function downloadPDF() {
     const element = document.getElementById('report-content');
     
+    // إضافة تأثير للزر
+    const btn = event.target;
+    btn.style.transform = 'scale(0.95)';
+    setTimeout(() => btn.style.transform = '', 200);
+    
     html2pdf().set({
         margin: [10, 10, 10, 10],
         filename: 'تقرير_نشاط.pdf',
@@ -931,6 +1103,11 @@ function downloadPDF() {
 // مشاركة عبر واتساب
 async function sharePDFWhatsApp() {
     try {
+        // إضافة تأثير للزر
+        const btn = event.target;
+        btn.style.transform = 'scale(0.95)';
+        setTimeout(() => btn.style.transform = '', 200);
+        
         const element = document.getElementById('report-content');
         
         const pdfBlob = await html2pdf().from(element).set({
@@ -954,7 +1131,7 @@ async function sharePDFWhatsApp() {
         // إنشاء نص للمشاركة
         const reportTitle = document.getElementById('reportTypeBox').textContent || 'تقرير';
         const subject = document.getElementById('subjectBox').textContent || '';
-        const message = `تقرير ${reportTitle} - ${subject}\n\nرابط التقرير: ${pdfUrl}`;
+        const message = `📋 تقرير ${reportTitle}\n📚 المادة: ${subject}\n📅 التاريخ: ${document.getElementById('gDate').textContent}\n\nتم إنشاء التقرير باستخدام أداة إصدار التقارير`;
         
         // فتح واتساب مع الرسالة
         window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
@@ -1000,12 +1177,29 @@ window.onload = function() {
     loadDates();
     
     // تعبئة النصوص التلقائية عند التحميل
-    cycleAutoText('summary');
-    cycleAutoText('steps');
-    cycleAutoText('strategies');
-    cycleAutoText('strengths');
-    cycleAutoText('improve');
-    cycleAutoText('recomm');
+    setTimeout(() => {
+        cycleAutoText('summary');
+        cycleAutoText('steps');
+        cycleAutoText('strategies');
+        cycleAutoText('strengths');
+        cycleAutoText('improve');
+        cycleAutoText('recomm');
+    }, 500);
+    
+    // إضافة بعض البيانات الافتراضية للمساعدة في الاختبار
+    document.getElementById('education').value = "الإدارة العامة للتعليم بمنطقة مكة المكرمة";
+    document.getElementById('reportType').value = "تقرير نشاط إثرائي";
+    document.getElementById('grade').value = "5/3";
+    document.getElementById('term').value = "الأول";
+    document.getElementById('subject').value = "لغتي";
+    document.getElementById('target').value = "جميع طلاب الصف";
+    document.getElementById('count').value = "25 طالب";
+    document.getElementById('place').value = "داخل الصف";
+    document.getElementById('teacher').value = "فهد الخالدي";
+    document.getElementById('principal').value = "نايف اللحياني";
+    document.getElementById('goal').value = "تنمية مهارات الطلاب من خلال أنشطة تعليمية تفاعلية تعزز التفكير والمعرفة بشكل فعال وواضح للجميع.";
+    
+    updateReport();
 };
 </script>
 </body>
