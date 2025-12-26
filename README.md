@@ -72,7 +72,6 @@ min-height:120px;
 text-align:center;font-size:13px;font-weight:700;
 margin-bottom:6px;color:#083024;border-bottom:1px solid #066d4d;
 }
-#goal{min-height:80px;}
 
 .report-row{
 display:grid;grid-template-columns:1fr 1fr;
@@ -122,7 +121,8 @@ min-height:50px;
 <body>
 
 <div class="btn-container">
-<button onclick="downloadPDFWhatsApp()">مشاركة PDF عبر واتساب</button>
+<button onclick="downloadPDF()">تنزيل ملف PDF</button>
+<button onclick="sharePDFWhatsApp()">مشاركة عبر واتساب</button>
 </div>
 
 <div id="report-content">
@@ -155,33 +155,33 @@ min-height:50px;
 <div class="report-row">
 <div class="report-box">
 <div class="report-box-title">نبذة مختصرة</div>
-<div class="report-box-content" id="box1"></div>
+<div class="report-box-content"></div>
 </div>
 <div class="report-box">
 <div class="report-box-title">إجراءات التنفيذ</div>
-<div class="report-box-content" id="box2"></div>
+<div class="report-box-content"></div>
 </div>
 </div>
 
 <div class="report-row">
 <div class="report-box">
 <div class="report-box-title">استراتيجيات</div>
-<div class="report-box-content" id="box3"></div>
+<div class="report-box-content"></div>
 </div>
 <div class="report-box">
 <div class="report-box-title">نقاط القوة</div>
-<div class="report-box-content" id="box4"></div>
+<div class="report-box-content"></div>
 </div>
 </div>
 
 <div class="report-row">
 <div class="report-box">
 <div class="report-box-title">نقاط التحسين</div>
-<div class="report-box-content" id="box5"></div>
+<div class="report-box-content"></div>
 </div>
 <div class="report-box">
 <div class="report-box-title">توصيات</div>
-<div class="report-box-content" id="box6"></div>
+<div class="report-box-content"></div>
 </div>
 </div>
 
@@ -199,8 +199,21 @@ min-height:50px;
 </div>
 
 <script>
-async function downloadPDFWhatsApp(){
-const el=document.getElementById("report-content");
+// توليد PDF للحفظ
+function downloadPDF(){
+var el=document.getElementById("report-content");
+html2pdf().set({
+margin:0,
+filename:"report.pdf",
+image:{type:"jpeg",quality:1},
+html2canvas:{scale:3,useCORS:true},
+jsPDF:{unit:"mm",format:"a4",orientation:"portrait"}
+}).from(el).save();
+}
+
+// مشاركة PDF عبر واتساب أو مشاركة iOS
+async function sharePDFWhatsApp(){
+var el=document.getElementById("report-content");
 const options={
 margin:0,
 filename:"report.pdf",
@@ -213,18 +226,17 @@ const worker=html2pdf().set(options).from(el);
 const pdfBlob=await worker.outputPdf("blob");
 const file=new File([pdfBlob],"report.pdf",{type:"application/pdf"});
 
-// دعم Web Share API
 if(navigator.share){
-navigator.share({
+await navigator.share({
 title:"تقرير إشرافي",
 files:[file]
 });
 }else{
-alert("جهازك لا يدعم المشاركة المباشرة. سيتم حفظ الملف.");
 worker.save();
 }
 }
 
+// التاريخ هجري + ميلادي API أم القرى
 async function loadDates(){
 let g=new Date();
 let gy=g.getFullYear(),gm=g.getMonth()+1,gd=g.getDate();
