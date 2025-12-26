@@ -100,7 +100,7 @@ display:grid;grid-template-columns:1fr 1fr;
 gap:8px;margin-top:8px;
 }
 .image-box{
-height:110px;border:1px dashed #066d4d;border-radius:6px;
+height:150px;border:1px dashed #066d4d;border-radius:6px;
 display:flex;align-items:center;justify-content:center;
 color:#066d4d;font-size:10px;overflow:hidden;
 }
