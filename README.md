@@ -1,145 +1,154 @@
-<!DOCTYPE html>
+
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <title>تقرير تعليمي PDF</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html, body { font-family: 'Cairo', sans-serif; direction: rtl; background: #ffffff; }
-.btn-container { text-align: center; padding: 10px; background: #eaeaea; position: fixed; top: 0; left: 0; width: 100%; z-index: 10; gap: 10px; display: flex; justify-content: center; }
-button { background: #0d3b29; color: #ffffff; border: none; padding: 10px 25px; font-size: 14px; border-radius: 4px; cursor: pointer; }
-button:hover { background: #0a2d20; }
-@media print { .btn-container { display: none; } }
 
-/* HEADER */
-.header {
-  width: 100%;
-  height: 120px;
-  background: #0d3b29;
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+  font-family: 'Cairo', sans-serif;
+  direction: rtl;
+  background: #ffffff;
+}
+
+/* زر الطباعة */
+.btn-container {
+  text-align: center;
+  padding: 10px;
+  background: #f5f5f5;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; z-index: 10;
+  gap: 10px;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
-.header img {
-  width: 22%;
+button {
+  background: #066d4d;
+  color: #ffffff;
+  border: none;
+  padding: 10px 25px;
+  font-size: 15px;
+  border-radius: 6px;
+  cursor: pointer;
 }
+button:hover { background: #05523a; }
+@media print { .btn-container { display: none; } }
 
-/* HEADER INFO */
+/* الهيدر مع الشعار */
+.header {
+  width: 100%;
+  height: 160px;
+  background-color: #083024;
+  background-image: url('https://i.ibb.co/1fc5gB6v/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 40%;
+  margin-top: 60px;
+  display: flex;
+  align-items: flex-end;
+}
 .header-info {
   width: 95%;
-  align-items: center;
   display: flex;
   justify-content: space-between;
-  margin: 10px auto;
-  font-size: 12px;
-  color: #0d3b29;
+  padding: 8px 10px;
+  position: relative;
+  z-index: 2;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 600;
+  margin-bottom: 8px;
 }
 
-/* PAGE */
+/* الصفحة */
 .page {
   width: 100%;
-  max-width: 850px;
+  max-width: 830px;
   padding: 10px;
   margin: auto;
-  background: #fff;
 }
 
-/* INFO BOXES */
+/* بيانات أساسية */
 .info-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
+  grid-template-columns: repeat(auto-fit,minmax(120px,1fr));
   gap: 6px;
-  margin-bottom: 14px;
+  margin-bottom: 8px;
 }
 .info-box {
-  border: 1px solid #cdd5cf;
+  background-color: #eaf3ef;
   border-radius: 4px;
-  text-align: center;
   padding: 6px;
+  text-align: center;
   font-size: 11px;
-  background: #f9f9f9;
-}
-.info-box strong {
-  display: block;
-  font-weight: 700;
-  font-size: 12px;
-  color: #0d3b29;
+  font-weight: 600;
+  color: #083024;
 }
 
-/* MAIN BOXES */
-.section-full {
-  border: 1px solid #cdd5cf;
-  border-radius: 4px;
+/* الهدف التربوي */
+.objective-box {
+  background: #f2f9f6;
+  border: 2px solid #066d4d;
   padding: 10px;
-  margin-top: 10px;
-  background: #fff;
+  border-radius: 6px;
+  margin-bottom: 8px;
 }
-.section-title-full {
+.objective-title {
   text-align: center;
   font-size: 13px;
   font-weight: 700;
-  color: #0d3b29;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 4px;
   margin-bottom: 6px;
-}
-.section-content-full {
-  min-height: 70px;
-  white-space: pre-line;
-  line-height: 1.5;
-  color: #333;
-  font-size: 11px;
+  color: #083024;
+  border-bottom: 1px solid #066d4d;
 }
 
-/* paired boxes */
+/* مربعات التقرير */
 .report-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-top: 8px;
+  gap: 8px;
+  margin-bottom: 8px;
 }
 .report-box {
-  border: 1px solid #cdd5cf;
-  border-radius: 4px;
+  background-color: #ffffff;
+  border-radius: 6px;
   padding: 10px;
-  background: #fff;
-  min-height: 120px;
+  border: 1px solid #cdd5cf;
 }
-.box-title-inner {
-  font-weight: 700;
-  font-size: 12px;
-  margin-bottom: 6px;
+.report-box-title {
   text-align: center;
-  color: #0d3b29;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 3px;
+  font-size: 12px;
+  color: #083024;
+  font-weight: 700;
+  border-bottom: 1px solid #ccd9d0;
+  margin-bottom: 6px;
 }
 .report-box-content {
-  white-space: pre-line;
-  line-height: 1.5;
   font-size: 11px;
-  color: #333;
+  line-height: 1.5;
+  min-height: 70px;
 }
 
-/* Images */
+/* الصور */
 .image-evidence-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin-top: 15px;
-  gap: 10px;
+  gap: 8px;
 }
 .image-box {
-  border: 1px dashed #0d3b29;
-  border-radius: 4px;
   height: 100px;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border: 1px dashed #066d4d;
+  border-radius: 6px;
   font-size: 11px;
-  color: #0d3b29;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #066d4d;
 }
 </style>
 </head>
@@ -154,60 +163,61 @@ button:hover { background: #0a2d20; }
 <div id="report-content">
 
   <div class="header">
-    <img crossorigin="anonymous" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgAAAQkC...==">
-  </div>
-
-  <div class="header-info">
-    <div id="leader">قائد المدرسة:</div>
-    <div id="school">اسم المدرسة:</div>
-    <div id="date">التاريخ:</div>
+    <div class="header-info">
+      <div>قائد المدرسة:</div>
+      <div>اسم المدرسة:</div>
+      <div>التاريخ:</div>
+    </div>
   </div>
 
   <div class="page">
 
-    <div class="section-full">
-      <div class="section-title-full">الهدف التربوي</div>
-      <div class="section-content-full" id="goal"></div>
+    <div class="objective-box">
+      <div class="objective-title">الهدف التربوي</div>
+      <div id="goal"></div>
     </div>
 
     <div class="info-grid">
-      <div class="info-box"><strong>مكان التنفيذ</strong><span id="place"></span></div>
-      <div class="info-box"><strong>المادة</strong><span id="subject"></span></div>
-      <div class="info-box"><strong>الصف</strong><span id="grade"></span></div>
-      <div class="info-box"><strong>عدد الطلاب</strong><span id="students"></span></div>
-      <div class="info-box"><strong>الحضور</strong><span id="attendance"></span></div>
-      <div class="info-box"><strong>نوع التقرير</strong><span id="type"></span></div>
+      <div class="info-box">مكان التنفيذ</div>
+      <div class="info-box">المادة</div>
+      <div class="info-box">الصف</div>
+      <div class="info-box">عدد الطلاب</div>
+      <div class="info-box">الحضور</div>
+      <div class="info-box">نوع التقرير</div>
     </div>
 
     <div class="report-row">
       <div class="report-box">
-        <div class="box-title-inner">نبذة مختصرة</div>
+        <div class="report-box-title">نبذة مختصرة</div>
         <div class="report-box-content" id="box1"></div>
       </div>
+
       <div class="report-box">
-        <div class="box-title-inner">إجراءات التنفيذ</div>
+        <div class="report-box-title">إجراءات التنفيذ</div>
         <div class="report-box-content" id="box2"></div>
       </div>
     </div>
 
     <div class="report-row">
       <div class="report-box">
-        <div class="box-title-inner">استراتيجيات</div>
+        <div class="report-box-title">استراتيجيات</div>
         <div class="report-box-content" id="box3"></div>
       </div>
+
       <div class="report-box">
-        <div class="box-title-inner">نقاط القوة</div>
+        <div class="report-box-title">نقاط القوة</div>
         <div class="report-box-content" id="box4"></div>
       </div>
     </div>
 
     <div class="report-row">
       <div class="report-box">
-        <div class="box-title-inner">نقاط التحسين</div>
+        <div class="report-box-title">نقاط التحسين</div>
         <div class="report-box-content" id="box5"></div>
       </div>
+
       <div class="report-box">
-        <div class="box-title-inner">توصيات</div>
+        <div class="report-box-title">توصيات</div>
         <div class="report-box-content" id="box6"></div>
       </div>
     </div>
@@ -223,15 +233,13 @@ button:hover { background: #0a2d20; }
 <script>
 function downloadPDF(){
   var el = document.getElementById('report-content');
-  html2pdf()
-  .set({
-    margin:0,
-    filename:'report.pdf',
-    image:{type:'jpeg', quality:1},
-    html2canvas:{ scale:3, useCORS:true },
-    jsPDF:{ unit:'mm', format:'a4', orientation:'portrait' }
-  })
-  .from(el).save();
+  html2pdf().set({
+    margin: 0,
+    filename: 'report.pdf',
+    image: { type: 'jpeg', quality: 1 },
+    html2canvas: { scale: 3, useCORS: true },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  }).from(el).save();
 }
 </script>
 
