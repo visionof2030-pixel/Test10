@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <title>تقرير إشرافي</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
-
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{font-family:'Cairo',sans-serif;background:#ffffff;direction:rtl;}
 
@@ -34,49 +34,33 @@ position:relative;
 }
 
 .header-right-top{
-position:absolute;
-top:5px;right:10px;
-font-size:13px;
-color:#ffffff;
-font-weight:700;
+position:absolute;top:5px;right:10px;
+font-size:13px;color:#ffffff;font-weight:700;
 }
 
 .header-right-bottom{
-position:absolute;
-bottom:5px;right:10px;
-font-size:12px;
-color:#ffffff;
-font-weight:600;
+position:absolute;bottom:5px;right:10px;
+font-size:12px;color:#ffffff;font-weight:600;
 }
 
 .header-left-bottom{
-position:absolute;
-bottom:5px;left:10px;
-font-size:12px;
-color:#ffffff;
-font-weight:600;
-text-align:left;
-direction:ltr;
+position:absolute;bottom:5px;left:10px;
+font-size:12px;color:#ffffff;font-weight:600;
+text-align:left;direction:ltr;
 }
 
 .page{
-width:100%;
-max-width:830px;
-padding:10px;
-margin:auto;
+width:100%;max-width:830px;padding:10px;margin:auto;
 }
 
 .info-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
 gap:6px;margin-bottom:14px;
 }
-
 .info-box{
 background:#eaf3ef;border-radius:4px;
-padding:6px;font-size:11px;
-font-weight:600;color:#083024;
-text-align:center;
+padding:6px;font-size:11px;font-weight:600;
+color:#083024;text-align:center;
 }
 
 .objective-box{
@@ -138,8 +122,7 @@ min-height:50px;
 <body>
 
 <div class="btn-container">
-<button onclick="window.print()">طباعة</button>
-<button onclick="downloadPDF()">تنزيل PDF</button>
+<button onclick="downloadPDFWhatsApp()">مشاركة PDF عبر واتساب</button>
 </div>
 
 <div id="report-content">
@@ -216,18 +199,32 @@ min-height:50px;
 </div>
 
 <script>
-function downloadPDF(){
-var el=document.getElementById('report-content');
-html2pdf().set({
+async function downloadPDFWhatsApp(){
+const el=document.getElementById("report-content");
+const options={
 margin:0,
-filename:'report.pdf',
-image:{type:'jpeg',quality:1},
+filename:"report.pdf",
+image:{type:"jpeg",quality:1},
 html2canvas:{scale:3,useCORS:true},
-jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}
-}).from(el).save();
+jsPDF:{unit:"mm",format:"a4",orientation:"portrait"}
+};
+const worker=html2pdf().set(options).from(el);
+
+const pdfBlob=await worker.outputPdf("blob");
+const file=new File([pdfBlob],"report.pdf",{type:"application/pdf"});
+
+// دعم Web Share API
+if(navigator.share){
+navigator.share({
+title:"تقرير إشرافي",
+files:[file]
+});
+}else{
+alert("جهازك لا يدعم المشاركة المباشرة. سيتم حفظ الملف.");
+worker.save();
+}
 }
 
-// تاريخ ميلادي + هجري عبر API أم القرى
 async function loadDates(){
 let g=new Date();
 let gy=g.getFullYear(),gm=g.getMonth()+1,gd=g.getDate();
