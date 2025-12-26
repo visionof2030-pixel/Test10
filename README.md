@@ -41,8 +41,9 @@ gap:6px;margin-bottom:14px;
 }
 .info-box{
 background:#eaf3ef;border-radius:4px;
-padding:6px;font-size:11px;font-weight:600;
-color:#083024;text-align:center;height:40px;display:flex;align-items:center;justify-content:center;
+font-size:11px;font-weight:600;
+color:#083024;text-align:center;
+height:40px;display:flex;align-items:center;justify-content:center;
 }
 
 .icon-title{
@@ -53,38 +54,37 @@ gap:6px;color:#083024;font-size:13px;font-weight:700;
 
 .objective-box{
 background:#f2f9f6;border:2px solid #066d4d;
-padding:10px 12px;border-radius:6px;margin-bottom:16px;
-height:108px;overflow:hidden;
+padding:8px 10px;border-radius:6px;margin-bottom:14px;
+height:118px;overflow:hidden;
 }
 .objective-box .icon-title{
 border-bottom:1px solid #066d4d;
-padding-bottom:4px;margin-bottom:6px;
+padding-bottom:3px;margin-bottom:5px;
 }
 
 .report-row{
 display:grid;grid-template-columns:1fr 1fr;
-gap:12px;margin-bottom:14px;
+gap:10px;margin-bottom:12px;
 }
 .report-box{
 background:#ffffff;border-radius:6px;
-padding:10px;border:1px solid #cdd5cf;
-height:130px;overflow:hidden;
-position:relative;
+padding:8px;border:1px solid #cdd5cf;
+height:118px;overflow:hidden;
 }
 .report-box-title{
-margin-bottom:4px;padding-bottom:4px;
+margin-bottom:4px;padding-bottom:3px;
 border-bottom:1px solid #ccd9d0;font-size:12px;
 }
 .report-box-content{
-font-size:10px;line-height:1.4;height:95px;overflow:hidden;
+font-size:10px;line-height:1.3;height:85px;overflow:hidden;
 }
 
 .image-evidence-grid{
 display:grid;grid-template-columns:1fr 1fr;
-gap:10px;margin-top:10px;
+gap:8px;margin-top:8px;
 }
 .image-box{
-height:80px;border:1px dashed #066d4d;
+height:75px;border:1px dashed #066d4d;
 border-radius:6px;font-size:10px;
 display:flex;align-items:center;justify-content:center;
 color:#066d4d;overflow:hidden;
@@ -97,14 +97,14 @@ gap:20px;
 }
 .signature-box{text-align:center;font-size:11px;color:#083024;font-weight:600;}
 .signature-line{
-margin-top:15px;border-top:1px solid #083024;
+margin-top:10px;border-top:1px solid #083024;
 width:80%;margin-inline:auto;font-size:10px;margin-bottom:4px;text-align:center;
 }
 
 .footer{
 width:100%;background:#083024;color:#ffffff;
 text-align:center;font-size:10px;padding:3px 0;
-margin-top:20px;border-radius:4px;
+margin-top:18px;border-radius:4px;
 }
 </style>
 </head>
@@ -240,9 +240,8 @@ jsPDF:{unit:"mm",format:"a4",orientation:"portrait"}
 }).from(el);
 const blob=await pdf.outputPdf("blob");
 const file=new File([blob],"report.pdf",{type:"application/pdf"});
-if(navigator.share){
-navigator.share({title:"تقرير إشرافي",files:[file]});
-}else{pdf.save();}
+if(navigator.share){navigator.share({title:"تقرير إشرافي",files:[file]});}
+else{pdf.save();}
 }
 
 async function loadDates(){
