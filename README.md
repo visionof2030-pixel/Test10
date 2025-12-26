@@ -12,19 +12,135 @@ html, body { font-family: 'Cairo', sans-serif; direction: rtl; background: #ffff
 button { background: #0d3b29; color: #ffffff; border: none; padding: 10px 25px; font-size: 14px; border-radius: 4px; cursor: pointer; }
 button:hover { background: #0a2d20; }
 @media print { .btn-container { display: none; } }
-.header { width: 100%; height: 130px; background: #0d3b29; display: flex; justify-content: center; align-items: center; }
-.header span { color: #fff; font-size: 20px; font-weight: 700; }
-.header-info { width: 95%; align-items: center; display: flex; justify-content: space-between; margin: 10px auto; font-size: 12px; color: #0d3b29; }
-.page { width: 100%; max-width: 850px; padding: 10px; margin: auto; background: #fff; }
-.info-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); gap: 6px; margin-bottom: 14px; }
-.info-box { border: 1px solid #cdd5cf; border-radius: 4px; text-align: center; padding: 6px; font-size: 11px; background: #f9f9f9; }
-.info-box strong { display: block; font-weight: 700; font-size: 12px; color: #0d3b29; }
-.report-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
-.report-box { border: 1px solid #cdd5cf; border-radius: 4px; padding: 10px; font-size: 11px; min-height: 120px; background: #fff; }
-.box-title-inner { font-weight: 700; font-size: 12px; margin-bottom: 6px; text-align: center; color: #0d3b29; border-bottom: 1px solid #ddd; padding-bottom: 3px; }
-.report-box-content { white-space: pre-line; line-height: 1.5; font-size: 11px; color: #333; padding-top: 4px; }
-.image-evidence-grid { display: grid; grid-template-columns: 1fr 1fr; margin-top: 15px; gap: 10px; }
-.image-box { border: 1px dashed #0d3b29; border-radius: 4px; height: 100px; text-align: center; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #0d3b29; }
+
+/* HEADER */
+.header {
+  width: 100%;
+  height: 120px;
+  background: #0d3b29;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header img {
+  width: 22%;
+}
+
+/* HEADER INFO */
+.header-info {
+  width: 95%;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px auto;
+  font-size: 12px;
+  color: #0d3b29;
+}
+
+/* PAGE */
+.page {
+  width: 100%;
+  max-width: 850px;
+  padding: 10px;
+  margin: auto;
+  background: #fff;
+}
+
+/* INFO BOXES */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.info-box {
+  border: 1px solid #cdd5cf;
+  border-radius: 4px;
+  text-align: center;
+  padding: 6px;
+  font-size: 11px;
+  background: #f9f9f9;
+}
+.info-box strong {
+  display: block;
+  font-weight: 700;
+  font-size: 12px;
+  color: #0d3b29;
+}
+
+/* MAIN BOXES */
+.section-full {
+  border: 1px solid #cdd5cf;
+  border-radius: 4px;
+  padding: 10px;
+  margin-top: 10px;
+  background: #fff;
+}
+.section-title-full {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #0d3b29;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 4px;
+  margin-bottom: 6px;
+}
+.section-content-full {
+  min-height: 70px;
+  white-space: pre-line;
+  line-height: 1.5;
+  color: #333;
+  font-size: 11px;
+}
+
+/* paired boxes */
+.report-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 8px;
+}
+.report-box {
+  border: 1px solid #cdd5cf;
+  border-radius: 4px;
+  padding: 10px;
+  background: #fff;
+  min-height: 120px;
+}
+.box-title-inner {
+  font-weight: 700;
+  font-size: 12px;
+  margin-bottom: 6px;
+  text-align: center;
+  color: #0d3b29;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 3px;
+}
+.report-box-content {
+  white-space: pre-line;
+  line-height: 1.5;
+  font-size: 11px;
+  color: #333;
+}
+
+/* Images */
+.image-evidence-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 15px;
+  gap: 10px;
+}
+.image-box {
+  border: 1px dashed #0d3b29;
+  border-radius: 4px;
+  height: 100px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: #0d3b29;
+}
 </style>
 </head>
 
@@ -38,7 +154,7 @@ button:hover { background: #0a2d20; }
 <div id="report-content">
 
   <div class="header">
-    <span>وزارة التعليم</span>
+    <img crossorigin="anonymous" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgAAAQkC...==">
   </div>
 
   <div class="header-info">
@@ -48,6 +164,11 @@ button:hover { background: #0a2d20; }
   </div>
 
   <div class="page">
+
+    <div class="section-full">
+      <div class="section-title-full">الهدف التربوي</div>
+      <div class="section-content-full" id="goal"></div>
+    </div>
 
     <div class="info-grid">
       <div class="info-box"><strong>مكان التنفيذ</strong><span id="place"></span></div>
@@ -63,7 +184,6 @@ button:hover { background: #0a2d20; }
         <div class="box-title-inner">نبذة مختصرة</div>
         <div class="report-box-content" id="box1"></div>
       </div>
-
       <div class="report-box">
         <div class="box-title-inner">إجراءات التنفيذ</div>
         <div class="report-box-content" id="box2"></div>
@@ -75,7 +195,6 @@ button:hover { background: #0a2d20; }
         <div class="box-title-inner">استراتيجيات</div>
         <div class="report-box-content" id="box3"></div>
       </div>
-
       <div class="report-box">
         <div class="box-title-inner">نقاط القوة</div>
         <div class="report-box-content" id="box4"></div>
@@ -87,7 +206,6 @@ button:hover { background: #0a2d20; }
         <div class="box-title-inner">نقاط التحسين</div>
         <div class="report-box-content" id="box5"></div>
       </div>
-
       <div class="report-box">
         <div class="box-title-inner">توصيات</div>
         <div class="report-box-content" id="box6"></div>
