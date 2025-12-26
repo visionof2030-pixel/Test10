@@ -11,14 +11,10 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{font-family:'Cairo',sans-serif;background:#ffffff;direction:rtl;overflow-x:hidden;}
 
-/* نفس عرض التقرير */
 .wrapper{
-max-width:830px;
-margin:auto;
-padding:15px;
+max-width:830px;margin:auto;padding:15px;
 }
 
-/* لجعل زر التنزيل مثبت بالأعلى */
 .btn-container{
 text-align:center;padding:12px;background:#f5f5f5;position:fixed;top:0;left:0;width:100%;z-index:20;
 display:flex;gap:10px;justify-content:center;flex-wrap:wrap;box-shadow:0 3px 6px rgba(0,0,0,0.25);
@@ -30,13 +26,15 @@ flex:1;min-width:140px;max-width:200px;
 
 .input-section{
 background:#f8fdfb;padding:15px;border-radius:10px;margin-top:90px;border:1px solid #e0f0ea;
-width:100%;
+max-width:100%;
 }
 
 label{font-size:15px;font-weight:700;margin-top:15px;display:block;color:#083024;}
+
 input,select,textarea{
 width:100%;padding:12px;margin-top:6px;border:2px solid #066d4d;border-radius:8px;font-size:15px;background:#ffffff;
 }
+
 textarea{height:85px;resize:none;font-size:15px !important;line-height:1.7;}
 
 .auto-buttons{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;}
@@ -45,7 +43,6 @@ padding:7px 10px;background:#066d4d;border:none;color:#fff;cursor:pointer;border
 flex:1;min-width:50px;
 }
 
-/********** Responsive **********/
 @media (max-width:600px){
 button.main-btn{min-width:100px;font-size:13px;padding:10px;}
 .info-grid,.info-grid2{grid-template-columns:repeat(2,1fr);}
@@ -53,7 +50,11 @@ button.main-btn{min-width:100px;font-size:13px;padding:10px;}
 .image-evidence-grid{grid-template-columns:1fr;}
 }
 
-/********** تقرير **********/
+/********** جعل خانات الإدخال مطابقة لعرض التقرير **********/
+body{display:flex;justify-content:center;}
+.input-section{max-width:830px !important;margin:0 auto !important;}
+input,select,textarea{width:100% !important;}
+
 #report-content{width:100%;margin:20px auto;}
 
 .header{background:#083024;padding:10px;min-height:120px;position:relative;color:#fff;text-align:center;}
@@ -101,6 +102,7 @@ display:flex;align-items:center;justify-content:center;background:#fff;overflow:
 .signature-line{margin-top:8px;border-top:1px solid #083024;width:80%;margin:auto;margin-bottom:4px;}
 
 .footer{text-align:center;font-size:10px;padding:6px;margin-top:20px;background:#083024;color:#fff;}
+
 </style>
 </head>
 
@@ -159,13 +161,13 @@ display:flex;align-items:center;justify-content:center;background:#fff;overflow:
 
 <script>
 const autoTexts={
-goal:["تنمية مهارات الطلاب من خلال أنشطة تعليمية تفاعلية تعزز التفكير والمعرفة بشكل فعال وواضح للجميع."],
-summary:["تم تنفيذ النشاط داخل الصف بمشاركة جميع الطلاب وتوظيف وسائل تعليمية محفزة عززت التعلم."],
-steps:["تقديم شرح للمفهوم الرئيس ثم تقسيم الطلاب إلى مجموعات للعمل التعاوني."],
-strategies:["التعلم التعاوني والعصف الذهني وتقويم المهارات بشكل منظم."],
-strengths:["مشاركة فعالة من الطلاب داخل النشاط وتحسن ملحوظ في الفهم."],
-improve:["زيادة وقت الأنشطة التفاعلية والاستراتيجيات الداعمة للطلاب المتأخرين."],
-recomm:["تعزيز استخدام التقنية والاستمرار في تنفيذ الأنشطة الصفية الهادفة."]
+goal:["تنمية مهارات الطلاب من خلال أنشطة تعليمية تفاعلية تعزز التفكير والمعرفة."],
+summary:["تم تنفيذ النشاط داخل الصف بمشاركة جميع الطلاب وتحفيز التعلم."],
+steps:["شرح المفهوم وتقسيم الطلاب إلى مجموعات تعاونية."],
+strategies:["التعلم التعاوني والعصف الذهني وتوظيف الوسائل التعليمية."],
+strengths:["مشاركة فعالة من الطلاب وتحسن ملحوظ في مستوى الفهم."],
+improve:["زيادة الأنشطة التفاعلية ودعم الطلاب المتأخرين أكاديمياً."],
+recomm:["الاستمرار في تنفيذ الأنشطة التقنية والتعليمية التفاعلية."]
 };
 function autoFill(x){document.getElementById(x).value=autoTexts[x].join(" ");updateReport();}
 </script>
@@ -212,8 +214,7 @@ function autoFill(x){document.getElementById(x).value=autoTexts[x].join(" ");upd
 <div class="header">
 <img src="https://i.ibb.co/1fc5gB6v/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png">
 <div class="header-left-bottom">
-<span id="hDate"></span>
-<br>
+<span id="hDate"></span><br>
 <span id="gDate"></span>
 </div>
 </div>
@@ -323,7 +324,6 @@ window.open(`https://wa.me/?text=${encodeURIComponent(url)}`);
 }
 }
 
-/***** التاريخ الهجري + الميلادي *****/
 async function loadDates(){
 let g=new Date();
 gDate.innerText=`${g.getDate()}-${g.getMonth()+1}-${g.getFullYear()} م`;
