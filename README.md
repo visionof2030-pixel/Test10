@@ -21,10 +21,19 @@ width:100%;padding:12px;margin-top:6px;border:2px solid #066d4d;border-radius:8p
 }
 textarea{height:85px;resize:none;font-size:15px !important;line-height:1.7;}
 
-.auto-buttons{text-align:center;margin-top:8px;}
+@media (max-width:600px){
+.input-section{padding:10px;}
+.auto-buttons button{flex:100%;}
+button.main-btn{min-width:100px;font-size:13px;padding:10px;}
+.info-grid,.info-grid2{grid-template-columns:repeat(2,1fr);}
+.report-row{grid-template-columns:1fr;}
+.image-evidence-grid{grid-template-columns:1fr;}
+}
+
+.auto-buttons{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;}
 .auto-buttons button{
 padding:7px 10px;background:#066d4d;border:none;color:#fff;cursor:pointer;border-radius:5px;
-font-size:12px;font-weight:bold;
+font-size:12px;font-weight:bold;flex:1;min-width:50px;
 }
 
 .btn-container{
@@ -48,7 +57,7 @@ position:absolute;color:#ffffff;font-weight:700;
 .header-right-top{top:6px;right:12px;font-size:13px;}
 .header-right-bottom{bottom:6px;right:12px;font-size:12px;font-weight:600;}
 .header-left-bottom{
-top:6px;left:12px;font-size:12px;font-weight:600;text-align:center;
+bottom:6px;left:12px;font-size:12px;font-weight:600;text-align:center;
 display:flex;flex-direction:column;line-height:1.2;
 }
 
@@ -106,9 +115,7 @@ display:flex;align-items:center;justify-content:center;background:#ffffff;overfl
 <div class="container">
 <div class="input-section">
 
-<label>اسم المدرسة</label>
-<input id="school" oninput="updateReport()" placeholder="اكتب اسم المدرسة">
-
+<div class="input-group">
 <label>إدارة التعليم</label>
 <select id="education" oninput="updateReport()">
 <option value="">اختر الإدارة</option>
@@ -122,8 +129,11 @@ display:flex;align-items:center;justify-content:center;background:#ffffff;overfl
 <option>تقرير نشاط إثرائي</option>
 <option>أخرى</option>
 </select>
-<input id="reportTypeInput" oninput="updateReport()" placeholder="اكتب اسم التقرير يدوياً" style="display:none;">
 
+<input id="reportTypeInput" oninput="updateReport()" placeholder="اكتب اسم التقرير يدوياً" style="display:none;">
+</div>
+
+<div class="input-group">
 <label>الصف</label>
 <input id="grade" oninput="updateReport()" placeholder="مثال: 5/3">
 
@@ -133,18 +143,23 @@ display:flex;align-items:center;justify-content:center;background:#ffffff;overfl
 <option>الأول</option>
 <option>الثاني</option>
 </select>
+</div>
 
+<div class="input-group">
 <label>المادة</label>
 <input id="subject" oninput="updateReport()" placeholder="مثال: لغتي – علوم – رياضيات">
 
 <label>المستهدفون</label>
 <input id="target" oninput="updateReport()" placeholder="مثال: جميع طلاب الصف">
+</div>
 
+<div class="input-group">
 <label>عدد الحضور</label>
 <input id="count" oninput="updateReport()" placeholder="مثال: 25 طالب">
 
 <label>مكان التنفيذ</label>
-<input id="place" oninput="updateReport()" placeholder="مثال: داخل الصف – المختبر – مصادر التعلم">
+<input id="place" oninput="updateReport()" placeholder="مثال: داخل الصف – المختبر – قاعة مصادر التعلم">
+</div>
 
 <label>اسم المعلم</label>
 <input id="teacher" oninput="updateReport()" placeholder="مثال: فهد الخالدي">
@@ -153,98 +168,80 @@ display:flex;align-items:center;justify-content:center;background:#ffffff;overfl
 <input id="principal" oninput="updateReport()" placeholder="مثال: نايف اللحياني">
 
 <script>
-let autoTexts={
+const autoTexts={
+goal:[
+"تنمية مهارات الطلاب من خلال أنشطة تعليمية تفاعلية تعزز التفكير والمعرفة بشكل فعال وواضح للجميع."
+],
 summary:[
-"تم تنفيذ النشاط وفق خطة تعليمية واضحة لتعزيز التعلم النشط وإتاحة فرص متنوعة.<br>شارك الطلاب بفاعلية وظهر اهتمامهم بالمحتوى وتحقيق نواتج التعلم المطلوبة بشكل ملحوظ.",
-"ركز النشاط على رفع مستوى المشاركة وتحسين مهارات التفكير العليا عبر استراتيجيات مناسبة.<br>ساهم توظيف الوسائل التعليمية في توضيح المفاهيم وتحقيق التفاعل الإيجابي المنتظر.",
-"اشتمل النشاط على ممارسات تعليمية عملية هدفت لتنمية الفهم العميق وزيادة الدافعية.<br>أظهر الطلاب تجاوباً كبيراً مع الأسئلة وأنشطة التقويم خلال التنفيذ بشكل فعال.",
-"سعى النشاط لتحقيق بيئة تعليمية محفزة تعتمد على توظيف الأنشطة التشاركية المتنوعة.<br>أسهم توزيع المهام في تعزيز المسؤولية الفردية والجماعية لدى الطلاب بشكل جيد.",
-"جاء النشاط وفق معايير الجودة في التعليم مع مراعاة الفروق الفردية بين الطلاب المشاركين.<br>أظهر أغلب الطلاب تقدماً واضحاً بالمهارات المستهدفة خلال فترة التنفيذ المحددة."
+"تم تنفيذ النشاط داخل الصف بمشاركة جميع الطلاب وتوظيف وسائل تعليمية محفزة عززت التعلم.",
+"تميز النشاط بتفاعل الطلاب الإيجابي وفهمهم للمفهوم المطلوب بشكل واضح ومنظم."
 ],
 steps:[
-"تقديم توجيهات أولية توضح أهداف النشاط وتعليمات الأداء بصورة تفصيلية واضحة للطلاب.<br>متابعة خطوات التنفيذ عملياً والتأكد من التزام الطلاب بالمهام الموكلة لكل مرحلة.",
-"تهيئة الطلاب بطرح أسئلة تمهيدية ترتبط بالمفهوم وتحفز الاستنتاج الذاتي للمحتوى.<br>تنفيذ العمل التعاوني داخل المجموعات مع تقديم تغذية راجعة فورية ومباشرة.",
-"شرح المهمة التعليمية وفق أساليب عرض مناسبة وإدارة الوقت بكفاءة عالية ومنظمة.<br>إتاحة الفرصة للطلاب لتطبيق المهارات عملياً ثم تقويم الأداء بأساليب بناءة.",
-"عرض أمثلة تطبيقية ذات صلة مباشرة بموضوع الدرس وبناء تصور أوضح للطلاب.<br>تحليل إجابات الطلاب ومعالجة الأخطاء وتثبيت المعلومات الصحيحة في الختام.",
-"تنظيم مراحل العمل بصورة تدريجية تضمن الفهم السليم قبل الانتقال للمستويات الأعلى.<br>تحفيز النقاش الإيجابي ومتابعة التفاعل وملاحظة تقدم الطلبة أثناء المشاركة."
+"تقديم شرح للمفهوم الرئيس ثم تقسيم الطلاب إلى مجموعات للعمل التعاوني.",
+"تنفيذ نشاط تطبيقي وطرح أسئلة لمعرفة مدى الفهم والتقدم لدى الطلاب."
 ],
 strategies:[
-"تطبيق التعلم التعاوني بأسلوب يعزز تبادل الخبرات والآراء بين الطلاب بصورة فعالة.<br>استخدام استراتيجيات التحفيز لدعم التركيز وزيادة دافعية المشاركة أثناء النشاط.",
-"الاعتماد على الاستقصاء والاكتشاف لتشجيع التفكير النقدي والوصول للحلول المناسبة.<br>تعزيز التعلم الذاتي من خلال المهام الفردية الهادفة للمسؤولية الشخصية.",
-"تنويع طرق العرض باستخدام الوسائط التعليمية الحديثة لتحقيق جودة في الإدراك.<br>توظيف الأسئلة المفتوحة لرفع مستوى الحوار وتطوير مهارات التواصل بين الطلاب.",
-"تفعيل العصف الذهني لاستثمار الخبرات السابقة وتوليد أفكار جديدة مرتبطة بالدرس.<br>التركيز على مشاركة جميع الطلاب لضمان تعميم الفائدة دون استثناء.",
-"استخدام المحاكاة والتجارب العملية لربط المعرفة النظرية بالواقع المحسوس للطلاب.<br>متابعة الأداء وتقديم إرشادات مباشرة لتحسين جودة التنفيذ أثناء النشاط."
+"التعلم التعاوني بين الطلاب ودعم مهارات التواصل بينهم بشكل فعال.",
+"العصف الذهني وتقويم المهارات بشكل منهجي واضح يمكن تتبعه."
 ],
 strengths:[
-"إقبال واضح من الطلاب على المشاركة في النشاط وتفاعل بناء يعكس فهمهم للمهمة.<br>تحسن في مهارات الاتصال والعمل الجماعي واستخدام طرق تعلم فعّالة.",
-"تحقيق الأهداف التعليمية المقررة بفضل التنظيم الجيد وتوفر الوقت الكافي للنشاط.<br>الطلاب أظهروا سلوكاً إيجابياً واهتماماً ملحوظاً أثناء تنفيذ جميع المهام.",
-"وضوح إرشادات المعلم وسهولة المتابعة أسهما في رفع مستوى التركيز لدى الطلاب.<br>عرض الوسائل التعليمية ساعد في استيعاب المفهوم بطريقة مبسطة ومباشرة.",
-"وجود دافعية قوية لدى الطلاب شجعت على الإبداع والمبادرة في عززت نتائج التعلم.<br>العمل التعاوني كان له أثر كبير في تعزيز مهارات التواصل والثقة بالنفس.",
-"توفر بيئة صفية محفزة أسهمت في تحقيق جودة الأداء والتزام الطلاب بالقواعد.<br>استخدام أدوات تقويم مناسبة ساعد في قياس تقدم الطلاب بصورة واقعية."
+"مشاركة فعالة من الطلاب داخل النشاط وإظهار سلوك إيجابي مميز.",
+"تحقيق الأهداف المخطط لها وتحسن ملحوظ في مستوى الفهم للدرس."
 ],
 improve:[
-"زيادة تخصيص الوقت للأنشطة التطبيقية لتحقيق الاستفادة القصوى داخل الصف الدراسي.<br>تقديم فرص أكبر للطلاب المتأخرين لمواكبة مستوى بقية زملائهم بنجاح.",
-"مراجعة توزيع المهام لضمان عدالة المشاركة بين جميع الطلاب دون استثناء.<br>التوسع في استخدام الوسائل التعليمية الرقمية لدعم التفاعل المستمر.",
-"تطوير المحتوى بإضافة أسئلة بمستويات تفكير أعلى تناسب قدرات جميع الطلاب.<br>تنويع طرائق التقويم لتحسين جودة النتائج بصورة أدق وأكثر شمولا.",
-"رفع مستوى الدعم الفردي للطلاب الذين يحتاجون إرشاداً إضافياً أثناء النشاط.<br>تحسين إدارة الوقت لضمان استكمال جميع مراحل النشاط بفاعلية أكبر.",
-"تعزيز التنسيق بين أفراد المجموعات لتنمية القيادة والتعاون بصورة أفضل.<br>إثراء النشاط بمصادر تعليمية مرتبطة بالواقع لزيادة الإقناع والتحفيز."
+"زيادة وقت تنفيذ الأنشطة التفاعلية ليستفيد الطلاب بشكل أكبر.",
+"تطوير الأساليب المستخدمة لدعم الطلاب المتأخرين أكاديمياً."
 ],
 recomm:[
-"الاستمرار في تطبيق الأنشطة التفاعلية التي تضمن مشاركة جميع الطلاب بفاعلية عالية.<br>دعم البرامج التدريبية للمعلمين لتحسين جودة التخطيط والتنفيذ التربوي.",
-"التركيز على توظيف التقنية التعليمية الحديثة وإدخال وسائل رقمية مبتكرة متنوعة.<br>تعزيز التحفيز السلوكي للطلاب لتحسين مهارات التعلم الذاتي المنظم.",
-"العمل على تصميم أنشطة متدرجة تراعي الفروق الفردية بين الطلاب بصورة أدق.<br>تفعيل الموارد التعليمية المتاحة بطرق تدعم تحقيق نواتج التعلم المطلوبة.",
-"تطوير محتوى الدروس بإضافة تجارب عملية تزيد ارتباط المعرفة بواقع المتعلمين.<br>توسيع فرص الممارسة والتقويم البنائي خلال النشاط بصورة مستمرة.",
-"تشجيع المبادرات التعليمية التي تنمي الإبداع والابتكار لدى الطلاب بكفاءة عالية.<br>تطبيق استراتيجيات تربوية تساعد على تعزيز الثقة وتحقيق الاعتماد الذاتي."
+"الاستمرار في تطبيق الأنشطة التربوية الهادفة داخل الصف الدراسي.",
+"تعزيز استخدام التقنية في التعليم لتحقيق نواتج تعلم أفضل."
 ]
 };
 
-let indexes={summary:0,steps:0,strategies:0,strengths:0,improve:0,recomm:0};
-
-function changeText(field){
-indexes[field]=(indexes[field]+1)%5;
-document.getElementById(field).value=autoTexts[field][indexes[field]];
+function autoFill(field){
+document.getElementById(field).value=autoTexts[field].join(" ");
 updateReport();
 }
 
 function handleReportType(){
 if(reportType.value==="أخرى"){
 reportTypeInput.style.display="block";
-document.getElementById("reportTypeBox").innerText=reportTypeInput.value;
+reportTypeBox.innerText=reportTypeInput.value;
 } else {
 reportTypeInput.style.display="none";
-document.getElementById("reportTypeBox").innerText=reportType.value;
+reportTypeBox.innerText=reportType.value;
 }
 updateReport();
 }
-
 </script>
 
 <label>الهدف التربوي</label>
 <textarea id="goal" oninput="updateReport()"></textarea>
+<div class="auto-buttons"><button onclick="autoFill('goal')">تعبئة</button></div>
 
 <label>نبذة مختصرة</label>
 <textarea id="summary" oninput="updateReport()"></textarea>
-<div class="auto-buttons"><button onclick="changeText('summary')">اضغط لتغيير النص</button></div>
+<div class="auto-buttons"><button onclick="autoFill('summary')">تعبئة</button></div>
 
 <label>إجراءات التنفيذ</label>
 <textarea id="steps" oninput="updateReport()"></textarea>
-<div class="auto-buttons"><button onclick="changeText('steps')">اضغط لتغيير النص</button></div>
+<div class="auto-buttons"><button onclick="autoFill('steps')">تعبئة</button></div>
 
 <label>الاستراتيجيات</label>
 <textarea id="strategies" oninput="updateReport()"></textarea>
-<div class="auto-buttons"><button onclick="changeText('strategies')">اضغط لتغيير النص</button></div>
+<div class="auto-buttons"><button onclick="autoFill('strategies')">تعبئة</button></div>
 
 <label>نقاط القوة</label>
 <textarea id="strengths" oninput="updateReport()"></textarea>
-<div class="auto-buttons"><button onclick="changeText('strengths')">اضغط لتغيير النص</button></div>
+<div class="auto-buttons"><button onclick="autoFill('strengths')">تعبئة</button></div>
 
 <label>نقاط التحسين</label>
 <textarea id="improve" oninput="updateReport()"></textarea>
-<div class="auto-buttons"><button onclick="changeText('improve')">اضغط لتغيير النص</button></div>
+<div class="auto-buttons"><button onclick="autoFill('improve')">تعبئة</button></div>
 
 <label>التوصيات</label>
 <textarea id="recomm" oninput="updateReport()"></textarea>
-<div class="auto-buttons"><button onclick="changeText('recomm')">اضغط لتغيير النص</button></div>
+<div class="auto-buttons"><button onclick="autoFill('recomm')">تعبئة</button></div>
 
 <label>الصورة 1</label>
 <input type="file" accept="image/*" onchange="loadImage(this,'imgBox1')">
@@ -258,7 +255,7 @@ updateReport();
 <div class="header">
 <img src="https://i.ibb.co/1fc5gB6v/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png">
 <div class="header-right-top" id="educationBox"></div>
-<div class="header-right-bottom" id="schoolBox"></div>
+<div class="header-right-bottom">مدرسة سعيد بن العاص</div>
 <div class="header-left-bottom">
 <span id="hDate"></span>
 <span id="gDate"></span>
@@ -321,30 +318,27 @@ updateReport();
 
 <script>
 function updateReport(){
-document.getElementById("educationBox").innerText=education.value;
-document.getElementById("termBox").innerText=term.value;
-document.getElementById("gradeBox").innerText=grade.value;
-document.getElementById("subjectBox").innerText=subject.value;
-document.getElementById("targetBox").innerText=target.value;
-document.getElementById("countBox").innerText=count.value;
-document.getElementById("placeBox").innerText=place.value;
-document.getElementById("teacherBox").innerText=teacher.value;
-document.getElementById("principalBox").innerText=principal.value;
-document.getElementById("schoolBox").innerText=school.value;
-
+educationBox.innerText=education.value;
+termBox.innerText=term.value;
+gradeBox.innerText=grade.value;
+subjectBox.innerText=subject.value;
+targetBox.innerText=target.value;
+countBox.innerText=count.value;
+placeBox.innerText=place.value;
+teacherBox.innerText=teacher.value;
+principalBox.innerText=principal.value;
 if(reportType.value==="أخرى"){
-document.getElementById("reportTypeBox").innerText=reportTypeInput.value;
+reportTypeBox.innerText=reportTypeInput.value;
 }else{
-document.getElementById("reportTypeBox").innerText=reportType.value;
+reportTypeBox.innerText=reportType.value;
 }
-
-document.getElementById("goalBox").innerHTML=goal.value.replace(/\n/g,"<br>");
-document.getElementById("summaryBox").innerHTML=summary.value.replace(/\n/g,"<br>");
-document.getElementById("stepsBox").innerHTML=steps.value.replace(/\n/g,"<br>");
-document.getElementById("strategiesBox").innerHTML=strategies.value.replace(/\n/g,"<br>");
-document.getElementById("strengthsBox").innerHTML=strengths.value.replace(/\n/g,"<br>");
-document.getElementById("improveBox").innerHTML=improve.value.replace(/\n/g,"<br>");
-document.getElementById("recommBox").innerHTML=recomm.value.replace(/\n/g,"<br>");
+goalBox.innerText=goal.value;
+summaryBox.innerText=summary.value;
+stepsBox.innerText=steps.value;
+strategiesBox.innerText=strategies.value;
+strengthsBox.innerText=strengths.value;
+improveBox.innerText=improve.value;
+recommBox.innerText=recomm.value;
 }
 
 function loadImage(input,target){
@@ -383,13 +377,11 @@ window.open(`https://wa.me/?text=${encodeURIComponent(url)}`);
 async function loadDates(){
 let g=new Date();
 let gd=`${g.getFullYear()}-${g.getMonth()+1}-${g.getDate()}`;
-document.getElementById("gDate").innerText=
-`${g.getDate()} ${g.toLocaleString('ar-SA',{month:'long'})} ${g.getFullYear()} م`;
+gDate.innerText=`${g.getDate()}-${g.getMonth()+1}-${g.getFullYear()} م`;
 let r=await fetch(`https://api.aladhan.com/v1/gToH?date=${gd}`);
 let d=await r.json();
-let hijri=d.data.hijri;
-document.getElementById("hDate").innerText=
-`${hijri.day} ${hijri.month.ar} ${hijri.year} هـ`;
+let h=d.data.hijri;
+hDate.innerText=`${h.weekday.ar} ${h.day} ${h.month.ar} ${h.year} هـ`;
 }
 loadDates();
 </script>
