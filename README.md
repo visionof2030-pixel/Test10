@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -53,24 +53,27 @@ body{display:flex;justify-content:center;}
 
 /*********** HEADER ***********/
 .header{
-background:#083024;padding:8px;min-height:130px;position:relative;
+background:#083024;padding:8px;min-height:140px;position:relative;
 color:#fff;text-align:center;overflow:hidden;
 display:flex;align-items:center;justify-content:center;
 }
 .header img{width:155px;opacity:.97;}
 
+/* اسم المدرسة */
+.header-school-title{
+position:absolute;bottom:36px;right:8px;font-size:12px;font-weight:600;
+}
 .header-school{
-position:absolute;bottom:6px;right:10px;
-font-size:13px;font-weight:700;
+position:absolute;bottom:20px;right:8px;font-size:12px;font-weight:700;
 }
+
+/* إدارة التعليم */
 .header-education{
-position:absolute;bottom:6px;left:50%;
-transform:translateX(-50%);
-font-size:12px;font-weight:700;
-color:#d7f2ea;
-text-align:center;
-white-space:nowrap;
+position:absolute;bottom:8px;left:50%;transform:translateX(-50%);
+font-size:11px;font-weight:700;color:#d7f2ea;white-space:nowrap;
 }
+
+/* التاريخ */
 .header-date-box{
 position:absolute;top:6px;left:10px;
 font-size:11px;text-align:right;line-height:1.3;
@@ -134,28 +137,48 @@ display:flex;align-items:center;justify-content:center;background:#ffffff;overfl
 
 <label>إدارة التعليم</label>
 <select id="education" oninput="updateReport()">
-<option value="">مثال: الإدارة العامة للتعليم بمنطقة مكة</option>
+<option value="">اختر إدارة التعليم</option>
 <option>الإدارة العامة للتعليم بمنطقة مكة المكرمة</option>
 <option>الإدارة العامة للتعليم بمحافظة جدة</option>
 </select>
 
 <label>اسم المدرسة</label>
-<input id="school" placeholder="مثال: مدرسة سعيد بن العاص" oninput="updateReport()">
+<input id="school" placeholder="مثال: معاذ بن جبل" oninput="updateReport()">
 
 <label>اسم التقرير</label>
 <select id="reportType" oninput="handleReportType()">
-<option value="">مثال: تقرير نشاط إثرائي</option>
+<option value="">اختر نوع التقرير</option>
 <option>تقرير نشاط إثرائي</option>
 <option>أخرى</option>
 </select>
 <input id="reportTypeInput" placeholder="أدخل اسم التقرير" oninput="updateReport()" style="display:none;">
+
+<label>صفة المعلّم</label>
+<select id="teacherType" oninput="updateReport()">
+<option value="">اختر الصفة</option>
+<option>المعلم</option>
+<option>المعلمة</option>
+</select>
+
+<label>اسم المعلم</label>
+<input id="teacher" placeholder="اسم المعلّم/ــة" oninput="updateReport()">
+
+<label>صفة المدير</label>
+<select id="principalType" oninput="updateReport()">
+<option value="">اختر الصفة</option>
+<option>المدير</option>
+<option>المديرة</option>
+</select>
+
+<label>اسم المدير</label>
+<input id="principal" placeholder="اسم مدير/ مديرة المدرسة" oninput="updateReport()">
 
 <label>الصف</label>
 <input id="grade" placeholder="مثال: ٥/٣" oninput="updateReport()">
 
 <label>الفصل الدراسي</label>
 <select id="term" oninput="updateReport()">
-<option value="">مثال: الأول</option>
+<option value="">اختر الفصل</option>
 <option>الأول</option>
 <option>الثاني</option>
 </select>
@@ -172,51 +195,45 @@ display:flex;align-items:center;justify-content:center;background:#ffffff;overfl
 <label>مكان التنفيذ</label>
 <input id="place" placeholder="مثال: داخل الصف – المختبر" oninput="updateReport()">
 
-<label>اسم المعلم</label>
-<input id="teacher" placeholder="مثال: فهد الخالدي" oninput="updateReport()">
-
-<label>اسم المدير</label>
-<input id="principal" placeholder="مثال: نايف اللحياني" oninput="updateReport()">
-
 <script>
 const autoTexts={
-goal:["تنمية مهارات الطلاب من خلال أنشطة تعليمية تفاعلية تعزز التفكير والمعرفة."],
-summary:["تم تنفيذ النشاط داخل الصف بمشاركة جميع الطلاب وتحفيز التعلم."],
-steps:["شرح المفهوم وتقسيم الطلاب إلى مجموعات تعاونية."],
-strategies:["التعلم التعاوني والعصف الذهني وتوظيف الوسائل التعليمية."],
-strengths:["مشاركة فعالة من الطلاب وتحسن ملحوظ في مستوى الفهم."],
-improve:["زيادة الأنشطة التفاعلية ودعم الطلاب المتأخرين أكاديمياً."],
-recomm:["الاستمرار في تنفيذ الأنشطة التقنية والتعليمية التفاعلية."]
+goal:["تنمية مهارات الطلاب من خلال أنشطة تعليمية تفاعلية."],
+summary:["تم تنفيذ النشاط بمشاركة جميع الطلاب وتحفيز التعلم."],
+steps:["شرح الدرس وتقسيم الطلاب إلى مجموعات."],
+strategies:["التعلم التعاوني والعصف الذهني."],
+strengths:["تفاعل ممتاز من الطلاب وتحسن في مستوى الفهم."],
+improve:["زيادة الأنشطة التفاعلية ودعم الطلاب المتعثرين."],
+recomm:["الاستمرار في توظيف التقنيات التعليمية داخل الصف."]
 };
 function autoFill(x){document.getElementById(x).value=autoTexts[x].join(" ");updateReport();}
 </script>
 
 <label>الهدف التربوي</label>
-<textarea id="goal" placeholder="أدخل الهدف التربوي" oninput="updateReport()"></textarea>
+<textarea id="goal" placeholder="أدخل الهدف التربوي" oninput="updateReport()">تنمية مهارات الطلاب من خلال أنشطة تعليمية تفاعلية.</textarea>
 <div class="auto-buttons"><button onclick="autoFill('goal')">تعبئة</button></div>
 
 <label>نبذة مختصرة</label>
-<textarea id="summary" placeholder="أدخل نبذة مختصرة" oninput="updateReport()"></textarea>
+<textarea id="summary" placeholder="أدخل نبذة مختصرة" oninput="updateReport()">تم تنفيذ النشاط بمشاركة جميع الطلاب وتحفيز التعلم.</textarea>
 <div class="auto-buttons"><button onclick="autoFill('summary')">تعبئة</button></div>
 
 <label>إجراءات التنفيذ</label>
-<textarea id="steps" placeholder="كيف تم تنفيذ النشاط؟" oninput="updateReport()"></textarea>
+<textarea id="steps" placeholder="كيف تم تنفيذ النشاط؟" oninput="updateReport()">شرح الدرس وتقسيم الطلاب إلى مجموعات.</textarea>
 <div class="auto-buttons"><button onclick="autoFill('steps')">تعبئة</button></div>
 
 <label>الاستراتيجيات</label>
-<textarea id="strategies" placeholder="ما هي الاستراتيجيات المتبعة؟" oninput="updateReport()"></textarea>
+<textarea id="strategies" placeholder="ما هي الاستراتيجيات؟" oninput="updateReport()">التعلم التعاوني والعصف الذهني.</textarea>
 <div class="auto-buttons"><button onclick="autoFill('strategies')">تعبئة</button></div>
 
 <label>نقاط القوة</label>
-<textarea id="strengths" placeholder="أبرز نقاط القوة" oninput="updateReport()"></textarea>
+<textarea id="strengths" placeholder="نقاط القوة" oninput="updateReport()">تفاعل ممتاز من الطلاب وتحسن في مستوى الفهم.</textarea>
 <div class="auto-buttons"><button onclick="autoFill('strengths')">تعبئة</button></div>
 
 <label>نقاط التحسين</label>
-<textarea id="improve" placeholder="ما الذي يحتاج تطوير؟" oninput="updateReport()"></textarea>
+<textarea id="improve" placeholder="نقاط تحتاج تطوير" oninput="updateReport()">زيادة الأنشطة التفاعلية ودعم الطلاب المتعثرين.</textarea>
 <div class="auto-buttons"><button onclick="autoFill('improve')">تعبئة</button></div>
 
 <label>التوصيات</label>
-<textarea id="recomm" placeholder="توصيات مستقبلية" oninput="updateReport()"></textarea>
+<textarea id="recomm" placeholder="توصيات مستقبلية" oninput="updateReport()">الاستمرار في توظيف التقنيات التعليمية داخل الصف.</textarea>
 <div class="auto-buttons"><button onclick="autoFill('recomm')">تعبئة</button></div>
 
 <label>الصورة 1</label>
@@ -233,45 +250,45 @@ function autoFill(x){document.getElementById(x).value=autoTexts[x].join(" ");upd
 <div class="header">
 <img src="https://i.ibb.co/1fc5gB6v/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png">
 
-<div class="header-school" id="schoolBox"></div>
+<div class="header-school-title">اسم المدرسة</div>
+<div class="header-school" id="schoolBox">معاذ بن جبل</div>
 
-<div class="header-education" id="educationBox"></div>
+<div class="header-education" id="educationBox">الإدارة العامة للتعليم بمنطقة مكة المكرمة</div>
 
 <div class="header-date-box">
-<span id="hDate"></span><br>
-<span id="gDate"></span>
+<span id="hDate">السبت 10 رجب 1446 هـ</span><br>
+<span id="gDate">21-12-2024 م</span>
 </div>
-
 </div>
 
 <div class="info-grid">
-<div class="info-box"><div class="info-title">الفصل</div><div class="info-value" id="termBox"></div></div>
-<div class="info-box"><div class="info-title">الصف</div><div class="info-value" id="gradeBox"></div></div>
-<div class="info-box"><div class="info-title">المادة</div><div class="info-value" id="subjectBox"></div></div>
-<div class="info-box"><div class="info-title">التقرير</div><div class="info-value" id="reportTypeBox"></div></div>
+<div class="info-box"><div class="info-title">الفصل</div><div class="info-value" id="termBox">الأول</div></div>
+<div class="info-box"><div class="info-title">الصف</div><div class="info-value" id="gradeBox">٥/٣</div></div>
+<div class="info-box"><div class="info-title">المادة</div><div class="info-value" id="subjectBox">لغتي</div></div>
+<div class="info-box"><div class="info-title">التقرير</div><div class="info-value" id="reportTypeBox">تقرير نشاط إثرائي</div></div>
 </div>
 
 <div class="info-grid2">
-<div class="info-box"><div class="info-title">المستهدفون</div><div class="info-value" id="targetBox"></div></div>
-<div class="info-box"><div class="info-title">العدد</div><div class="info-value" id="countBox"></div></div>
-<div class="info-box"><div class="info-title">المكان</div><div class="info-value" id="placeBox"></div></div>
+<div class="info-box"><div class="info-title">المستهدفون</div><div class="info-value" id="targetBox">طلاب الصف</div></div>
+<div class="info-box"><div class="info-title">العدد</div><div class="info-value" id="countBox">٢٥</div></div>
+<div class="info-box"><div class="info-title">المكان</div><div class="info-value" id="placeBox">داخل الصف</div></div>
 </div>
 
-<div class="objective-box"><div class="objective-title">الهدف التربوي</div><div class="objective-content" id="goalBox"></div></div>
+<div class="objective-box"><div class="objective-title">الهدف التربوي</div><div class="objective-content" id="goalBox">تنمية مهارات الطلاب من خلال أنشطة تعليمية تفاعلية.</div></div>
 
 <div class="report-row">
-<div class="report-box"><div class="report-box-title">النبذة</div><div class="report-box-content" id="summaryBox"></div></div>
-<div class="report-box"><div class="report-box-title">إجراءات التنفيذ</div><div class="report-box-content" id="stepsBox"></div></div>
-</div>
-
-<div class="report-row">
-<div class="report-box"><div class="report-box-title">الاستراتيجيات</div><div class="report-box-content" id="strategiesBox"></div></div>
-<div class="report-box"><div class="report-box-title">نقاط القوة</div><div class="report-box-content" id="strengthsBox"></div></div>
+<div class="report-box"><div class="report-box-title">النبذة</div><div class="report-box-content" id="summaryBox">تم تنفيذ النشاط بمشاركة جميع الطلاب وتحفيز التعلم.</div></div>
+<div class="report-box"><div class="report-box-title">إجراءات التنفيذ</div><div class="report-box-content" id="stepsBox">شرح الدرس وتقسيم الطلاب إلى مجموعات.</div></div>
 </div>
 
 <div class="report-row">
-<div class="report-box"><div class="report-box-title">نقاط التحسين</div><div class="report-box-content" id="improveBox"></div></div>
-<div class="report-box"><div class="report-box-title">التوصيات</div><div class="report-box-content" id="recommBox"></div></div>
+<div class="report-box"><div class="report-box-title">الاستراتيجيات</div><div class="report-box-content" id="strategiesBox">التعلم التعاوني والعصف الذهني.</div></div>
+<div class="report-box"><div class="report-box-title">نقاط القوة</div><div class="report-box-content" id="strengthsBox">تفاعل ممتاز من الطلاب وتحسن في مستوى الفهم.</div></div>
+</div>
+
+<div class="report-row">
+<div class="report-box"><div class="report-box-title">نقاط التحسين</div><div class="report-box-content" id="improveBox">زيادة الأنشطة التفاعلية ودعم الطلاب المتعثرين.</div></div>
+<div class="report-box"><div class="report-box-title">التوصيات</div><div class="report-box-content" id="recommBox">الاستمرار في توظيف التقنيات التعليمية داخل الصف.</div></div>
 </div>
 
 <div class="image-evidence-grid">
@@ -281,14 +298,14 @@ function autoFill(x){document.getElementById(x).value=autoTexts[x].join(" ");upd
 
 <div class="signature-section">
 <div class="signature-box">
-<span id="teacherBox"></span>
+<div id="teacherTypeBox">المعلم</div>
+<span id="teacherBox">فهد الخالدي</span>
 <div class="signature-line"></div>
-المعلم
 </div>
 <div class="signature-box">
-<span id="principalBox"></span>
+<div id="principalTypeBox">المدير</div>
+<span id="principalBox">نايف اللحياني</span>
 <div class="signature-line"></div>
-مدير المدرسة
 </div>
 </div>
 
@@ -297,20 +314,27 @@ function autoFill(x){document.getElementById(x).value=autoTexts[x].join(" ");upd
 
 <script>
 function updateReport(){
-document.getElementById("educationBox").innerText = education.value;
-document.getElementById("schoolBox").innerText = school.value;
-document.getElementById("termBox").innerText = term.value;
-document.getElementById("gradeBox").innerText = grade.value;
-document.getElementById("subjectBox").innerText = subject.value;
-document.getElementById("targetBox").innerText = target.value;
-document.getElementById("countBox").innerText = count.value;
-document.getElementById("placeBox").innerText = place.value;
-document.getElementById("teacherBox").innerText = teacher.value;
-document.getElementById("principalBox").innerText = principal.value;
+educationBox.innerText=education.value;
+schoolBox.innerText=school.value;
+
+termBox.innerText=term.value;
+gradeBox.innerText=grade.value;
+subjectBox.innerText=subject.value;
+targetBox.innerText=target.value;
+countBox.innerText=count.value;
+placeBox.innerText=place.value;
+
+teacherBox.innerText=teacher.value;
+principalBox.innerText=principal.value;
+
+teacherTypeBox.innerText=teacherType.value;
+principalTypeBox.innerText=principalType.value;
 
 if(reportType.value==="أخرى"){
+reportTypeInput.style.display="block";
 reportTypeBox.innerText=reportTypeInput.value;
 }else{
+reportTypeInput.style.display="none";
 reportTypeBox.innerText=reportType.value;
 }
 
@@ -324,31 +348,28 @@ recommBox.innerText=recomm.value;
 }
 
 function handleReportType(){
-reportTypeInput.style.display = reportType.value==="أخرى" ? "block" : "none";
 updateReport();
 }
 
 function loadImage(input,target){
-let f=input.files[0];
-let r=new FileReader();
-r.onload=()=>document.getElementById(target).innerHTML=`<img src="${r.result}">`;
-r.readAsDataURL(f);
+let reader=new FileReader();
+reader.onload=()=>document.getElementById(target).innerHTML=`<img src="${reader.result}">`;
+reader.readAsDataURL(input.files[0]);
 }
 
 function downloadPDF(){
 html2pdf().set({
 margin:0,filename:"report.pdf",
 image:{type:"jpeg",quality:1},
-html2canvas:{scale:4,useCORS:true,scrollY:0},
+html2canvas:{scale:4,useCORS:true,scrollY:0,letterRendering:true},
 jsPDF:{unit:"mm",format:"a4",orientation:"portrait"}
 }).from(document.getElementById("report-content")).save();
 }
 
 async function makePDFBlob(){
 return await html2pdf().set({
-margin:0,
-image:{type:"jpeg",quality:1},
-html2canvas:{scale:4,useCORS:true,scrollY:0},
+margin:0,image:{type:"jpeg",quality:1},
+html2canvas:{scale:4,useCORS:true,scrollY:0,letterRendering:true},
 jsPDF:{unit:"mm",format:"a4",orientation:"portrait"}
 }).from(document.getElementById("report-content")).outputPdf("blob");
 }
@@ -364,22 +385,23 @@ window.open(`https://wa.me/?text=${encodeURIComponent(url)}`,"_blank");
 }
 }
 
-/********** تاريخ هجري دقيق **********/
+/******** التاريخ الهجري *********/
 async function loadDates(){
-const gd=new Date();
-gDate.innerText = gd.toLocaleDateString('ar-EG')+" م";
+const g=new Date();
+gDate.innerText=g.toLocaleDateString('ar-EG')+" م";
 
 try{
-let url=`https://api.aladhan.com/v1/gToH?date=${gd.getDate()}-${gd.getMonth()+1}-${gd.getFullYear()}`;
+let url=`https://api.aladhan.com/v1/gToH?date=${g.getDate()}-${g.getMonth()+1}-${g.getFullYear()}`;
 let res=await fetch(url);
-let data=await res.json();
-let h=data.data.hijri;
+let j=await res.json();
+let h=j.data.hijri;
 hDate.innerText=`${h.weekday.ar} ${h.day} ${h.month.ar} ${h.year} هـ`;
 }catch(e){
-hDate.innerText="التاريخ الهجري غير متاح الآن";
+hDate.innerText="تعذر تحميل التاريخ الهجري";
 }
 }
 loadDates();
+updateReport();
 </script>
 
 </body>
