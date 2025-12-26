@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -23,24 +23,15 @@ button:hover{background:#05523a;}
 @media print{.btn-container{display:none;}}
 
 .header{
-width:100%;height:170px;background:#083024;
+width:100%;height:128px;
+background:#083024;
 background-image:url('https://i.ibb.co/1fc5gB6v/9-C92-E57-B-23-FA-479-D-A024-1-D5-F871-B4-F8-D.png');
 background-repeat:no-repeat;background-position:center;
 background-size:38%;margin-top:60px;position:relative;
 }
-.header-right-top{
-position:absolute;top:5px;right:10px;
-font-size:13px;color:#ffffff;font-weight:700;
-}
-.header-right-bottom{
-position:absolute;bottom:5px;right:10px;
-font-size:12px;color:#ffffff;font-weight:600;
-}
-.header-left-bottom{
-position:absolute;bottom:5px;left:10px;
-font-size:12px;color:#ffffff;font-weight:600;
-text-align:left;direction:ltr;
-}
+.header-right-top{position:absolute;top:5px;right:10px;font-size:13px;color:#ffffff;font-weight:700;}
+.header-right-bottom{position:absolute;bottom:5px;right:10px;font-size:12px;color:#ffffff;font-weight:600;}
+.header-left-bottom{position:absolute;bottom:5px;left:10px;font-size:12px;color:#ffffff;font-weight:600;text-align:left;direction:ltr;}
 
 .page{width:100%;max-width:830px;padding:10px;margin:auto;}
 
@@ -51,69 +42,69 @@ gap:6px;margin-bottom:14px;
 .info-box{
 background:#eaf3ef;border-radius:4px;
 padding:6px;font-size:11px;font-weight:600;
-color:#083024;text-align:center;
+color:#083024;text-align:center;height:40px;display:flex;align-items:center;justify-content:center;
 }
 
 .icon-title{
 display:flex;align-items:center;justify-content:center;
 gap:6px;color:#083024;font-size:13px;font-weight:700;
 }
-.icon-title svg{
-width:16px;height:16px;stroke:#066d4d;stroke-width:2;fill:none;
-}
+.icon-title svg{width:14px;height:14px;stroke:#066d4d;stroke-width:2;fill:none;}
 
 .objective-box{
 background:#f2f9f6;border:2px solid #066d4d;
-padding:25px 12px;border-radius:6px;margin-bottom:22px;
-min-height:140px;
+padding:10px 12px;border-radius:6px;margin-bottom:16px;
+height:108px;overflow:hidden;
 }
 .objective-box .icon-title{
 border-bottom:1px solid #066d4d;
-padding-bottom:4px;margin-bottom:8px;
+padding-bottom:4px;margin-bottom:6px;
 }
 
 .report-row{
 display:grid;grid-template-columns:1fr 1fr;
-gap:18px;margin-bottom:18px;
+gap:12px;margin-bottom:14px;
 }
 .report-box{
 background:#ffffff;border-radius:6px;
-padding:18px 10px;border:1px solid #cdd5cf;
-min-height:150px;
+padding:10px;border:1px solid #cdd5cf;
+height:130px;overflow:hidden;
+position:relative;
 }
 .report-box-title{
-margin-bottom:6px;padding-bottom:4px;
-border-bottom:1px solid #ccd9d0;
+margin-bottom:4px;padding-bottom:4px;
+border-bottom:1px solid #ccd9d0;font-size:12px;
 }
-.report-box-content{font-size:11px;line-height:1.5;min-height:80px;}
+.report-box-content{
+font-size:10px;line-height:1.4;height:95px;overflow:hidden;
+}
 
 .image-evidence-grid{
 display:grid;grid-template-columns:1fr 1fr;
 gap:10px;margin-top:10px;
 }
 .image-box{
-height:110px;border:1px dashed #066d4d;
-border-radius:6px;font-size:11px;
+height:80px;border:1px dashed #066d4d;
+border-radius:6px;font-size:10px;
 display:flex;align-items:center;justify-content:center;
-color:#066d4d;
+color:#066d4d;overflow:hidden;
 }
 
 .signature-section{
-margin-top:40px;
+margin-top:20px;
 display:grid;grid-template-columns:1fr 1fr;
-gap:40px;
+gap:20px;
 }
-.signature-box{text-align:center;font-size:12px;color:#083024;font-weight:600;}
+.signature-box{text-align:center;font-size:11px;color:#083024;font-weight:600;}
 .signature-line{
-margin-top:25px;border-top:1px solid #083024;
-width:80%;margin-inline:auto;
-font-size:11px;margin-bottom:4px;text-align:center;
+margin-top:15px;border-top:1px solid #083024;
+width:80%;margin-inline:auto;font-size:10px;margin-bottom:4px;text-align:center;
 }
 
 .footer{
 width:100%;background:#083024;color:#ffffff;
-text-align:center;font-size:10px;padding:4px 0;
-margin-top:30px;border-radius:4px;
+text-align:center;font-size:10px;padding:3px 0;
+margin-top:20px;border-radius:4px;
 }
 </style>
 </head>
@@ -173,7 +164,7 @@ margin-top:30px;border-radius:4px;
 <div class="report-row">
 <div class="report-box">
 <div class="report-box-title icon-title">
-<svg viewBox="0 0 24 24"><path d="M9 2l6 0-2 11h-2L9 2zM12 22a2 2 0 100-4 2 2 0 000 4z"/></svg>
+<svg viewBox="0 0 24 24"><path d="M9 2h6l-2 11h-2zM12 22a2 2 0 100-4 2 2 0 000 4z"/></svg>
 استراتيجيات
 </div>
 <div class="report-box-content"></div>
@@ -247,7 +238,6 @@ image:{type:"jpeg",quality:1},
 html2canvas:{scale:3,useCORS:true},
 jsPDF:{unit:"mm",format:"a4",orientation:"portrait"}
 }).from(el);
-
 const blob=await pdf.outputPdf("blob");
 const file=new File([blob],"report.pdf",{type:"application/pdf"});
 if(navigator.share){
