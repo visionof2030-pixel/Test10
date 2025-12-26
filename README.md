@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -54,41 +54,38 @@ padding:6px;font-size:11px;font-weight:600;
 color:#083024;text-align:center;
 }
 
-.section-icon{
-position:absolute;top:-16px;right:50%;
-transform:translateX(50%);
-background:#ffffff;
-padding:3px;border-radius:50%;
+.icon-title{
+display:flex;align-items:center;justify-content:center;
+gap:6px;color:#083024;font-size:13px;font-weight:700;
 }
-.section-icon svg{width:22px;height:22px;stroke:#066d4d;stroke-width:2;}
+.icon-title svg{
+width:16px;height:16px;stroke:#066d4d;stroke-width:2;fill:none;
+}
 
 .objective-box{
 background:#f2f9f6;border:2px solid #066d4d;
-padding:25px 10px;border-radius:6px;margin-bottom:22px;
-min-height:140px;position:relative;
+padding:25px 12px;border-radius:6px;margin-bottom:22px;
+min-height:140px;
 }
-.objective-title{
-text-align:center;font-size:14px;font-weight:700;
-margin-bottom:6px;color:#083024;
-border-bottom:1px solid #066d4d;padding-bottom:4px;
+.objective-box .icon-title{
+border-bottom:1px solid #066d4d;
+padding-bottom:4px;margin-bottom:8px;
 }
 
 .report-row{
 display:grid;grid-template-columns:1fr 1fr;
-gap:20px;margin-bottom:22px;
+gap:18px;margin-bottom:18px;
 }
 .report-box{
 background:#ffffff;border-radius:6px;
-padding:25px 10px;border:1px solid #cdd5cf;
-min-height:150px;position:relative;
+padding:18px 10px;border:1px solid #cdd5cf;
+min-height:150px;
 }
 .report-box-title{
-text-align:center;font-size:13px;color:#083024;font-weight:700;
-border-bottom:1px solid #ccd9d0;margin-bottom:6px;padding-bottom:4px;
+margin-bottom:6px;padding-bottom:4px;
+border-bottom:1px solid #ccd9d0;
 }
-.report-box-content{
-font-size:11px;line-height:1.5;min-height:80px;
-}
+.report-box-content{font-size:11px;line-height:1.5;min-height:80px;}
 
 .image-evidence-grid{
 display:grid;grid-template-columns:1fr 1fr;
@@ -106,14 +103,11 @@ margin-top:40px;
 display:grid;grid-template-columns:1fr 1fr;
 gap:40px;
 }
-.signature-box{
-text-align:center;font-size:12px;color:#083024;font-weight:600;
-}
+.signature-box{text-align:center;font-size:12px;color:#083024;font-weight:600;}
 .signature-line{
 margin-top:25px;border-top:1px solid #083024;
 width:80%;margin-inline:auto;
-font-size:11px;margin-bottom:4px;
-text-align:center;
+font-size:11px;margin-bottom:4px;text-align:center;
 }
 
 .footer{
@@ -136,9 +130,7 @@ margin-top:30px;border-radius:4px;
 <div class="header">
 <div class="header-right-top">إدارة التعليم</div>
 <div class="header-right-bottom">مدرسة سعيد بن العاص</div>
-<div class="header-left-bottom">
-<span id="gDate"></span> | <span id="hDate"></span>
-</div>
+<div class="header-left-bottom"><span id="gDate"></span> | <span id="hDate"></span></div>
 </div>
 
 <div class="page">
@@ -154,62 +146,62 @@ margin-top:30px;border-radius:4px;
 </div>
 
 <div class="objective-box">
-<div class="section-icon">
-<svg fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
-</div>
-<div class="objective-title">الهدف التربوي</div>
-</div>
-
-<div class="report-row">
-<div class="report-box">
-<div class="section-icon">
-<svg fill="none" viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="16" rx="2"/></svg>
-</div>
-<div class="report-box-title">نبذة مختصرة</div>
-<div class="report-box-content"></div>
-</div>
-
-<div class="report-box">
-<div class="section-icon">
-<svg fill="none" viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></svg>
-</div>
-<div class="report-box-title">إجراءات التنفيذ</div>
-<div class="report-box-content"></div>
+<div class="icon-title">
+<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
+الهدف التربوي
 </div>
 </div>
 
 <div class="report-row">
 <div class="report-box">
-<div class="section-icon">
-<svg fill="none" viewBox="0 0 24 24"><path d="M9 2l6 0-2 11h-2L9 2zM12 22a2 2 0 100-4 2 2 0 000 4z"/></svg>
+<div class="report-box-title icon-title">
+<svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="16" rx="2"/></svg>
+نبذة مختصرة
 </div>
-<div class="report-box-title">استراتيجيات</div>
 <div class="report-box-content"></div>
 </div>
 
 <div class="report-box">
-<div class="section-icon">
-<svg fill="none" viewBox="0 0 24 24"><path d="M20 6l-11 11-5-5"/></svg>
+<div class="report-box-title icon-title">
+<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></svg>
+إجراءات التنفيذ
 </div>
-<div class="report-box-title">نقاط القوة</div>
 <div class="report-box-content"></div>
 </div>
 </div>
 
 <div class="report-row">
 <div class="report-box">
-<div class="section-icon">
-<svg fill="none" viewBox="0 0 24 24"><path d="M12 4v16M6 10l6-6 6 6"/></svg>
+<div class="report-box-title icon-title">
+<svg viewBox="0 0 24 24"><path d="M9 2l6 0-2 11h-2L9 2zM12 22a2 2 0 100-4 2 2 0 000 4z"/></svg>
+استراتيجيات
 </div>
-<div class="report-box-title">نقاط التحسين</div>
 <div class="report-box-content"></div>
 </div>
 
 <div class="report-box">
-<div class="section-icon">
-<svg fill="none" viewBox="0 0 24 24"><path d="M6 4h12v16H6zM9 9h6M9 13h4"/></svg>
+<div class="report-box-title icon-title">
+<svg viewBox="0 0 24 24"><path d="M20 6l-11 11-5-5"/></svg>
+نقاط القوة
 </div>
-<div class="report-box-title">توصيات</div>
+<div class="report-box-content"></div>
+</div>
+</div>
+
+<div class="report-row">
+<div class="report-box">
+<div class="report-box-title icon-title">
+<svg viewBox="0 0 24 24"><path d="M12 4v16M6 10l6-6 6 6"/></svg>
+نقاط التحسين
+</div>
+<div class="report-box-content"></div>
+</div>
+
+<div class="report-box">
+<div class="report-box-title icon-title">
+<svg viewBox="0 0 24 24"><path d="M6 4h12v16H6zM9 9h6M9 13h4"/></svg>
+توصيات
+</div>
 <div class="report-box-content"></div>
 </div>
 </div>
@@ -239,30 +231,35 @@ margin-top:30px;border-radius:4px;
 
 <script>
 function downloadPDF(){
-var el=document.getElementById("report-content");
 html2pdf().set({
-margin:0,
-filename:"report.pdf",
+margin:0,filename:"report.pdf",
 image:{type:"jpeg",quality:1},
 html2canvas:{scale:3,useCORS:true},
 jsPDF:{unit:"mm",format:"a4",orientation:"portrait"}
-}).from(el).save();
+}).from(document.getElementById("report-content")).save();
 }
 
 async function sharePDFWhatsApp(){
-var el=document.getElementById("report-content");
-const options={margin:0,filename:"report.pdf",image:{type:"jpeg",quality:1},html2canvas:{scale:3,useCORS:true},jsPDF:{unit:"mm",format:"a4",orientation:"portrait"}};
-const worker=html2pdf().set(options).from(el);
-const pdfBlob=await worker.outputPdf("blob");
-const file=new File([pdfBlob],"report.pdf",{type:"application/pdf"});
-if(navigator.share){await navigator.share({title:"تقرير إشرافي",files:[file]});}else{worker.save();}
+const el=document.getElementById("report-content");
+const pdf=html2pdf().set({
+margin:0,filename:"report.pdf",
+image:{type:"jpeg",quality:1},
+html2canvas:{scale:3,useCORS:true},
+jsPDF:{unit:"mm",format:"a4",orientation:"portrait"}
+}).from(el);
+
+const blob=await pdf.outputPdf("blob");
+const file=new File([blob],"report.pdf",{type:"application/pdf"});
+if(navigator.share){
+navigator.share({title:"تقرير إشرافي",files:[file]});
+}else{pdf.save();}
 }
 
 async function loadDates(){
-let g=new Date();let gy=g.getFullYear(),gm=g.getMonth()+1,gd=g.getDate();
+let g=new Date(),gy=g.getFullYear(),gm=g.getMonth()+1,gd=g.getDate();
 document.getElementById("gDate").innerText=`${gd}-${gm}-${gy}`;
-let api=`https://api.aladhan.com/v1/gToH?date=${gd}-${gm}-${gy}`;
-let r=await fetch(api);let d=await r.json();let h=d.data.hijri;
+let r=await fetch(`https://api.aladhan.com/v1/gToH?date=${gd}-${gm}-${gy}`);
+let d=await r.json(),h=d.data.hijri;
 document.getElementById("hDate").innerText=`${h.day}-${h.month.number}-${h.year}`;
 }
 loadDates();
