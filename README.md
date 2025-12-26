@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -131,7 +131,10 @@ border-radius:4px;
 
 <div class="objective-box">
 <div class="icon-title">
-<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
+<svg viewBox="0 0 24 24">
+  <circle cx="12" cy="12" r="10" stroke-width="1.5" fill="none"/>
+  <path d="M9 12l2 2 4-4" stroke-width="1.5" fill="none"/>
+</svg>
 الهدف التربوي
 </div>
 </div>
@@ -139,7 +142,12 @@ border-radius:4px;
 <div class="report-row">
 <div class="report-box">
 <div class="icon-title">
-<svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="16" rx="2"/></svg>
+<svg viewBox="0 0 24 24">
+  <rect x="3" y="3" width="18" height="18" rx="2" ry="2" stroke-width="1.5" fill="none"/>
+  <line x1="8" y1="8" x2="16" y2="8" stroke-width="1.5"/>
+  <line x1="8" y1="12" x2="16" y2="12" stroke-width="1.5"/>
+  <line x1="8" y1="16" x2="12" y2="16" stroke-width="1.5"/>
+</svg>
 نبذة مختصرة
 </div>
 <div class="report-box-content"></div>
@@ -147,7 +155,10 @@ border-radius:4px;
 
 <div class="report-box">
 <div class="icon-title">
-<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></svg>
+<svg viewBox="0 0 24 24">
+  <path d="M12 3v18M3 12h18" stroke-width="1.5" fill="none"/>
+  <circle cx="12" cy="12" r="8" stroke-width="1.5" fill="none"/>
+</svg>
 إجراءات التنفيذ
 </div>
 <div class="report-box-content"></div>
@@ -157,7 +168,11 @@ border-radius:4px;
 <div class="report-row">
 <div class="report-box">
 <div class="icon-title">
-<svg viewBox="0 0 24 24"><path d="M9 2h6l-2 11h-2zM12 22a2 2 0 100-4 2 2 0 000 4z"/></svg>
+<svg viewBox="0 0 24 24">
+  <path d="M12 2L2 7l10 5 10-5-10-5z" stroke-width="1.5" fill="none"/>
+  <path d="M2 17l10 5 10-5" stroke-width="1.5" fill="none"/>
+  <path d="M2 12l10 5 10-5" stroke-width="1.5" fill="none"/>
+</svg>
 استراتيجيات
 </div>
 <div class="report-box-content"></div>
@@ -165,7 +180,10 @@ border-radius:4px;
 
 <div class="report-box">
 <div class="icon-title">
-<svg viewBox="0 0 24 24"><path d="M20 6l-11 11-5-5"/></svg>
+<svg viewBox="0 0 24 24">
+  <polyline points="20 6 9 17 4 12" stroke-width="1.5" fill="none"/>
+  <circle cx="12" cy="12" r="10" stroke-width="1.5" fill="none"/>
+</svg>
 نقاط القوة
 </div>
 <div class="report-box-content"></div>
@@ -175,7 +193,10 @@ border-radius:4px;
 <div class="report-row">
 <div class="report-box">
 <div class="icon-title">
-<svg viewBox="0 0 24 24"><path d="M12 4v16M6 10l6-6 6 6"/></svg>
+<svg viewBox="0 0 24 24">
+  <path d="M17 8l-5 5-5-5" stroke-width="1.5" fill="none"/>
+  <line x1="12" y1="4" x2="12" y2="20" stroke-width="1.5"/>
+</svg>
 نقاط التحسين
 </div>
 <div class="report-box-content"></div>
@@ -183,7 +204,13 @@ border-radius:4px;
 
 <div class="report-box">
 <div class="icon-title">
-<svg viewBox="0 0 24 24"><path d="M6 4h12v16H6zM9 9h6M9 13h4"/></svg>
+<svg viewBox="0 0 24 24">
+  <rect x="3" y="3" width="18" height="18" rx="2" ry="2" stroke-width="1.5" fill="none"/>
+  <line x1="8" y1="8" x2="16" y2="8" stroke-width="1.5"/>
+  <line x1="8" y1="12" x2="16" y2="12" stroke-width="1.5"/>
+  <line x1="8" y1="16" x2="12" y2="16" stroke-width="1.5"/>
+  <circle cx="18" cy="6" r="2" stroke-width="1.5" fill="none"/>
+</svg>
 توصيات
 </div>
 <div class="report-box-content"></div>
