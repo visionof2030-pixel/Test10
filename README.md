@@ -97,7 +97,7 @@ display:grid;grid-template-columns:1fr 1fr;
 gap:8px;margin-top:8px;
 }
 .image-box{
-height:150px;border:1px dashed #066d4d;border-radius:8px;
+height:200px;border:1px dashed #066d4d;border-radius:8px;
 display:flex;align-items:center;justify-content:center;
 color:#066d4d;font-size:10px;overflow:hidden;
 box-shadow:0 3px 6px rgba(6,109,77,0.28);
