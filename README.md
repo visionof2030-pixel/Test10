@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -96,7 +96,8 @@ border:1px solid rgba(6,109,77,0.3);
 
 .objective-box{
 background:#f3f9f6;border:1px solid rgba(6,109,77,0.35);
-padding:6px 10px;border-radius:8px;margin-bottom:10px;min-height:90px;
+padding:6px 10px;border-radius:8px;margin-bottom:10px;
+min-height:120px;
 }
 .objective-title{text-align:center;font-size:14px;font-weight:700;}
 .objective-content{font-size:15px;line-height:1.7;}
