@@ -38,27 +38,7 @@ background:linear-gradient(135deg, #ffffff 0%, #f5fcf9 100%);
 padding:10px 15px;display:flex;justify-content:space-between;align-items:center;
 box-shadow:0 4px 15px rgba(4, 74, 53, 0.12);border-bottom:2px solid #d0e6de;
 backdrop-filter:blur(5px);
-gap:15px;
 }
-
-.execution-text{
-color:#044a35;font-size:15px;font-weight:900; /* حجم أكبر */
-padding:8px 15px;background:linear-gradient(135deg, #e8f4f0 0%, #d4ebe2 100%);
-border-radius:10px;border-right:4px solid #ffd166;
-display:flex;align-items:center;gap:10px;
-box-shadow:0 4px 12px rgba(6, 109, 77, 0.2);
-position:relative;overflow:hidden;
-flex-shrink:0;
-min-width: 250px; /* عرض أكبر */
-justify-content: center;
-}
-.execution-text::before{
-content:'';position:absolute;top:0;right:0;width:100%;height:100%;
-background:linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-transform:translateX(-100%);animation:shine 3s infinite;
-}
-@keyframes shine{100%{transform:translateX(100%);}}
-.execution-text i{color:#066d4d;font-size:18px;} /* أيقونة أكبر */
 
 /* تصميم الجانب الأيمن */
 .right-section {
@@ -165,7 +145,7 @@ font-size: 10px !important;
 
 /* تحسين واجهة الإدخال */
 .input-section{
-background:#ffffff;padding:20px;border-radius:18px;margin-top:130px;
+background:#ffffff;padding:20px;border-radius:18px;margin-top:110px; /* تم تعديل margin-top من 130px إلى 110px */
 border:2px solid #e0f0ea;box-shadow:0 8px 25px rgba(4, 74, 53, 0.1);
 position:relative;overflow:hidden;
 }
@@ -264,7 +244,7 @@ z-index: 1000;
 /* إشعارات */
 .notification {
 position: fixed;
-top: 110px;
+top: 100px; /* تم تعديل من 110px إلى 100px */
 right: 10px;
 left: 10px;
 background: linear-gradient(135deg, #066d4d 0%, #044a35 100%);
@@ -467,26 +447,15 @@ gap: 10px;
 height: auto;
 }
 
-.execution-text {
-font-size: 14px;
-padding: 6px 12px;
-width: 100%;
-min-width: unset;
-justify-content: center;
-order: 1;
-}
-
 .right-section {
 width: 100%;
 flex-direction: column;
 gap: 10px;
-order: 2;
 }
 
 .app-title {
 max-width: 100%;
 width: 100%;
-order: 1;
 font-size: 10px;
 padding: 5px 10px;
 }
@@ -494,7 +463,6 @@ padding: 5px 10px;
 .btn-group {
 width: 100%;
 justify-content: space-between;
-order: 2;
 }
 
 .btn-pair {
@@ -524,7 +492,7 @@ font-size: 9px !important;
 }
 
 .input-section {
-margin-top: 120px;
+margin-top: 100px;
 padding: 15px;
 border-radius: 15px;
 }
@@ -540,7 +508,7 @@ gap: 15px;
 }
 
 .notification {
-top: 100px;
+top: 90px;
 padding: 10px 15px;
 font-size: 14px;
 }
@@ -575,11 +543,6 @@ height: 40px;
 animation-duration: 35s;
 }
 
-.execution-text {
-font-size: 12px;
-padding: 5px 10px;
-}
-
 .app-title {
 font-size: 9px;
 padding: 4px 8px;
@@ -609,7 +572,7 @@ font-size: 8px !important;
 }
 
 .input-section {
-margin-top: 110px;
+margin-top: 90px;
 padding: 12px;
 }
 
@@ -657,7 +620,7 @@ margin-bottom: 4px;
 }
 
 .input-section {
-margin-top: 100px;
+margin-top: 80px;
 }
 }
 
@@ -673,7 +636,7 @@ top: calc(45px + env(safe-area-inset-top));
 }
 
 .input-section {
-margin-top: calc(120px + env(safe-area-inset-top));
+margin-top: calc(100px + env(safe-area-inset-top));
 }
 }
 
@@ -689,7 +652,7 @@ top: calc(45px + env(safe-area-inset-top));
 }
 
 .input-section {
-margin-top: calc(120px + env(safe-area-inset-top));
+margin-top: calc(100px + env(safe-area-inset-top));
 }
 }
 
@@ -705,7 +668,7 @@ top: calc(45px + env(safe-area-inset-top));
 }
 
 .input-section {
-margin-top: calc(120px + env(safe-area-inset-top));
+margin-top: calc(100px + env(safe-area-inset-top));
 }
 }
 
@@ -856,13 +819,9 @@ font-size: 16px !important;
 </div>
 
 <div class="control-bar">
-    <!-- الجانب الأيمن: عبارة التنفيذ - تم التعديل ليكون "أداة إصدار التقارير التربوية" (أكبر) -->
-    <div class="execution-text">
-        <i class="fas fa-tools"></i>
-        أداة إصدار التقارير التربوية
-    </div>
+    <!-- تم إزالة الجانب الأيمن (execution-text) الذي كان يحتوي على "أداة إصدار التقارير التربوية" -->
     
-    <!-- الجانب الأيسر: الأزرار والعنوان - تم التعديل ليكون "تنفيذ: المعلم فهد الخالدي" (أصغر) -->
+    <!-- الجانب الأيسر فقط: الأزرار والعنوان -->
     <div class="right-section">
         <!-- العبارة الجديدة - تم التعديل -->
         <div class="app-title">
@@ -954,6 +913,42 @@ font-size: 16px !important;
   <h2><i class="fas fa-tools" style="margin-left:10px;"></i>أداة إصدار التقارير التربوية</h2>
   
   <div class="form-group">
+    <label><i class="fas fa-file-alt"></i>اسم التقرير</label>
+    
+    <!-- التصنيف العام - تم إصلاح النص وإضافة خيار "تقارير أخرى" -->
+    <select id="reportCategory" oninput="handleReportCategory()" style="margin-bottom:10px;">
+        <option value="">اختر تصنيف التقرير</option>
+        <option value="التقارير التعليمية الصفية">أولا: التقارير التعليمية الصفية</option>
+        <option value="التقارير العلاجية والدعم الفردي">ثانيا: التقارير العلاجية والدعم الفردي</option>
+        <option value="التقارير التحفيزية والسلوكية">ثالثا: التقارير التحفيزية والسلوكية</option>
+        <option value="تقارير الأنشطة غير الصفية">رابعا: تقارير الأنشطة غير الصفية</option>
+        <option value="تقارير التواصل مع أولياء الأمور والمجتمع">خامسا: تقارير التواصل مع أولياء الأمور والمجتمع</option>
+        <option value="التقارير التخطيطية والتنظيمية">سادسا: التقارير التخطيطية والتنظيمية</option>
+        <option value="تقارير التقييم والمتابعة">سابعا: تقارير التقييم والمتابعة</option>
+        <option value="تقارير التدريب والتطوير المهني">ثامنا: تقارير التدريب والتطوير المهني</option>
+        <option value="تقارير توظيف التكنولوجيا">تاسعا: تقارير توظيف التكنولوجيا</option>
+        <option value="تقارير البحث والتطوير المناهجي">عاشرا: تقارير البحث والتطوير المناهجي</option>
+        <option value="تقارير الجودة واللجان">حادي عشر: تقارير الجودة واللجان</option>
+        <option value="تقارير الأمن والسلامة">ثاني عشر: تقارير الأمن والسلامة</option>
+        <option value="أخرى">تقارير أخرى (إدخال يدوي)</option>
+    </select>
+    
+    <!-- حقل البحث - متاح دائمًا -->
+    <div id="reportSearchContainer" style="display:block; margin-bottom:10px; position:relative;">
+        <input type="text" id="reportSearch" placeholder="ابحث عن تقرير..." style="width:100%; padding:10px; border:1px solid #d4ebe2; border-radius:6px; font-size:14px;">
+        <div id="searchResults" style="display:none; position:absolute; top:100%; left:0; right:0; background:white; border:1px solid #ddd; border-radius:6px; max-height:200px; overflow-y:auto; z-index:1000; box-shadow:0 4px 12px rgba(0,0,0,0.1);"></div>
+    </div>
+    
+    <!-- قائمة التقارير المنسدلة -->
+    <select id="reportType" oninput="handleReportType()" style="display:none;">
+        <option value="">اختر تقريرًا</option>
+    </select>
+    
+    <!-- حقل الإدخال للنوع "أخرى" -->
+    <input id="reportTypeInput" placeholder="أدخل اسم التقرير" oninput="updateReport()" style="display:none; margin-top:8px;">
+  </div>
+  
+  <div class="form-group">
     <label><i class="fas fa-university"></i>إدارة التعليم</label>
     <select id="education" oninput="updateReport()">
       <option>الإدارة العامة للتعليم بمنطقة مكة المكرمة</option>
@@ -978,41 +973,6 @@ font-size: 16px !important;
   <div class="form-group">
     <label><i class="fas fa-school"></i>اسم المدرسة</label>
     <input id="school" value="سعيد بن العاص" placeholder="أدخل اسم المدرسة" oninput="updateReport()">
-  </div>
-  
-  <div class="form-group">
-    <label><i class="fas fa-file-alt"></i>اسم التقرير</label>
-    
-    <!-- التصنيف العام -->
-    <select id="reportCategory" oninput="handleReportCategory()" style="margin-bottom:10px;">
-        <option value="">اختر تصنيف التقرير (اختياري)</option>
-        <option value="التقارير التعليمية الصفية">أولا: التقارير التعليمية الصفية</option>
-        <option value="التقارير العلاجية والدعم الفردي">ثانيا: التقارير العلاجية والدعم الفردي</option>
-        <option value="التقارير التحفيزية والسلوكية">ثالثا: التقارير التحفيزية والسلوكية</option>
-        <option value="تقارير الأنشطة غير الصفية">رابعا: تقارير الأنشطة غير الصفية</option>
-        <option value="تقارير التواصل مع أولياء الأمور والمجتمع">خامسا: تقارير التواصل مع أولياء الأمور والمجتمع</option>
-        <option value="التقارير التخطيطية والتنظيمية">سادسا: التقارير التخطيطية والتنظيمية</option>
-        <option value="تقارير التقييم والمتابعة">سابعا: تقارير التقييم والمتابعة</option>
-        <option value="تقارير التدريب والتطوير المهني">ثامنا: تقارير التدريب والتطوير المهني</option>
-        <option value="تقارير توظيف التكنولوجيا">تاسعا: تقارير توظيف التكنولوجيا</option>
-        <option value="تقارير البحث والتطوير المناهجي">عاشرا: تقارير البحث والتطوير المناهجي</option>
-        <option value="تقارير الجودة واللجان">حادي عشر: تقارير الجودة واللجان</option>
-        <option value="تقارير الأمن والسلامة">ثاني عشر: تقارير الأمن والسلامة</option>
-    </select>
-    
-    <!-- حقل البحث - متاح دائمًا -->
-    <div id="reportSearchContainer" style="display:block; margin-bottom:10px; position:relative;">
-        <input type="text" id="reportSearch" placeholder="ابحث عن تقرير..." style="width:100%; padding:10px; border:1px solid #d4ebe2; border-radius:6px; font-size:14px;">
-        <div id="searchResults" style="display:none; position:absolute; top:100%; left:0; right:0; background:white; border:1px solid #ddd; border-radius:6px; max-height:200px; overflow-y:auto; z-index:1000; box-shadow:0 4px 12px rgba(0,0,0,0.1);"></div>
-    </div>
-    
-    <!-- قائمة التقارير المنسدلة -->
-    <select id="reportType" oninput="handleReportType()" style="display:none;">
-        <option value="">اختر تقريرًا</option>
-    </select>
-    
-    <!-- حقل الإدخال للنوع "أخرى" -->
-    <input id="reportTypeInput" placeholder="أدخل اسم التقرير" oninput="updateReport()" style="display:none; margin-top:8px;">
   </div>
   
   <div class="form-row">
@@ -1334,7 +1294,7 @@ const allReportsByCategory = {
 const allReports = [];
 for (const category in allReportsByCategory) {
     allReportsByCategory[category].forEach(report => {
-        allReports.push(report);
+        allReports.push({name: report, category: category});
     });
 }
 
@@ -7107,21 +7067,41 @@ function autoFill(id){
     }
 }
 
-// دالة معالجة اختيار التصنيف
+// دالة معالجة اختيار التصنيف - تم إصلاحها لدعم خيار "أخرى"
 function handleReportCategory() {
     const categorySelect = document.getElementById('reportCategory');
     const reportTypeSelect = document.getElementById('reportType');
+    const reportTypeInput = document.getElementById('reportTypeInput');
+    const reportSearchContainer = document.getElementById('reportSearchContainer');
     
-    if (categorySelect.value) {
-        // إظهار قائمة التقارير المنسدلة
+    if (categorySelect.value === "أخرى") {
+        // إخفاء قائمة التقارير المنسدلة وإظهار حقل الإدخال اليدوي
+        reportTypeSelect.style.display = 'none';
+        reportTypeInput.style.display = 'block';
+        reportSearchContainer.style.display = 'none';
+        
+        // تفريغ قائمة التقارير المنسدلة
+        reportTypeSelect.innerHTML = '<option value="أخرى">أخرى</option>';
+        reportTypeSelect.value = "أخرى";
+        handleReportType();
+    } else if (categorySelect.value) {
+        // إظهار قائمة التقارير المنسدلة وحقل البحث وإخفاء حقل الإدخال اليدوي
         reportTypeSelect.style.display = 'block';
+        reportTypeInput.style.display = 'none';
+        reportSearchContainer.style.display = 'block';
         
         // تحديث قائمة التقارير بناءً على التصنيف المختار
         const reports = allReportsByCategory[categorySelect.value] || [];
         updateReportTypeOptions(reports);
+        
+        // إعادة تعيين قيمة حقل البحث
+        document.getElementById('reportSearch').value = '';
+        document.getElementById('searchResults').style.display = 'none';
     } else {
-        // إخفاء قائمة التقارير المنسدلة
+        // إخفاء جميع الحقول
         reportTypeSelect.style.display = 'none';
+        reportTypeInput.style.display = 'none';
+        reportSearchContainer.style.display = 'none';
         reportTypeSelect.innerHTML = '<option value="">اختر تقريرًا</option>';
     }
 }
@@ -7139,7 +7119,17 @@ function updateReportTypeOptions(reports) {
     });
 }
 
-// دالة البحث الفوري في التقارير - تعمل مع أو بدون تصنيف
+// دالة للعثور على التصنيف المناسب للتقرير
+function findCategoryForReport(reportName) {
+    for (const category in allReportsByCategory) {
+        if (allReportsByCategory[category].includes(reportName)) {
+            return category;
+        }
+    }
+    return null;
+}
+
+// دالة البحث الفوري في التقارير - تم إصلاحها بالكامل
 function handleReportSearch() {
     const reportSearch = document.getElementById('reportSearch');
     const searchResults = document.getElementById('searchResults');
@@ -7157,33 +7147,74 @@ function handleReportSearch() {
     let filteredReports = [];
     
     // إذا كان هناك تصنيف محدد، نبحث فقط في تقارير ذلك التصنيف
-    if (categorySelect.value) {
+    if (categorySelect.value && categorySelect.value !== "أخرى") {
         const reports = allReportsByCategory[categorySelect.value] || [];
         filteredReports = reports.filter(report => 
             report.toLowerCase().includes(searchTerm)
         );
+    } else if (categorySelect.value === "أخرى") {
+        // إذا كان التصنيف "أخرى"، لا نعرض نتائج بحث
+        filteredReports = [];
     } else {
         // إذا لم يكن هناك تصنيف محدد، نبحث في جميع التقارير
-        filteredReports = allReports.filter(report => 
-            report.toLowerCase().includes(searchTerm)
+        filteredReports = allReports.filter(item => 
+            item.name.toLowerCase().includes(searchTerm)
         );
     }
     
     if (filteredReports.length > 0) {
         searchResults.innerHTML = '';
-        filteredReports.forEach(report => {
+        
+        filteredReports.forEach(item => {
+            const reportName = typeof item === 'string' ? item : item.name;
+            const reportCategory = typeof item === 'string' ? categorySelect.value : item.category;
+            
             const div = document.createElement('div');
-            div.textContent = report;
+            div.textContent = reportName;
             div.style.padding = '8px 12px';
             div.style.cursor = 'pointer';
             div.style.borderBottom = '1px solid #eee';
+            
+            // إضافة فئة التصنيف كسمة بيانات
+            div.setAttribute('data-category', reportCategory);
+            div.setAttribute('data-report', reportName);
+            
             div.onmouseover = () => div.style.backgroundColor = '#f0f9f6';
             div.onmouseout = () => div.style.backgroundColor = 'white';
             div.onclick = () => {
-                reportTypeSelect.value = report;
+                // الحصول على بيانات التقرير من السمات
+                const selectedReport = div.getAttribute('data-report');
+                const selectedCategory = div.getAttribute('data-category');
+                
+                // إذا كان التصنيف الحالي فارغًا أو مختلفًا، نقوم بتحديثه
+                if (categorySelect.value !== selectedCategory && selectedCategory) {
+                    categorySelect.value = selectedCategory;
+                    // تحديث قائمة التقارير بناءً على التصنيف الجديد
+                    const reports = allReportsByCategory[selectedCategory] || [];
+                    updateReportTypeOptions(reports);
+                }
+                
+                // تعيين القيمة في القائمة المنسدلة
+                reportTypeSelect.value = selectedReport;
+                
+                // إخفاء نتائج البحث
                 reportSearch.value = '';
                 searchResults.style.display = 'none';
+                
+                // تشغيل الحدث لتحديث النصوص الذكية
                 handleReportType();
+                
+                // تحديث التقرير المعروض
+                updateReport();
+                
+                // إظهار القائمة المنسدلة للتأكيد
+                reportTypeSelect.style.display = 'block';
+                
+                // إضافة تأثير بسيط للتأكيد
+                reportTypeSelect.style.borderColor = '#066d4d';
+                setTimeout(() => {
+                    reportTypeSelect.style.borderColor = '#d4ebe2';
+                }, 1000);
             };
             searchResults.appendChild(div);
         });
@@ -7216,8 +7247,6 @@ function handleReportType(){
     // إعادة تعيين العدادات عند تغيير نوع التقرير
     counters = {goal:0,summary:0,steps:0,strategies:0,strengths:0,improve:0,recomm:0};
     
-    // إظهار/إخفاء حقل الإدخال للنوع "أخرى"
-    reportTypeInput.style.display = (currentReportType === "أخرى") ? "block" : "none";
     updateReport();
 }
 
@@ -7237,8 +7266,16 @@ function updateReport(){
     
     const reportTypeSelect = document.getElementById('reportType');
     const reportTypeInput = document.getElementById('reportTypeInput');
-    const reportType = reportTypeSelect.value;
-    document.getElementById('reportTypeBox').innerText = (reportType === "أخرى") ? reportTypeInput.value : reportType;
+    const categorySelect = document.getElementById('reportCategory');
+    let reportType = "";
+    
+    if (categorySelect.value === "أخرى") {
+        reportType = reportTypeInput.value || "تقرير";
+        document.getElementById('reportTypeBox').innerText = reportType;
+    } else {
+        reportType = reportTypeSelect.value;
+        document.getElementById('reportTypeBox').innerText = reportType;
+    }
     
     document.getElementById('goalBox').innerText = document.getElementById('goal').value;
     document.getElementById('summaryBox').innerText = document.getElementById('summary').value;
@@ -7378,10 +7415,11 @@ function downloadPDF(){
     // الحصول على اسم التقرير لاستخدامه كاسم للملف
     const reportTypeSelect = document.getElementById('reportType');
     const reportTypeInput = document.getElementById('reportTypeInput');
+    const categorySelect = document.getElementById('reportCategory');
     let reportName = "";
     
-    if (reportTypeSelect.value === "أخرى" && reportTypeInput.value) {
-        reportName = reportTypeInput.value;
+    if (categorySelect.value === "أخرى") {
+        reportName = reportTypeInput.value || "تقرير";
     } else if (reportTypeSelect.value) {
         reportName = reportTypeSelect.value;
     } else {
@@ -7437,10 +7475,11 @@ async function sharePDFWhatsApp(){
     // الحصول على اسم التقرير لاستخدامه في الرسالة
     const reportTypeSelect = document.getElementById('reportType');
     const reportTypeInput = document.getElementById('reportTypeInput');
+    const categorySelect = document.getElementById('reportCategory');
     let reportName = "";
     
-    if (reportTypeSelect.value === "أخرى" && reportTypeInput.value) {
-        reportName = reportTypeInput.value;
+    if (categorySelect.value === "أخرى") {
+        reportName = reportTypeInput.value || "تقرير";
     } else if (reportTypeSelect.value) {
         reportName = reportTypeSelect.value;
     } else {
@@ -7508,6 +7547,38 @@ window.onload = function() {
     if ('ontouchstart' in window) {
         document.body.classList.add('touch-device');
     }
+    
+    // إضافة مستمع حدث للنقر على نتائج البحث
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('#searchResults div')) {
+            const clickedReport = e.target.textContent;
+            const reportTypeSelect = document.getElementById('reportType');
+            const categorySelect = document.getElementById('reportCategory');
+            
+            // البحث عن التصنيف المناسب للتقرير المحدد
+            for (const category in allReportsByCategory) {
+                if (allReportsByCategory[category].includes(clickedReport)) {
+                    // تعيين التصنيف
+                    categorySelect.value = category;
+                    // تحديث القائمة المنسدلة
+                    const reports = allReportsByCategory[category] || [];
+                    updateReportTypeOptions(reports);
+                    break;
+                }
+            }
+            
+            // تعيين قيمة التقرير في القائمة المنسدلة
+            reportTypeSelect.value = clickedReport;
+            
+            // تشغيل الأحداث اللازمة
+            handleReportType();
+            updateReport();
+            
+            // إخفاء نتائج البحث
+            document.getElementById('searchResults').style.display = 'none';
+            document.getElementById('reportSearch').value = '';
+        }
+    });
 }
 </script>
 
